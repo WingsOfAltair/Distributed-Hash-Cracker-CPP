@@ -1,0 +1,7 @@
+﻿  Distributed-Hash-Cracker-CPP-Client.cpp
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(83,59): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(117,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(123,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(136,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Distributed-Hash-Cracker-CPP-Client.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe
