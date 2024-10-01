@@ -52,7 +52,7 @@ void handle_client(SOCKET client_socket) {
         // Check if a match was found
         if (message.find("MATCH FOUND") != std::string::npos) {
             std::lock_guard<std::mutex> lock(mtx);
-            std::cout << "Match found: " << message << "\n";
+            std::cout << message << " from client " << client_socket << "\n";
             clients_responses++; // Increment responses
             match_found = true; // Set flag to true if any client finds a match
             notify_clients("STOP"); // Notify all clients to stop processing
@@ -61,7 +61,7 @@ void handle_client(SOCKET client_socket) {
             std::lock_guard<std::mutex> lock(mtx);
             // Extract hash from the message
             std::string hash = message.substr(message.find(':') + 1); // Assuming the format is "NO MATCH: <hash>"
-            std::cout << "NO MATCH for hash from client " << client_socket << ": " << hash << "\n"; // Print NO MATCH with hash
+            std::cout << "Client " << client_socket << ": " << hash << "\n"; // Print NO MATCH with hash
             clients_responses++; // Increment responses
         }
     }

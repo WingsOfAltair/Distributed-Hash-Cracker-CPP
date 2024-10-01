@@ -13,7 +13,7 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 
-#define SERVER_IP "127.0.0.1" // Change this to your server's IP if needed
+#define SERVER_IP "192.168.1.29" // Change this to your server's IP if needed
 #define PORT 8080
 
 std::string wordlistFilename = "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\x64\\Debug\\wordlist.txt";
