@@ -8,9 +8,12 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <algorithm>
+#include <codecvt>
+#include <locale>
+#include <cwctype> // For wide character space trimming
 
 #define PORT 8080
-#define WORDLIST_FILE "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\x64\\Debug\\wordlist.txt" // Specify your wordlist file here
+#define WORDLIST_FILE "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\x64\\Debug\\wordlist.txt"
 
 // Function to calculate hash using EVP
 std::string calculate_hash(const std::string& hash_type, const std::string& input) {
@@ -19,7 +22,6 @@ std::string calculate_hash(const std::string& hash_type, const std::string& inpu
 
     const EVP_MD* md = nullptr;
 
-    // Choose the appropriate hash function
     if (hash_type == "MD5") {
         md = EVP_md5();
     }
@@ -54,7 +56,6 @@ int main() {
         return 1;
     }
 
-    // Create client socket
     SOCKET client_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (client_socket == INVALID_SOCKET) {
         std::cerr << "Socket creation failed: " << WSAGetLastError() << std::endl;
@@ -65,7 +66,7 @@ int main() {
     sockaddr_in server_address;
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(PORT);
-    inet_pton(AF_INET, "127.0.0.1", &server_address.sin_addr); // Use inet_pton for IPv4
+    inet_pton(AF_INET, "127.0.0.1", &server_address.sin_addr);
 
     if (connect(client_socket, (struct sockaddr*)&server_address, sizeof(server_address)) == SOCKET_ERROR) {
         std::cerr << "Connection failed: " << WSAGetLastError() << std::endl;
@@ -83,7 +84,6 @@ int main() {
         }
         buffer[bytes_received] = '\0';
 
-        // Parse received message (e.g., "MD5:49f68a5c8493ec2c0bf489821c21fc3b")
         std::string message(buffer);
         size_t delimiter_pos = message.find(':');
         if (delimiter_pos != std::string::npos) {
@@ -92,49 +92,50 @@ int main() {
 
             std::cout << "Processing " << hash_type << " hash: " << hash_value << std::endl;
 
-            // Open the wordlist file
-            std::ifstream wordlist(WORDLIST_FILE);
+            std::wifstream wordlist(WORDLIST_FILE);
+            wordlist.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
             if (!wordlist.is_open()) {
                 std::cerr << "Could not open wordlist file: " << WORDLIST_FILE << std::endl;
                 break;
             }
 
-            std::string word;
+            std::wstring word;
+            int line_number = 0;
             bool match_found = false;
 
-            int line_number = 0; // Initialize line number counter
-            // Iterate through each word in the wordlist
+            // Iterate through all words in the wordlist
             while (std::getline(wordlist, word)) {
-                line_number++; // Increment the line number for each line read
-                // Trim whitespace (if needed)
-                word.erase(std::remove_if(word.begin(), word.end(), ::isspace), word.end());
+                line_number++;
 
-                // Hash the word
-                std::string calculated_hash = calculate_hash(hash_type, word);
-                std::cout << "Calculated hash for '" << word << "': " << calculated_hash << std::endl;
+                // Trim whitespaces
+                word.erase(std::remove_if(word.begin(), word.end(), ::iswspace), word.end());
 
-                // Compare the calculated hash with the received hash
+                // Convert wstring to string (UTF-8)
+                std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
+                std::string utf8_word = converter.to_bytes(word);
+
+                std::string calculated_hash = calculate_hash(hash_type, utf8_word);
+                std::cout << "Calculated hash for '" << utf8_word << "': " << calculated_hash << std::endl;
+
                 if (calculated_hash == hash_value) {
-                    std::cout << "Match found: " << word << " -> " << hash_value << std::endl;
+                    std::cout << "Match found: " << utf8_word << " -> " << hash_value << std::endl;
 
                     // Notify the server of the match
-                    std::string notification = "MATCH:" + word + ":" + hash_value + " found in wordfile: " + WORDLIST_FILE + " at line: " + std::to_string(line_number); // Update to include found word and hash
+                    std::string notification = "MATCH:" + utf8_word + ":" + hash_value + " found in wordfile: " + WORDLIST_FILE + " at line: " + std::to_string(line_number);
                     send(client_socket, notification.c_str(), notification.size(), 0);
 
                     match_found = true;
-                    break; // Stop searching after finding a match
+                    // Keep looking through the file even after a match is found
                 }
             }
 
             if (!match_found) {
                 std::cout << "No match found for the provided hash." << std::endl;
-
-                // Notify the server that no match was found
-                std::string notification = "NO_MATCH:" + hash_value; // Update to include no match notification
+                std::string notification = "NO_MATCH:" + hash_value;
                 send(client_socket, notification.c_str(), notification.size(), 0);
             }
 
-            wordlist.close(); // Close the wordlist file
+            wordlist.close();
         }
     }
 
