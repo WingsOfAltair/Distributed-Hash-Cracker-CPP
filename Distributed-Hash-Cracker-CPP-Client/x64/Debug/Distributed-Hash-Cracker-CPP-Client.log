@@ -1,5 +1,32 @@
 ﻿  Distributed-Hash-Cracker-CPP-Client.cpp
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(132,58): warning C4244: 'argument': conversion from 'SOCKET' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(159,80): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(169,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(136,84): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(144,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244: 'argument': conversion from 'wchar_t' to 'const _Elem', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:             _Elem=char
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         ]
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53):
+      the template instantiation context (the oldest one first) is
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(127,42):
+          see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(127,42):
+              see the first reference to 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' in 'main'
+          C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2590,17):
+          see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)' being compiled
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
+  
   Distributed-Hash-Cracker-CPP-Client.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe

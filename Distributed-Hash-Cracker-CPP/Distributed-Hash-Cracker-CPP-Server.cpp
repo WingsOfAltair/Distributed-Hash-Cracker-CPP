@@ -19,10 +19,10 @@ std::string to_utf8(const std::string& str) {
     return str; // Assuming str is already in UTF-8 format
 }
 
-// Function to notify clients of the new hash
-void notify_clients(const std::string& hash_type, const std::string& hash) {
+// Function to notify clients of the new hash with optional salt
+void notify_clients(const std::string& hash_type, const std::string& hash, const std::string& salt = "") {
     for (const auto& client : clients) {
-        std::string message = to_utf8(hash_type + ":" + hash); // Ensure it's UTF-8 encoded
+        std::string message = to_utf8(hash_type + ":" + hash + (salt.empty() ? "" : ":" + salt)); // Append salt if present
         send(client, message.c_str(), message.length(), 0);
     }
 }
@@ -117,16 +117,20 @@ int main() {
     while (true) {
         std::string hash_type;
         std::string hash;
+        std::string salt;
 
-        // Ask for the hash type and hash from the user
+        // Ask for the hash type, hash, and optional salt from the user
         std::cout << "Enter the hash type (MD5, SHA1, SHA256): ";
         std::getline(std::cin, hash_type);
 
         std::cout << "Enter the hash: ";
         std::getline(std::cin, hash);
 
+        std::cout << "Enter the salt (leave empty if none): ";
+        std::getline(std::cin, salt);
+
         if (!hash_type.empty() && !hash.empty()) {
-            notify_clients(hash_type, hash);
+            notify_clients(hash_type, hash, salt);
             match_found = false; // Reset match_found flag for the next round
             clients_responses = 0; // Reset responses for the next round
 
