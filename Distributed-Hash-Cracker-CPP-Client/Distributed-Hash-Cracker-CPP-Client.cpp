@@ -11,6 +11,7 @@
 #include <codecvt>
 #include <locale>
 #include <cwctype> // For wide character space trimming
+#include <vector>
 
 #define PORT 8080
 #define WORDLIST_FILE "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\x64\\Debug\\wordlist.txt"
@@ -68,11 +69,10 @@ int main() {
     server_address.sin_port = htons(PORT);
     inet_pton(AF_INET, "127.0.0.1", &server_address.sin_addr);
 
-    if (connect(client_socket, (struct sockaddr*)&server_address, sizeof(server_address)) == SOCKET_ERROR) {
-        std::cerr << "Connection failed: " << WSAGetLastError() << std::endl;
-        closesocket(client_socket);
-        WSACleanup();
-        return 1;
+    // Attempt to connect to the server continuously
+    while (connect(client_socket, (struct sockaddr*)&server_address, sizeof(server_address)) == SOCKET_ERROR) {
+        std::cerr << "Connection failed: " << WSAGetLastError() << ". Retrying..." << std::endl;
+        Sleep(1000); // Wait before retrying
     }
 
     char buffer[1024];
@@ -85,6 +85,13 @@ int main() {
         buffer[bytes_received] = '\0';
 
         std::string message(buffer);
+
+        // Check for STOP command from server
+        if (message == "STOP") {
+            std::cout << "Server requested to stop processing. Waiting for new hash..." << std::endl;
+            continue; // Do not exit; wait for new hash from server
+        }
+
         size_t delimiter_pos = message.find(':');
         if (delimiter_pos != std::string::npos) {
             std::string hash_type = message.substr(0, delimiter_pos);
@@ -92,6 +99,7 @@ int main() {
 
             std::cout << "Processing " << hash_type << " hash: " << hash_value << std::endl;
 
+            // Open the wordlist file
             std::wifstream wordlist(WORDLIST_FILE);
             wordlist.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
             if (!wordlist.is_open()) {
@@ -114,6 +122,32 @@ int main() {
                 std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
                 std::string utf8_word = converter.to_bytes(word);
 
+                // Check for messages while processing
+                fd_set read_fds;
+                FD_ZERO(&read_fds);
+                FD_SET(client_socket, &read_fds);
+                struct timeval timeout = { 0, 0 }; // No wait
+
+                // Check for available data on the socket
+                int select_result = select(client_socket + 1, &read_fds, nullptr, nullptr, &timeout);
+                if (select_result > 0) {
+                    // Data is available to read, receive the message
+                    bytes_received = recv(client_socket, buffer, sizeof(buffer) - 1, 0);
+                    if (bytes_received <= 0) {
+                        std::cerr << "Disconnected from server or error occurred: " << WSAGetLastError() << std::endl;
+                        break;
+                    }
+                    buffer[bytes_received] = '\0';
+                    std::string message(buffer);
+
+                    // Check for STOP command from server
+                    if (message == "STOP") {
+                        std::cout << "Server requested to stop processing. Waiting for new hash..." << std::endl;
+                        break; // Stop processing the current wordlist
+                    }
+                }
+
+                // Calculate the hash
                 std::string calculated_hash = calculate_hash(hash_type, utf8_word);
                 std::cout << "Calculated hash for '" << utf8_word << "': " << calculated_hash << std::endl;
 

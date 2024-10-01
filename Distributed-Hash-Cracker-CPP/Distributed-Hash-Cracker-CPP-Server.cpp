@@ -14,10 +14,15 @@ std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
 
+// Function to convert std::string to UTF-8 (if needed)
+std::string to_utf8(const std::string& str) {
+    return str; // Assuming str is already in UTF-8 format
+}
+
 // Function to notify clients of the new hash
 void notify_clients(const std::string& hash_type, const std::string& hash) {
     for (const auto& client : clients) {
-        std::string message = hash_type + ":" + hash; // Format: "hash_type:hash"
+        std::string message = to_utf8(hash_type + ":" + hash); // Ensure it's UTF-8 encoded
         send(client, message.c_str(), message.length(), 0);
     }
 }
@@ -38,9 +43,8 @@ void handle_client(SOCKET client_socket) {
 
         // Check for match notifications
         if (message.find("MATCH:") == 0) {
-            // Extract match details
             std::string match_info = message.substr(6); // Remove "MATCH:"
-            std::cout << "Client " << client_socket << " Match found : " << match_info << std::endl;
+            std::cout << "Client " << client_socket << " Match found: " << match_info << std::endl;
             match_found = true;
 
             // Notify all clients to stop processing
@@ -49,8 +53,7 @@ void handle_client(SOCKET client_socket) {
                 send(client, stop_message.c_str(), stop_message.length(), 0);
             }
         }
-        else if (message.find("NO_MATCH") == 0) 
-        {
+        else if (message.find("NO_MATCH") == 0) {
             std::cout << "Match not found in client: " << client_socket << std::endl;
         }
 
@@ -98,7 +101,8 @@ int main() {
 
     std::cout << "Server is listening on port " << PORT << std::endl;
 
-    std::thread client_handler([&]() {
+    // Thread to accept clients
+    std::thread client_handler([&]() { // Capture by reference
         while (true) {
             SOCKET client_socket = accept(server_socket, nullptr, nullptr);
             if (client_socket == INVALID_SOCKET) {
@@ -115,14 +119,14 @@ int main() {
         std::string hash;
 
         // Ask for the hash type and hash from the user
-        std::cout << "Enter the hash type (MD5, SHA1, SHA256.): ";
-        std::getline(std::cin, hash_type); // Get hash type from user input
+        std::cout << "Enter the hash type (MD5, SHA1, SHA256): ";
+        std::getline(std::cin, hash_type);
 
         std::cout << "Enter the hash: ";
-        std::getline(std::cin, hash); // Get hash from user input
+        std::getline(std::cin, hash);
 
         if (!hash_type.empty() && !hash.empty()) {
-            notify_clients(hash_type, hash); // Notify all clients of the new hash type and value
+            notify_clients(hash_type, hash);
             match_found = false; // Reset match_found flag for the next round
             clients_responses = 0; // Reset responses for the next round
 
