@@ -2,72 +2,65 @@
 #include <string>
 #include <vector>
 #include <thread>
-#include <mutex>
-#include <unordered_set>
 #include <winsock2.h>
+#include <ws2tcpip.h>
+#include <atomic>
+#include <algorithm>
 
-#pragma comment(lib, "Ws2_32.lib")
 #define PORT 8080
 
-std::mutex mtx;
-std::unordered_set<SOCKET> clients;
-int total_clients = 0; // Track total number of connected clients
-int clients_responses = 0; // Track the number of responses received
-bool match_found = false; // Flag to track if a match was found
+std::vector<SOCKET> clients;
+std::atomic<bool> match_found(false);
+std::atomic<int> clients_responses(0);
+int total_clients = 0;
 
-// Function to notify all clients of a new hash
-void notify_clients(const std::string& hash) {
-    for (const auto& client_socket : clients) {
-        send(client_socket, hash.c_str(), hash.size(), 0);
+// Function to notify clients of the new hash
+void notify_clients(const std::string& hash_type, const std::string& hash) {
+    for (const auto& client : clients) {
+        std::string message = hash_type + ":" + hash; // Format: "hash_type:hash"
+        send(client, message.c_str(), message.length(), 0);
     }
 }
 
-// Function to handle each client connection
+// Function to handle each client
 void handle_client(SOCKET client_socket) {
-    char buffer[1024] = { 0 };
-    clients.insert(client_socket); // Add the client to the set
-
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-        total_clients++; // Increment total clients on connection
-        std::cout << "Client connected: " << client_socket << std::endl;
-    }
+    clients.push_back(client_socket);
+    total_clients++;
 
     while (true) {
-        // Receive message from the client
-        int valread = recv(client_socket, buffer, sizeof(buffer), 0);
-        if (valread <= 0) {
-            std::cout << "Client disconnected: " << client_socket << std::endl;
-            clients.erase(client_socket); // Remove the client from the set
-            {
-                std::lock_guard<std::mutex> lock(mtx);
-                total_clients--; // Decrement total clients on disconnection
-            }
-            break; // Exit loop on disconnection
+        char buffer[1024];
+        int bytes_received = recv(client_socket, buffer, sizeof(buffer) - 1, 0);
+        if (bytes_received <= 0) {
+            break; // Client disconnected
         }
-
+        buffer[bytes_received] = '\0';
         std::string message(buffer);
-        //std::cout << "Received from client " << client_socket << ": " << message << std::endl;
 
-        // Check if a match was found
-        if (message.find("MATCH FOUND") != std::string::npos) {
-            std::lock_guard<std::mutex> lock(mtx);
-            std::cout << message << " from client " << client_socket << "\n";
-            clients_responses++; // Increment responses
-            match_found = true; // Set flag to true if any client finds a match
-            notify_clients("STOP"); // Notify all clients to stop processing
+        // Check for match notifications
+        if (message.find("MATCH:") == 0) {
+            // Extract match details
+            std::string match_info = message.substr(6); // Remove "MATCH:"
+            std::cout << "Client " << client_socket << " Match found : " << match_info << std::endl;
+            match_found = true;
+
+            // Notify all clients to stop processing
+            for (const auto& client : clients) {
+                std::string stop_message = "STOP";
+                send(client, stop_message.c_str(), stop_message.length(), 0);
+            }
         }
-        else if (message.find("NO MATCH") != std::string::npos) {
-            std::lock_guard<std::mutex> lock(mtx);
-            // Extract hash from the message
-            std::string hash = message.substr(message.find(':') + 1); // Assuming the format is "NO MATCH: <hash>"
-            std::cout << "Client " << client_socket << ": " << hash << "\n"; // Print NO MATCH with hash
-            clients_responses++; // Increment responses
+        else if (message.find("NO_MATCH") == 0) 
+        {
+            std::cout << "Match not found in client: " << client_socket << std::endl;
         }
+
+        clients_responses++;
     }
 
-    // Close the client socket
+    // Clean up on client disconnection
     closesocket(client_socket);
+    clients.erase(std::remove(clients.begin(), clients.end(), client_socket), clients.end());
+    total_clients--;
 }
 
 int main() {
@@ -117,16 +110,19 @@ int main() {
         }
         });
 
-
     while (true) {
+        std::string hash_type;
         std::string hash;
 
-        // Ask for a new MD5 hash from the user
-        std::cout << "Enter the MD5 hash: ";
-        std::getline(std::cin, hash); // Get new hash from user input
+        // Ask for the hash type and hash from the user
+        std::cout << "Enter the hash type (MD5, SHA1, SHA256.): ";
+        std::getline(std::cin, hash_type); // Get hash type from user input
 
-        if (!hash.empty()) {
-            notify_clients(hash); // Notify all clients of the new hash
+        std::cout << "Enter the hash: ";
+        std::getline(std::cin, hash); // Get hash from user input
+
+        if (!hash_type.empty() && !hash.empty()) {
+            notify_clients(hash_type, hash); // Notify all clients of the new hash type and value
             match_found = false; // Reset match_found flag for the next round
             clients_responses = 0; // Reset responses for the next round
 
@@ -140,14 +136,14 @@ int main() {
 
             // If all clients report no match
             if (!match_found && clients_responses == total_clients) {
-                std::cout << "All clients reported no matches. Asking for a new MD5 hash...\n";
+                std::cout << "All clients reported no matches. Asking for a new hash...\n";
             }
             else if (match_found) {
-                std::cout << "Match found, asking for a new MD5 hash...\n";
+                std::cout << "Match found, asking for a new hash...\n";
             }
         }
         else {
-            std::cout << "No hash entered. Please try again." << std::endl;
+            std::cout << "No hash or hash type entered. Please try again." << std::endl;
         }
     }
 
