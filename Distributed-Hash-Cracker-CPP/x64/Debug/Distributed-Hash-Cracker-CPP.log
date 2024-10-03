@@ -1,4 +1,4 @@
 ﻿  Distributed-Hash-Cracker-CPP-Server.cpp
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(60,53): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(87,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(62,53): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(89,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Distributed-Hash-Cracker-CPP.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Server.exe

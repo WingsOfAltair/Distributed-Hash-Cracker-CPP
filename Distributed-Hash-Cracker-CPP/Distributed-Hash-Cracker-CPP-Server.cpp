@@ -18,6 +18,8 @@ std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
 
+bool ready = true;
+
 std::map<std::string, std::string> readConfig(const std::string& filename) {
     std::map<std::string, std::string> configMap;
     std::filesystem::path currentPath = std::filesystem::current_path();
@@ -90,6 +92,9 @@ void handle_client(SOCKET client_socket) {
         else if (message.find("NO_MATCH") == 0) {
             std::cout << "Match not found in client: " << client_socket << std::endl;
         }
+        else if (message.find("Ready to accept new requests.") == 0) {
+            ready = true;
+        }
 
         clients_responses++;
     }
@@ -156,43 +161,46 @@ int main() {
         });
 
     while (true) {
-        std::string hash_type;
-        std::string hash;
-        std::string salt;
+        while (ready) {
+            std::string hash_type;
+            std::string hash;
+            std::string salt;
 
-        // Ask for the hash type, hash, and optional salt from the user
-        std::cout << "Enter the hash type (MD5, SHA1, SHA256, BCRYPT): ";
-        std::getline(std::cin, hash_type);
+            // Ask for the hash type, hash, and optional salt from the user
+            std::cout << "Enter the hash type (MD5, SHA1, SHA256, BCRYPT): ";
+            std::getline(std::cin, hash_type);
 
-        std::cout << "Enter the hash: ";
-        std::getline(std::cin, hash);
+            std::cout << "Enter the hash: ";
+            std::getline(std::cin, hash);
 
-        std::cout << "Enter the salt (leave empty if none, or BCRYPT): ";
-        std::getline(std::cin, salt);
+            std::cout << "Enter the salt (leave empty if none, or BCRYPT): ";
+            std::getline(std::cin, salt);
 
-        if (!hash_type.empty() && !hash.empty()) {
-            notify_clients(hash_type, hash, salt);
-            match_found = false; // Reset match_found flag for the next round
-            clients_responses = 0; // Reset responses for the next round
+            if (!hash_type.empty() && !hash.empty()) {
+                ready = false;
+                notify_clients(hash_type, hash, salt);
+                match_found = false; // Reset match_found flag for the next round
+                clients_responses = 0; // Reset responses for the next round
 
-            // Wait for all clients to respond before checking for matches
-            while (clients.size() > 0 && clients_responses < total_clients) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Optional delay
-                if (match_found) {
-                    break; // Break out to prompt for a new hash if a match is found
+                // Wait for all clients to respond before checking for matches
+                while (clients.size() > 0 && clients_responses < total_clients) {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Optional delay
+                    if (match_found) {
+                        break; // Break out to prompt for a new hash if a match is found
+                    }
+                }
+
+                // If all clients report no match
+                if (!match_found && clients_responses == total_clients) {
+                    std::cout << "All clients reported no matches. please wait until you can enter a new hash...\n";
+                }
+                else if (match_found) {
+                    std::cout << "Match found, please wait until you can enter a new hash...\n";
                 }
             }
-
-            // If all clients report no match
-            if (!match_found && clients_responses == total_clients) {
-                std::cout << "All clients reported no matches. Asking for a new hash...\n";
+            else {
+                std::cout << "No hash or hash type entered. Please try again." << std::endl;
             }
-            else if (match_found) {
-                std::cout << "Match found, asking for a new hash...\n";
-            }
-        }
-        else {
-            std::cout << "No hash or hash type entered. Please try again." << std::endl;
         }
     }
 
