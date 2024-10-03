@@ -101,6 +101,7 @@ void handle_client(SOCKET client_socket) {
             bool all_clients_ready = true;  // Assume all clients are ready
             for (const auto& client : clients_ready) {
                 if (!client.second) {  // If any client is not ready, set to false
+                    std::cout << "Client " << std::to_string(client_socket) << " is still working..." << std::endl;
                     all_clients_ready = false;
                     break;
                 }
