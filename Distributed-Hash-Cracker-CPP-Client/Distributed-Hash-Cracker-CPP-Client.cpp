@@ -201,6 +201,33 @@ int main() {
                         break; // Exit the loop on a match
                     }
                 }
+
+                // Check for STOP signal after processing each word
+                fd_set readfds;
+                struct timeval tv;
+                tv.tv_sec = 0; // No waiting time
+                tv.tv_usec = 0;
+
+                FD_ZERO(&readfds);
+                FD_SET(client_socket, &readfds);
+
+                // Check if there's data to read
+                if (select(client_socket + 1, &readfds, nullptr, nullptr, &tv) > 0) {
+                    // Socket is ready for reading
+                    int bytes_received = recv(client_socket, buffer, sizeof(buffer) - 1, 0);
+                    if (bytes_received <= 0) {
+                        std::cerr << "Disconnected from server or error occurred: " << WSAGetLastError() << std::endl;
+                        break; // Exit on disconnect
+                    }
+
+                    buffer[bytes_received] = '\0';
+                    std::string message(buffer);
+
+                    if (message == "STOP") {
+                        std::cout << "Received STOP command. Stopping processing.\n";
+                        break; // Exit the loop if STOP command is received
+                    }
+                }
             }
 
             // Notify the server if no match was found
