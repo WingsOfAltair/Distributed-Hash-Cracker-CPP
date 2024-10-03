@@ -1,0 +1,86 @@
+﻿  Building Custom Rule D:/GitHub/libbcrypt/CMakeLists.txt
+cl : command line  warning D9002: ignoring unknown option '-O3'
+  bcrypt.c
+  crypt_blowfish.c
+D:\GitHub\libbcrypt\src\bcrypt.c(34,10): warning C4464: relative include path contains '..'
+D:\GitHub\libbcrypt\include\bcrypt\bcrypt.h(17,1): warning C4005: 'BCRYPT_HASHSIZE': macro redefinition
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+      D:\GitHub\libbcrypt\src\bcrypt.c(32,1):
+      see previous definition of 'BCRYPT_HASHSIZE'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11121,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11127,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11132,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11137,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11144,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11165,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11171,22): warning C4668: '_WIN32_WINNT_WIN10_RS3' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11179,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11183,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11187,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11192,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16525,22): warning C4668: '_WIN32_WINNT_WIN10_RS3' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16674,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16687,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16916,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/bcrypt.c')
+  
+D:\GitHub\libbcrypt\src\bcrypt.c(50,9): warning C4013: 'close' undefined; assuming extern returning int
+D:\GitHub\libbcrypt\src\bcrypt.c(68,14): warning C4013: 'read' undefined; assuming extern returning int
+D:\GitHub\libbcrypt\src\bcrypt.c(97,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\libbcrypt\src\bcrypt.c(98,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\libbcrypt\src\bcrypt.c(158,8): warning C4013: 'crypt_gensalt_rn' undefined; assuming extern returning int
+D:\GitHub\libbcrypt\src\bcrypt.c(158,6): warning C4047: '=': 'char *' differs in levels of indirection from 'int'
+D:\GitHub\libbcrypt\src\bcrypt.c(118,6): warning C4101: 'fd': unreferenced local variable
+D:\GitHub\libbcrypt\src\bcrypt.c(126,12): warning C4101: 'i': unreferenced local variable
+D:\GitHub\libbcrypt\src\bcrypt.c(166,8): warning C4013: 'crypt_rn' undefined; assuming extern returning int
+D:\GitHub\libbcrypt\src\bcrypt.c(166,6): warning C4047: '=': 'char *' differs in levels of indirection from 'int'
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(55,10): warning C4464: relative include path contains '..'
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(399,23): warning C4244: '=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(407,32): warning C4244: '=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(903,18): warning C4244: '=': conversion from 'unsigned long' to 'char', possible loss of data
+  crypt_gensalt.c
+D:\GitHub\libbcrypt\src\crypt_gensalt.c(30,10): warning C4464: relative include path contains '..'
+  wrapper.c
+D:\GitHub\libbcrypt\src\wrapper.c(45,10): warning C4464: relative include path contains '..'
+D:\GitHub\libbcrypt\include\bcrypt\ow-crypt.h(25,5): warning C4668: '__FreeBSD__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/wrapper.c')
+  
+D:\GitHub\libbcrypt\src\wrapper.c(47,10): warning C4464: relative include path contains '..'
+D:\GitHub\libbcrypt\src\wrapper.c(48,10): warning C4464: relative include path contains '..'
+  Generating Code...
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(760): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(759): message : index 'i' range checked by comparison on this line
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(765): message : feeds memory load on this line
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(706): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(705): message : index 'i' range checked by comparison on this line
+D:\GitHub\libbcrypt\src\crypt_blowfish.c(708): message : feeds memory load on this line
+  bcrypt.vcxproj -> D:\GitHub\BCrypt\Debug\bcrypt.lib

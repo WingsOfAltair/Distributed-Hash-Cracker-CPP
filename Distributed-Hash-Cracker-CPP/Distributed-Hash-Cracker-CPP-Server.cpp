@@ -120,13 +120,13 @@ int main() {
         std::string salt;
 
         // Ask for the hash type, hash, and optional salt from the user
-        std::cout << "Enter the hash type (MD5, SHA1, SHA256): ";
+        std::cout << "Enter the hash type (MD5, SHA1, SHA256, BCRYPT): ";
         std::getline(std::cin, hash_type);
 
         std::cout << "Enter the hash: ";
         std::getline(std::cin, hash);
 
-        std::cout << "Enter the salt (leave empty if none): ";
+        std::cout << "Enter the salt (leave empty if none, or enter rounds if BCRYPT): ";
         std::getline(std::cin, salt);
 
         if (!hash_type.empty() && !hash.empty()) {

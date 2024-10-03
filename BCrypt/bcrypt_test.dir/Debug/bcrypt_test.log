@@ -1,0 +1,8 @@
+﻿  Building Custom Rule D:/GitHub/libbcrypt/CMakeLists.txt
+cl : command line  warning D9002: ignoring unknown option '--std=c++11'
+cl : command line  warning D9002: ignoring unknown option '-O3'
+  main.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\limits.h(70,5): warning C4668: '__STDC_WANT_SECURE_LIB__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file '../libbcrypt/src/main.cpp')
+  
+  bcrypt_test.vcxproj -> D:\GitHub\BCrypt\Debug\bcrypt_test.exe

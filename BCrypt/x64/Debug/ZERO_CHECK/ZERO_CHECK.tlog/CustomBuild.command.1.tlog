@@ -1,0 +1,10 @@
+^D:\GITHUB\BCRYPT\CMAKEFILES\352DB3589C6C08B9CAD2A7841697563C\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHub/libbcrypt -BD:/GitHub/BCrypt --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/GitHub/BCrypt/bcrypt.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

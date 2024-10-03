@@ -1,0 +1,6 @@
+D:/GitHub/BCrypt/CMakeFiles/bcrypt.dir
+D:/GitHub/BCrypt/CMakeFiles/bcrypt_test.dir
+D:/GitHub/BCrypt/CMakeFiles/PACKAGE.dir
+D:/GitHub/BCrypt/CMakeFiles/INSTALL.dir
+D:/GitHub/BCrypt/CMakeFiles/ALL_BUILD.dir
+D:/GitHub/BCrypt/CMakeFiles/ZERO_CHECK.dir

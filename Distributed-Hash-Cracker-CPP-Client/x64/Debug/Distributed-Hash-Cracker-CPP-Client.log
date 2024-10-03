@@ -1,6 +1,1126 @@
 ﻿  Distributed-Hash-Cracker-CPP-Client.cpp
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(136,84): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(144,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\limits.h(70,5): warning C4668: '__STDC_WANT_SECURE_LIB__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winbase.h(7937,48): warning C5039: 'TpSetCallbackCleanupGroup': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11121,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11127,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11132,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11137,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11144,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11165,22): warning C4668: '_WIN32_WINNT_WIN10_TH2' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11171,22): warning C4668: '_WIN32_WINNT_WIN10_RS3' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11179,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11183,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11187,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(11192,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16525,22): warning C4668: '_WIN32_WINNT_WIN10_RS3' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16674,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16687,22): warning C4668: '_WIN32_WINNT_WIN10_RS4' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winioctl.h(16916,22): warning C4668: '_WIN32_WINNT_WIN10_RS1' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(269,1): warning C4820: '_SOCKET_ADDRESS': '4' bytes padding added after data member '_SOCKET_ADDRESS::iSockaddrLength'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(278,31): warning C4820: '_SOCKET_ADDRESS_LIST': '4' bytes padding added after data member '_SOCKET_ADDRESS_LIST::iAddressCount'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(691,42): warning C4820: '_WSABUF': '4' bytes padding added after data member '_WSABUF::len'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(701,22): warning C4820: '_WSAMSG': '4' bytes padding added after data member '_WSAMSG::namelen'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(709,22): warning C4820: '_WSAMSG': '4' bytes padding added after data member '_WSAMSG::dwBufferCount'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(717,1): warning C4820: '_WSAMSG': '4' bytes padding added after data member '_WSAMSG::dwFlags'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(999,33): warning C4820: 'addrinfoex2A': '4' bytes padding added after data member 'addrinfoex2A::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1018,26): warning C4820: 'addrinfoex2W': '4' bytes padding added after data member 'addrinfoex2W::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1035,26): warning C4820: 'addrinfoex3': '4' bytes padding added after data member 'addrinfoex3::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1037,1): warning C4820: 'addrinfoex3': '4' bytes padding added after data member 'addrinfoex3::ai_interfaceindex'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1053,26): warning C4820: 'addrinfoex4': '4' bytes padding added after data member 'addrinfoex4::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1055,26): warning C4820: 'addrinfoex4': '4' bytes padding added after data member 'addrinfoex4::ai_interfaceindex'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1072,26): warning C4820: 'addrinfoex5': '4' bytes padding added after data member 'addrinfoex5::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1074,26): warning C4820: 'addrinfoex5': '4' bytes padding added after data member 'addrinfoex5::ai_interfaceindex'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1076,1): warning C4820: 'addrinfoex5': '4' bytes padding added after data member 'addrinfoex5::ai_ttl'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1099,22): warning C4820: 'addrinfo_dns_server': '4' bytes padding added after data member 'addrinfo_dns_server::ai_servertype'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1101,60): warning C4820: 'addrinfo_dns_server': '4' bytes padding added after data member 'addrinfo_dns_server::ai_addrlen'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1132,26): warning C4820: 'addrinfoex6': '4' bytes padding added after data member 'addrinfoex6::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1134,26): warning C4820: 'addrinfoex6': '4' bytes padding added after data member 'addrinfoex6::ai_interfaceindex'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1161,26): warning C4820: 'addrinfoex7': '4' bytes padding added after data member 'addrinfoex7::ai_version'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ws2def.h(1163,26): warning C4820: 'addrinfoex7': '4' bytes padding added after data member 'addrinfoex7::ai_interfaceindex'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(138,37): warning C4820: 'fd_set': '4' bytes padding added after data member 'fd_set::fd_count'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(241,40): warning C4820: 'hostent': '4' bytes padding added after data member 'hostent::h_length'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(253,17): warning C4820: 'netent': '2' bytes padding added after data member 'netent::n_addrtype'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(266,1): warning C4820: 'servent': '6' bytes padding added after data member 'servent::s_port'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(272,1): warning C4820: 'protoent': '6' bytes padding added after data member 'protoent::p_proto'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(380,1): warning C4820: 'WSAData': '6' bytes padding added after data member 'WSAData::szSystemStatus'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1102,20): warning C4820: '_WSACOMPLETION::<unnamed-tag>': '4' bytes padding added after data member '_WSACOMPLETION::<unnamed-tag>::uMsg'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1116,17): warning C4820: '_WSACOMPLETION': '4' bytes padding added after data member '_WSACOMPLETION::Type'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1320,21): warning C4820: '_WSAQuerySetA': '4' bytes padding added after data member '_WSAQuerySetA::dwSize'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1325,21): warning C4820: '_WSAQuerySetA': '4' bytes padding added after data member '_WSAQuerySetA::dwNameSpace'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1328,55): warning C4820: '_WSAQuerySetA': '4' bytes padding added after data member '_WSAQuerySetA::dwNumberOfProtocols'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1331,53): warning C4820: '_WSAQuerySetA': '4' bytes padding added after data member '_WSAQuerySetA::dwNumberOfCsAddrs'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1333,21): warning C4820: '_WSAQuerySetA': '4' bytes padding added after data member '_WSAQuerySetA::dwOutputFlags'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1339,21): warning C4820: '_WSAQuerySetW': '4' bytes padding added after data member '_WSAQuerySetW::dwSize'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1344,21): warning C4820: '_WSAQuerySetW': '4' bytes padding added after data member '_WSAQuerySetW::dwNameSpace'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1347,55): warning C4820: '_WSAQuerySetW': '4' bytes padding added after data member '_WSAQuerySetW::dwNumberOfProtocols'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1350,53): warning C4820: '_WSAQuerySetW': '4' bytes padding added after data member '_WSAQuerySetW::dwNumberOfCsAddrs'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1352,21): warning C4820: '_WSAQuerySetW': '4' bytes padding added after data member '_WSAQuerySetW::dwOutputFlags'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1361,21): warning C4820: '_WSAQuerySet2A': '4' bytes padding added after data member '_WSAQuerySet2A::dwSize'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1365,21): warning C4820: '_WSAQuerySet2A': '4' bytes padding added after data member '_WSAQuerySet2A::dwNameSpace'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1368,21): warning C4820: '_WSAQuerySet2A': '4' bytes padding added after data member '_WSAQuerySet2A::dwNumberOfProtocols'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1371,21): warning C4820: '_WSAQuerySet2A': '4' bytes padding added after data member '_WSAQuerySet2A::dwNumberOfCsAddrs'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1373,21): warning C4820: '_WSAQuerySet2A': '4' bytes padding added after data member '_WSAQuerySet2A::dwOutputFlags'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1378,21): warning C4820: '_WSAQuerySet2W': '4' bytes padding added after data member '_WSAQuerySet2W::dwSize'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1382,21): warning C4820: '_WSAQuerySet2W': '4' bytes padding added after data member '_WSAQuerySet2W::dwNameSpace'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1385,55): warning C4820: '_WSAQuerySet2W': '4' bytes padding added after data member '_WSAQuerySet2W::dwNumberOfProtocols'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1388,53): warning C4820: '_WSAQuerySet2W': '4' bytes padding added after data member '_WSAQuerySet2W::dwNumberOfCsAddrs'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1390,21): warning C4820: '_WSAQuerySet2W': '4' bytes padding added after data member '_WSAQuerySet2W::dwOutputFlags'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1486,13): warning C4820: '_WSANSClassInfoA': '4' bytes padding added after data member '_WSANSClassInfoA::dwValueSize'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1497,13): warning C4820: '_WSANSClassInfoW': '4' bytes padding added after data member '_WSANSClassInfoW::dwValueSize'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1520,25): warning C4820: '_WSAServiceClassInfoA': '4' bytes padding added after data member '_WSAServiceClassInfoA::dwCount'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1530,25): warning C4820: '_WSAServiceClassInfoW': '4' bytes padding added after data member '_WSAServiceClassInfoW::dwCount'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1552,25): warning C4820: '_WSANAMESPACE_INFOA': '4' bytes padding added after data member '_WSANAMESPACE_INFOA::dwVersion'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1560,25): warning C4820: '_WSANAMESPACE_INFOW': '4' bytes padding added after data member '_WSANAMESPACE_INFOW::dwVersion'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1568,25): warning C4820: '_WSANAMESPACE_INFOEXA': '4' bytes padding added after data member '_WSANAMESPACE_INFOEXA::dwVersion'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1577,25): warning C4820: '_WSANAMESPACE_INFOEXW': '4' bytes padding added after data member '_WSANAMESPACE_INFOEXW::dwVersion'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winsock2.h(1621,1): warning C4820: 'pollfd': '4' bytes padding added after data member 'pollfd::revents'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\ws2tcpip.h(956,54): warning C5039: 'WSAIoctl': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core.h(42,27): warning C4820: 'ossl_dispatch_st': '4' bytes padding added after data member 'ossl_dispatch_st::function_id'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core.h(63,14): warning C4820: 'ossl_item_st': '4' bytes padding added after data member 'ossl_item_st::id'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core.h(88,15): warning C4820: 'ossl_param_st': '4' bytes padding added after data member 'ossl_param_st::data_type'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(64,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(64,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(67,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(67,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(70,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_thread_start_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(70,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(74,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_get_libctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(74,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(87,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_set_error_mark_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(87,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(89,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_clear_last_error_mark_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(89,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(92,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_pop_error_to_mark_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(92,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(100,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_obj_add_sigid_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(100,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(103,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_core_obj_create_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(103,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(109,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_malloc_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(109,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(112,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_zalloc_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(112,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(121,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_realloc_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(121,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(124,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_clear_realloc_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(124,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(128,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_secure_malloc_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(128,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(131,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_secure_zalloc_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(131,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(141,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_CRYPTO_secure_allocated_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(141,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(161,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_new_file_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(161,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(163,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_new_membuf_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(163,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(164,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_read_ex_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(164,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(166,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_write_ex_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(166,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(168,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_gets_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(168,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(169,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_puts_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(169,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(170,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_up_ref_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(170,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(171,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_free_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(171,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(172,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_vprintf_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(172,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(174,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_vsnprintf_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(174,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(176,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_BIO_ctrl_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(176,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(194,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_get_entropy_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(194,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(197,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_get_user_entropy_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(197,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(204,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_get_nonce_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(204,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(208,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_get_user_nonce_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(208,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(226,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_register_child_cb_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(226,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(234,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_name_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(234,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(236,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_get0_provider_ctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(236,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(238,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_get0_dispatch_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(238,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(240,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_up_ref_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(240,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(242,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_free_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(242,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(249,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(249,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(252,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(252,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(255,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_query_operation_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(255,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(261,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_get_reason_strings_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(261,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(264,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_get_capabilities_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(264,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(267,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_provider_self_test_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(267,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(305,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(305,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(306,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(306,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(307,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_update_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(307,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(309,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_final_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(309,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(312,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_squeeze_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(312,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(315,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_digest_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(315,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(320,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(320,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(322,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(322,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(323,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(323,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(325,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(325,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(327,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(327,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(329,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(329,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(331,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_digest_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(331,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(351,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(351,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(352,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_encrypt_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(352,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(358,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_decrypt_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(358,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(364,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_update_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(364,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(368,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_final_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(368,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(371,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_cipher_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(371,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(376,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(376,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(377,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(377,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(378,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(378,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(380,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(380,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(382,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(382,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(384,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(384,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(386,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_cipher_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(386,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(404,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(404,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(405,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(405,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(407,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(407,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(409,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_update_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(409,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(411,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_final_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(411,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(414,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(414,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(415,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(415,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(417,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(417,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(419,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(419,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(420,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(420,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(422,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_mac_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(422,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(439,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(439,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(440,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(440,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(443,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_derive_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(443,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(445,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(445,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(446,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(446,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(448,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(448,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(450,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(450,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(451,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(451,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(453,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kdf_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(453,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(478,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(478,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(482,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_instantiate_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(482,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(487,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_uninstantiate_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(487,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(488,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_generate_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(488,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(492,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_reseed_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(492,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(496,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_nonce_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(496,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(499,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_enable_locking_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(499,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(500,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_lock_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(500,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(502,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(502,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(503,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(503,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(505,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(505,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(507,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(507,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(508,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(508,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(510,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(510,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(517,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_verify_zeroization_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(517,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(519,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_rand_get_seed_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(519,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(582,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_new_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(582,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(591,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_gen_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(591,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(593,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_gen_set_template_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(593,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(595,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_gen_set_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(595,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(597,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_gen_settable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(597,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(600,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_gen_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(600,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(606,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_load_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(606,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(616,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(616,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(618,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(618,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(623,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_set_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(623,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(625,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_settable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(625,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(630,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_query_operation_name_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(630,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(635,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_has_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(635,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(639,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_validate_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(639,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(644,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_match_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(644,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(653,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_import_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(653,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(655,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_import_types_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(655,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(657,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_export_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(657,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(660,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_export_types_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(660,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(665,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_dup_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(665,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(671,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_import_types_ex_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(671,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(673,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keymgmt_export_types_ex_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(673,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(689,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(689,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(690,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(690,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(692,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_derive_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(692,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(694,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_set_peer_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(694,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(696,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(696,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(697,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(697,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(699,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(699,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(701,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(701,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(703,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_keyexch_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(703,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(734,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(734,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(736,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_sign_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(736,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(738,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_sign_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(738,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(742,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_verify_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(742,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(744,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_verify_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(744,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(749,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_verify_recover_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(749,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(751,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_verify_recover_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(751,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(754,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_sign_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(754,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(757,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_sign_update_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(757,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(759,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_sign_final_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(759,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(762,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_sign_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(762,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(765,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_verify_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(765,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(768,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_verify_update_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(768,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(770,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_verify_final_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(770,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(772,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_digest_verify_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(772,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(776,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(776,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(777,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(777,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(779,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(779,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(781,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(781,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(783,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(783,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(785,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_get_ctx_md_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(785,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(787,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_gettable_ctx_md_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(787,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(789,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_set_ctx_md_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(789,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(791,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_signature_settable_ctx_md_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(791,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(809,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(809,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(810,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_encrypt_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(810,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(812,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_encrypt_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(812,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(817,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_decrypt_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(817,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(819,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_decrypt_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(819,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(825,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(825,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(826,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(826,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(828,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(828,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(830,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(830,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(832,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_asym_cipher_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(832,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(850,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(850,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(851,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_encapsulate_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(851,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(853,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_auth_encapsulate_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(853,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(856,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_encapsulate_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(856,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(860,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_decapsulate_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(860,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(862,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_auth_decapsulate_init_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(862,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(865,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_decapsulate_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(865,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(869,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_dupctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(869,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(870,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_get_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(870,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(871,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_gettable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(871,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(873,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(873,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(875,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_kem_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(875,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(889,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(889,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(891,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(891,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(892,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(892,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(894,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(894,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(896,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(896,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(899,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_does_selection_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(899,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(901,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_encode_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(901,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(907,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_encoder_import_object_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(907,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(920,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_newctx_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(920,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(922,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_get_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(922,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(923,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_gettable_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(923,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(925,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(925,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(927,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(927,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(930,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_does_selection_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(930,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(932,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_decode_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(932,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(936,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_decoder_export_object_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(936,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(962,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_open_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(962,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(963,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_attach_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(963,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(964,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_settable_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(964,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(966,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_set_ctx_params_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(966,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(968,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_load_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(968,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(972,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_eof_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(972,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(973,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_close_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(973,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(974,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_export_object_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(974,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(977,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_delete_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(977,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(980,1): warning C4191: 'type cast': unsafe conversion from 'void (__cdecl *const )(void)' to 'OSSL_FUNC_store_open_ex_fn (__cdecl *)'
+C:\Program Files\OpenSSL-Win64\include\openssl\core_dispatch.h(980,1): warning C4191:         Making a function call using the resulting pointer may cause your program to fail
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\bio.h(423,12): warning C4820: 'bio_poll_descriptor_st': '4' bytes padding added after data member 'bio_poll_descriptor_st::type'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\asn1.h(196,1): warning C4820: 'asn1_string_st': '4' bytes padding added after data member 'asn1_string_st::flags'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\asn1.h(551,12): warning C4820: 'asn1_type_st': '4' bytes padding added after data member 'asn1_type_st::type'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\asn1.h(590,22): warning C4820: 'BIT_STRING_BITNAME_st': '4' bytes padding added after data member 'BIT_STRING_BITNAME_st::bitnum'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\evp.h(458,1): warning C4820: '<unnamed-tag>': '4' bytes padding added after data member '<unnamed-tag>::interleave'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\err.h(245,40): warning C4365: 'return': conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\err.h(252,20): warning C4365: 'return': conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\err.h(258,24): warning C4365: 'return': conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\err.h(259,20): warning C4365: 'return': conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+C:\Program Files\OpenSSL-Win64\include\openssl\err.h(371,23): warning C4820: 'ERR_string_data_st': '4' bytes padding added after data member 'ERR_string_data_st::error'
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(140,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(140,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(153,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(153,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(162,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(162,86): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,25): warning C4365: 'argument': conversion from 'char' to 'unsigned char', signed/unsigned mismatch
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,25):
+      the template instantiation context (the oldest one first) is
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(53,10):
+          see reference to function template instantiation '_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,to_lowercase::<lambda_1>>(const _InIt,const _InIt,_OutIt,_Fn)' being compiled
+          with
+          [
+              _OutIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
+              _Elem=char,
+              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
+              _Fn=to_lowercase::<lambda_1>
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): warning C4242: '=': conversion from 'int' to 'char', possible loss of data
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244: 'argument': conversion from 'wchar_t' to 'const _Elem', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         [
@@ -9,7 +1129,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(127,42):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(128,42):
           see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
           with
           [
@@ -17,7 +1137,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
               _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
               _Alloc=std::allocator<char>
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(127,42):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(128,42):
               see the first reference to 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' in 'main'
           C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2590,17):
           see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)' being compiled
@@ -29,4 +1149,14 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
               _Size=unsigned __int64
           ]
   
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4365: 'argument': conversion from 'wchar_t' to 'const _Elem', signed/unsigned mismatch
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4365:         with
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4365:         [
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4365:             _Elem=char
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4365:         ]
+  (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(46): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(45): message : index 'i' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(46): message : feeds call on this line
   Distributed-Hash-Cracker-CPP-Client.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe

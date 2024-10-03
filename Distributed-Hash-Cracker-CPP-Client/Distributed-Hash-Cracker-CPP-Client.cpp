@@ -1,3 +1,4 @@
+#include "bcrypt/BCrypt.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -125,16 +126,33 @@ int main() {
             while (std::getline(wordlist, utf8_word)) {
                 line_number++;
                 std::string utf8_word_str(utf8_word.begin(), utf8_word.end());
-                std::string input_with_salt = utf8_word_str + salt; // Append salt to the word
-                std::string calculated_hash = to_lowercase(calculate_hash(hash_type, input_with_salt));
+                std::string calculated_hash;
 
-                std::cout << "Calculating the password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                if (to_lowercase(hash_type) == "bcrypt") {
+                    calculated_hash = BCrypt::generateHash(utf8_word_str, std::stoi(salt));
 
-                if (calculated_hash == to_lowercase(hash_value)) {
-                    match_found = true;
-                    std::string match_message = "MATCH:" + utf8_word_str + " in wordlist: " + WORDLIST_FILE + ", line: " + std::to_string(line_number);
-                    send(client_socket, match_message.c_str(), match_message.length(), 0);
-                    break; // Exit the loop on a match
+                    std::cout << "Calculated the password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+
+                    if (BCrypt::validatePassword(utf8_word_str, hash_value))
+                    {
+                        match_found = true;
+                        std::string match_message = "MATCH:" + utf8_word_str + " in wordlist: " + WORDLIST_FILE + ", line: " + std::to_string(line_number);
+                        send(client_socket, match_message.c_str(), match_message.length(), 0);
+                        break; // Exit the loop on a match
+                    }
+                }
+                else {
+                    std::string input_with_salt = utf8_word_str + salt; // Append salt to the word
+                    calculated_hash = to_lowercase(calculate_hash(hash_type, input_with_salt));
+
+                    std::cout << "Calculated the password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+
+                    if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                        match_found = true;
+                        std::string match_message = "MATCH:" + utf8_word_str + " in wordlist: " + WORDLIST_FILE + ", line: " + std::to_string(line_number);
+                        send(client_socket, match_message.c_str(), match_message.length(), 0);
+                        break; // Exit the loop on a match
+                    }
                 }
             }
 
