@@ -9,10 +9,43 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <vector>
-#include <algorithm>
+#include <algorithm>         
+#include <map>  
+#include <filesystem>
 
-#define PORT 8080
-#define WORDLIST_FILE "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\x64\\Debug\\wordlist.txt"
+std::string WORDLIST_FILE = "";
+std::string SERVER_IP = "";
+int SERVER_PORT = 0;
+
+std::map<std::string, std::string> readConfig(const std::string& filename) {
+    std::map<std::string, std::string> configMap;
+    std::filesystem::path currentPath = std::filesystem::current_path();
+    std::filesystem::path fullPath = std::filesystem::absolute(currentPath / filename);
+    std::ifstream configFile(fullPath);
+    std::string line;
+
+    if (std::filesystem::exists(fullPath)) {
+        if (configFile.is_open()) {
+            while (std::getline(configFile, line)) {
+                size_t delimiterPos = line.find('=');
+                if (delimiterPos != std::string::npos) {
+                    std::string key = line.substr(0, delimiterPos);
+                    std::string value = line.substr(delimiterPos + 1);
+                    configMap[key] = value;
+                }
+            }
+            configFile.close();
+        }
+        else {
+            std::cerr << "Unable to open config file: " << filename << std::endl;
+        }
+    }
+    else {
+        std::cerr << "File does not exist." << std::endl;
+    }
+
+    return configMap;
+}
 
 // Function to calculate hash using EVP
 std::string calculate_hash(const std::string& hash_type, const std::string& input) {
@@ -56,6 +89,18 @@ std::string to_lowercase(const std::string& str) {
 }
 
 int main() {
+    std::map<std::string, std::string> config = readConfig("config.ini");
+
+    for (const auto& pair : config) {
+        if (pair.first == "SERVER_IP")
+            SERVER_IP = pair.second;
+        if (pair.first == "SERVER_PORT")
+            SERVER_PORT = std::stoi(pair.second);
+        if (pair.first == "WORDLIST_FILE")
+            WORDLIST_FILE = pair.second;
+    }
+
+
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
         std::cerr << "WSAStartup failed: " << WSAGetLastError() << std::endl;
@@ -71,8 +116,8 @@ int main() {
 
     sockaddr_in server_address;
     server_address.sin_family = AF_INET;
-    server_address.sin_port = htons(PORT);
-    inet_pton(AF_INET, "127.0.0.1", &server_address.sin_addr);
+    server_address.sin_port = htons(SERVER_PORT);
+    inet_pton(AF_INET, SERVER_IP.c_str(), &server_address.sin_addr);
 
     // Attempt to connect to the server continuously
     while (connect(client_socket, (struct sockaddr*)&server_address, sizeof(server_address)) == SOCKET_ERROR) {

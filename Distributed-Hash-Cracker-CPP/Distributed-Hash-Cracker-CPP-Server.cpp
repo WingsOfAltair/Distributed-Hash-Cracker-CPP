@@ -7,7 +7,7 @@
 #include <atomic>
 #include <algorithm>
 
-#define PORT 8080
+#define PORT 8000
 
 std::vector<SOCKET> clients;
 std::atomic<bool> match_found(false);

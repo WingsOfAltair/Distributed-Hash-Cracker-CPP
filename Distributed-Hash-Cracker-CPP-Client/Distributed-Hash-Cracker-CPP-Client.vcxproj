@@ -107,6 +107,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\include;C:\Program Files\OpenSSL-Win64\include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

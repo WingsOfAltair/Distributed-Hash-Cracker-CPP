@@ -1098,17 +1098,19 @@ C:\Program Files\OpenSSL-Win64\include\openssl\err.h(259,20): warning C4365: 're
 C:\Program Files\OpenSSL-Win64\include\openssl\err.h(371,23): warning C4820: 'ERR_string_data_st': '4' bytes padding added after data member 'ERR_string_data_st::error'
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(164,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(164,86): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(119,37): warning C4242: 'argument': conversion from 'int' to 'u_short', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(119,37): warning C4365: 'argument': conversion from 'int' to 'u_short', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(186,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(186,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(199,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(199,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(209,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(209,86): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,25): warning C4365: 'argument': conversion from 'char' to 'unsigned char', signed/unsigned mismatch
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,25):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(53,10):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(86,10):
           see reference to function template instantiation '_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,to_lowercase::<lambda_1>>(const _InIt,const _InIt,_OutIt,_Fn)' being compiled
           with
           [
@@ -1129,7 +1131,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(128,42):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(173,42):
           see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
           with
           [
@@ -1137,7 +1139,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
               _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
               _Alloc=std::allocator<char>
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(128,42):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(173,42):
               see the first reference to 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' in 'main'
           C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2590,17):
           see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)' being compiled
@@ -1156,7 +1158,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4365:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(46): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(45): message : index 'i' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(46): message : feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(79): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(78): message : index 'i' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(79): message : feeds call on this line
   Distributed-Hash-Cracker-CPP-Client.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe
