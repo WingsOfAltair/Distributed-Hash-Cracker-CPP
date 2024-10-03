@@ -21,13 +21,13 @@ std::string calculate_hash(const std::string& hash_type, const std::string& inpu
 
     const EVP_MD* md = nullptr;
 
-    if (hash_type == "MD5") {
+    if (hash_type == "md5") {
         md = EVP_md5();
     }
-    else if (hash_type == "SHA1") {
+    else if (hash_type == "sha1") {
         md = EVP_sha1();
     }
-    else if (hash_type == "SHA256") {
+    else if (hash_type == "sha256") {
         md = EVP_sha256();
     }
     else {
@@ -144,7 +144,7 @@ int main() {
                 }
                 else {
                     std::string input_with_salt = utf8_word_str + salt; // Append salt to the word
-                    calculated_hash = to_lowercase(calculate_hash(hash_type, input_with_salt));
+                    calculated_hash = calculate_hash(hash_type, input_with_salt);
 
                     std::cout << "Calculated the password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
 
