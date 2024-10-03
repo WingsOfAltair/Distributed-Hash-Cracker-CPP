@@ -1098,12 +1098,12 @@ C:\Program Files\OpenSSL-Win64\include\openssl\err.h(259,20): warning C4365: 're
 C:\Program Files\OpenSSL-Win64\include\openssl\err.h(371,23): warning C4820: 'ERR_string_data_st': '4' bytes padding added after data member 'ERR_string_data_st::error'
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(140,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(140,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(153,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(153,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(162,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(162,86): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,88): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(163,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(163,86): warning C4365: 'argument': conversion from 'unsigned __int64' to 'int', signed/unsigned mismatch
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,25): warning C4365: 'argument': conversion from 'char' to 'unsigned char', signed/unsigned mismatch
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,25):
@@ -1159,4 +1159,8 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.331
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(46): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(45): message : index 'i' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(46): message : feeds call on this line
+bcrypt.lib(bcrypt.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(bcrypt.obj)' or at ''; linking object as if no debug info
+bcrypt.lib(wrapper.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(wrapper.obj)' or at ''; linking object as if no debug info
+bcrypt.lib(crypt_blowfish.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(crypt_blowfish.obj)' or at ''; linking object as if no debug info
+bcrypt.lib(crypt_gensalt.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(crypt_gensalt.obj)' or at ''; linking object as if no debug info
   Distributed-Hash-Cracker-CPP-Client.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe

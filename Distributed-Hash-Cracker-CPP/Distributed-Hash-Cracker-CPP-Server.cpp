@@ -126,7 +126,7 @@ int main() {
         std::cout << "Enter the hash: ";
         std::getline(std::cin, hash);
 
-        std::cout << "Enter the salt (leave empty if none, or enter rounds if BCRYPT): ";
+        std::cout << "Enter the salt (leave empty if none, or BCRYPT): ";
         std::getline(std::cin, salt);
 
         if (!hash_type.empty() && !hash.empty()) {

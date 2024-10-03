@@ -129,9 +129,10 @@ int main() {
                 std::string calculated_hash;
 
                 if (to_lowercase(hash_type) == "bcrypt") {
-                    calculated_hash = BCrypt::generateHash(utf8_word_str, std::stoi(salt));
+                    //calculated_hash = BCrypt::generateHash(utf8_word_str, std::stoi(salt));
 
-                    std::cout << "Calculated the password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                    //std::cout << "Calculated the password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
 
                     if (BCrypt::validatePassword(utf8_word_str, hash_value))
                     {
