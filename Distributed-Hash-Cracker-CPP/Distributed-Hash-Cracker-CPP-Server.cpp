@@ -14,6 +14,7 @@
 int SERVER_PORT = 0;
 
 std::vector<SOCKET> clients;
+std::map<SOCKET, bool> clients_ready;  // Track the "ready" state of each client
 std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
@@ -66,6 +67,7 @@ void notify_clients(const std::string& hash_type, const std::string& hash, const
 // Function to handle each client
 void handle_client(SOCKET client_socket) {
     clients.push_back(client_socket);
+    clients_ready[client_socket] = false;
     total_clients++;
 
     while (true) {
@@ -93,7 +95,23 @@ void handle_client(SOCKET client_socket) {
             std::cout << "Match not found in client: " << client_socket << std::endl;
         }
         else if (message.find("Ready to accept new requests.") == 0) {
-            ready = true;
+            clients_ready[client_socket] = true;  // Mark this client as ready
+
+            // Check if all clients are ready
+            bool all_clients_ready = true;  // Assume all clients are ready
+            for (const auto& client : clients_ready) {
+                if (!client.second) {  // If any client is not ready, set to false
+                    all_clients_ready = false;
+                    break;
+                }
+            }
+
+            if (all_clients_ready) {
+                for (auto& client : clients_ready) {  // Use non-const reference to modify the map
+                    client.second = false;  // Reset each client's ready state to false
+                }
+                ready = true;  // Set ready to true only when all clients are ready
+            }
         }
 
         clients_responses++;
@@ -102,6 +120,7 @@ void handle_client(SOCKET client_socket) {
     // Clean up on client disconnection
     closesocket(client_socket);
     clients.erase(std::remove(clients.begin(), clients.end(), client_socket), clients.end());
+    clients_ready.erase(client_socket);
     total_clients--;
 }
 
