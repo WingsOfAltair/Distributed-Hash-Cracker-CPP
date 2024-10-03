@@ -152,6 +152,7 @@ int main() {
                         match_found = true;
                         std::string match_message = "MATCH:" + utf8_word_str + " in wordlist: " + WORDLIST_FILE + ", line: " + std::to_string(line_number);
                         send(client_socket, match_message.c_str(), match_message.length(), 0);
+                        std::cout << "Match found: " << utf8_word_str << " in wordlist: " << WORDLIST_FILE << ", line: " << std::to_string(line_number) << std::endl;
                         break; // Exit the loop on a match
                     }
                 }
@@ -161,6 +162,7 @@ int main() {
             if (!match_found) {
                 std::string no_match_message = "NO_MATCH";
                 send(client_socket, no_match_message.c_str(), no_match_message.length(), 0);
+                std::cout << "No match was found in wordlist: " << WORDLIST_FILE << std::endl;
             }
         }
     }
