@@ -171,7 +171,7 @@ int main() {
             while (std::getline(wordlist, utf8_word)) {
                 line_number++;
                 std::string utf8_word_str(utf8_word.begin(), utf8_word.end());
-                std::string calculated_hash;
+                std::string calculated_hash; 
 
                 if (to_lowercase(hash_type) == "bcrypt") {
                     //calculated_hash = BCrypt::generateHash(utf8_word_str, std::stoi(salt));

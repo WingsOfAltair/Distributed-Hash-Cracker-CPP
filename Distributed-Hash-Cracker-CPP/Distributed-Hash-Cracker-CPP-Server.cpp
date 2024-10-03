@@ -6,13 +6,47 @@
 #include <ws2tcpip.h>
 #include <atomic>
 #include <algorithm>
+#include <map>
+#include <fstream>
+#include <sstream>
+#include <filesystem>
 
-#define PORT 8000
+int SERVER_PORT = 0;
 
 std::vector<SOCKET> clients;
 std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
+
+std::map<std::string, std::string> readConfig(const std::string& filename) {
+    std::map<std::string, std::string> configMap;
+    std::filesystem::path currentPath = std::filesystem::current_path();
+    std::filesystem::path fullPath = std::filesystem::absolute(currentPath / filename);
+    std::ifstream configFile(fullPath);
+    std::string line;
+
+    if (std::filesystem::exists(fullPath)) {
+        if (configFile.is_open()) {
+            while (std::getline(configFile, line)) {
+                size_t delimiterPos = line.find('=');
+                if (delimiterPos != std::string::npos) {
+                    std::string key = line.substr(0, delimiterPos);
+                    std::string value = line.substr(delimiterPos + 1);
+                    configMap[key] = value;
+                }
+            }
+            configFile.close();
+        }
+        else {
+            std::cerr << "Unable to open config file: " << filename << std::endl;
+        }
+    }
+    else {
+        std::cerr << "File does not exist." << std::endl;
+    }
+
+    return configMap;
+}
 
 // Function to convert std::string to UTF-8 (if needed)
 std::string to_utf8(const std::string& str) {
@@ -67,6 +101,13 @@ void handle_client(SOCKET client_socket) {
 }
 
 int main() {
+    std::map<std::string, std::string> config = readConfig("server.ini");
+
+    for (const auto& pair : config) {
+        if (pair.first == "SERVER_PORT")
+            SERVER_PORT = std::stoi(pair.second);
+    }
+
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
         std::cerr << "WSAStartup failed: " << WSAGetLastError() << std::endl;
@@ -84,7 +125,7 @@ int main() {
     sockaddr_in address;
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
+    address.sin_port = htons(SERVER_PORT);
     if (bind(server_socket, (struct sockaddr*)&address, sizeof(address)) == SOCKET_ERROR) {
         std::cerr << "Bind failed: " << WSAGetLastError() << std::endl;
         closesocket(server_socket);
@@ -99,7 +140,7 @@ int main() {
         return 1;
     }
 
-    std::cout << "Server is listening on port " << PORT << std::endl;
+    std::cout << "Server is listening on port " << SERVER_PORT << std::endl;
 
     // Thread to accept clients
     std::thread client_handler([&]() { // Capture by reference
