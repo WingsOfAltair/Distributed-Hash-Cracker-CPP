@@ -186,8 +186,9 @@ int main() {
             std::string hash;
             std::string salt;
 
-            // Ask for the hash type, hash, and optional salt from the user
-            std::cout << "Enter the hash type (MD5, SHA1, SHA256, BCRYPT): ";
+            // Ask for the hash type, hash, and optional salt from the user     
+            std::cout << "Hash type (MD5, SHA1, SHA256, BCRYPT): " << std::endl;
+            std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
 
             std::cout << "Enter the hash: ";
@@ -201,6 +202,8 @@ int main() {
                 notify_clients(hash_type, hash, salt);
                 match_found = false; // Reset match_found flag for the next round
                 clients_responses = 0; // Reset responses for the next round
+                
+                std::cout << "Processing entered hash, please wait..." << std::endl;
 
                 // Wait for all clients to respond before checking for matches
                 while (clients.size() > 0 && clients_responses < total_clients) {
