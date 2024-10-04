@@ -79,17 +79,13 @@ std::string getHashType(const std::string& hash) {
     // Map of hash types with their expected lengths in hexadecimal
     std::unordered_map<std::string, size_t> hashTypes = {
         {"MD5", 32},
-        {"SHA-1", 40},
-        {"RIPEMD-160", 40},
-        {"SHA-224", 56},
-        {"SHA-256", 64},
-        {"SHA-384", 96},
-        {"SHA-512", 128},
-        {"SHA3-224", 56},
-        {"SHA3-256", 64},
-        {"SHA3-384", 96},
-        {"SHA3-512", 128}
+        {"SHA-1 or RIPEMD-160", 40}, // Handle the ambiguity between SHA-1 and RIPEMD-160
+        {"SHA-224 or SHA3-224", 56},
+        {"SHA-256 or SHA3-256", 64},
+        {"SHA-384 or SHA3-384", 96},
+        {"SHA-512 or SHA3-512", 128},
     };
+
 
     // Get the length of the hash
     size_t hashLength = hash.length();
