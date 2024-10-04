@@ -9,7 +9,9 @@
 #include <map>
 #include <fstream>
 #include <sstream>
-#include <filesystem>
+#include <filesystem>    
+#include <regex>  
+#include <unordered_map>
 
 int SERVER_PORT = 0;
 
@@ -54,6 +56,52 @@ std::map<std::string, std::string> readConfig(const std::string& filename) {
 // Function to convert std::string to UTF-8 (if needed)
 std::string to_utf8(const std::string& str) {
     return str; // Assuming str is already in UTF-8 format
+}
+
+std::string to_lowercase(const std::string& str) {
+    std::string lower_str = str;
+    std::transform(lower_str.begin(), lower_str.end(), lower_str.begin(),
+        [](unsigned char c) { return std::tolower(c); });
+    return lower_str;
+}
+
+// Function to check if the given hash is bcrypt
+bool isBcryptHash(const std::string& hash) {
+    // Regex pattern to match bcrypt hashes
+    std::regex bcryptPattern(R"(^\$(2[aby])\$\d{2}\$[./A-Za-z0-9]{53}$)");
+
+    // Return true if the hash matches the bcrypt format
+    return std::regex_match(hash, bcryptPattern);
+}
+
+// Function to determine if it's SHA, SHA-3, or RIPEMD-160 based on length
+std::string getHashType(const std::string& hash) {
+    // Map of hash types with their expected lengths in hexadecimal
+    std::unordered_map<std::string, size_t> hashTypes = {
+        {"MD5", 32},
+        {"SHA-1", 40},
+        {"RIPEMD-160", 40},
+        {"SHA-224", 56},
+        {"SHA-256", 64},
+        {"SHA-384", 96},
+        {"SHA-512", 128},
+        {"SHA3-224", 56},
+        {"SHA3-256", 64},
+        {"SHA3-384", 96},
+        {"SHA3-512", 128}
+    };
+
+    // Get the length of the hash
+    size_t hashLength = hash.length();
+
+    // Try to match the length with known hash types
+    for (const auto& [type, length] : hashTypes) {
+        if (hashLength == length) {
+            return type;  // Return the first match found
+        }
+    }
+
+    return "Unknown hash type";  // No match found
 }
 
 // Function to notify clients of the new hash with optional salt
@@ -188,11 +236,31 @@ int main() {
 
             // Ask for the hash type, hash, and optional salt from the user     
             std::cout << "Hash type (BCRYPT, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
+            std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
 
             std::cout << "Enter the hash: ";
             std::getline(std::cin, hash);
+
+            if (to_lowercase(hash_type) == "type") {
+                std::string hashType = getHashType(hash);
+                if (hashType == "Unknown hash type") {
+                    bool isBcrypt = isBcryptHash(hash);
+                    if (isBcrypt) {
+                        std::cout << "Hash Type: BCrypt" << std::endl;
+                        continue;
+                    }
+                    else {
+                        std::cout << "Unknown hash type." << std::endl;
+                        continue;
+                    }
+                }
+                else {
+                    std::cout << "Hash Type: " << getHashType(hash) << std::endl;
+                    continue;
+                }
+            }
 
             std::cout << "Enter the salt (leave empty if none, or BCRYPT): ";
             std::getline(std::cin, salt);
