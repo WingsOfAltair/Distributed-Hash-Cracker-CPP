@@ -84,8 +84,32 @@ std::string calculate_hash(const std::string& hash_type, const std::string& inpu
     else if (hash_type == "sha1") {
         md = EVP_sha1();
     }
+    else if (hash_type == "sha512") {
+        md = EVP_sha512();
+    }
+    else if (hash_type == "sha384") {
+        md = EVP_sha384();
+    }
     else if (hash_type == "sha256") {
         md = EVP_sha256();
+    }
+    else if (hash_type == "sha224") {
+        md = EVP_sha224();
+    }
+    else if (hash_type == "sha3-512") {
+        md = EVP_sha3_512();
+    }
+    else if (hash_type == "sha3-384") {
+        md = EVP_sha3_384();
+    }
+    else if (hash_type == "sha3-256") {
+        md = EVP_sha3_256();
+    }
+    else if (hash_type == "sha3-224") {
+        md = EVP_sha3_224();
+    }
+    else if (hash_type == "ripemd160") {
+        md = EVP_ripemd160();
     }
     else {
         std::cerr << "Unsupported hash type: " << hash_type << std::endl;

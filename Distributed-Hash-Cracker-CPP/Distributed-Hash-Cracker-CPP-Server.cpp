@@ -187,7 +187,7 @@ int main() {
             std::string salt;
 
             // Ask for the hash type, hash, and optional salt from the user     
-            std::cout << "Hash type (MD5, SHA1, SHA256, BCRYPT): " << std::endl;
+            std::cout << "Hash type (BCRYPT, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
 
