@@ -15,7 +15,7 @@ using boost::asio::ip::tcp;
 
 int SERVER_PORT = 0;
 std::vector<std::shared_ptr<tcp::socket>> clients;
-std::map<tcp::socket*, bool> clients_ready;
+std::unordered_map<std::string, bool> clients_ready;
 std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
@@ -83,7 +83,11 @@ void notify_clients(const std::string& hash_type, const std::string& hash, const
 // Handle each client connection
 void handle_client(std::shared_ptr<tcp::socket> client_socket) {
     clients.push_back(client_socket);
-    clients_ready[client_socket.get()] = false;
+    auto client_endpoint = client_socket->remote_endpoint();
+    std::string client_key = client_endpoint.address().to_string() + ":" + std::to_string(client_endpoint.port());
+    if (clients_ready.find(client_key) == clients_ready.end()) {
+        clients_ready[client_key] = false;
+    }
     total_clients++;
 
     while (true) {
@@ -106,10 +110,9 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
             std::cout << "Match not found in client: " << client_socket << std::endl;
         }
         else if (message == "Ready to accept new requests.") {
-            clients_ready[client_socket.get()] = true;
+            clients_ready[client_key] = true;
             bool all_ready = std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; });
             if (all_ready) {
-                for (auto& entry : clients_ready) entry.second = false;
                 ready = true;
             }
         }
