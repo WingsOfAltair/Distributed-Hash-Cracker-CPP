@@ -1,4 +1,6 @@
 ﻿  Distributed-Hash-Cracker-CPP-Server.cpp
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(107,53): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(135,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
   Distributed-Hash-Cracker-CPP.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Server.exe
