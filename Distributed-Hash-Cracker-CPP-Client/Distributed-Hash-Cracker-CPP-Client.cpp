@@ -34,7 +34,7 @@ std::atomic<bool> stop_processing(false);  // Global flag for stopping threads
 
 char buffer[1024];
 
-void RestartApplication() {
+/*void RestartApplication() {
     // Get the current executable's path
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
@@ -54,7 +54,7 @@ void RestartApplication() {
 
     // Exit the current instance
     ExitProcess(0);
-}
+}*/
 
 // Function to read config file
 std::map<std::string, std::string> readConfig(const std::string& filename) {
