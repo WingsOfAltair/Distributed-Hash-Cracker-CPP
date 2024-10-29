@@ -47,6 +47,7 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::SSL
     OpenSSL::Crypto
     bcrypt  # Link bcrypt library
+    crypt   # Link the crypt library
 )
 
 add_executable(DistributedHashCrackerServer 
@@ -58,11 +59,13 @@ target_link_libraries(DistributedHashCrackerServer PRIVATE
     OpenSSL::Crypto
 )
 
-# Specify the Boost libraries you want to copy
-set(BOOST_DLLS
-    "C:/boost/lib64-msvc-14.3/boost_thread-vc143-mt-gd-x64-1_85.dll"      # Adjust for your Boost version
-    "C:/boost/lib64-msvc-14.3/boost_filesystem-vc143-mt-gd-x64-1_85.dll"  # Add boost_filesystem DLL
-)
+if(WIN32)
+	# Specify the Boost libraries you want to copy
+	set(BOOST_DLLS
+    	"C:/boost/lib64-msvc-14.3/boost_thread-vc143-mt-gd-x64-1_85.dll"      # Adjust for your Boost version
+    	"C:/boost/lib64-msvc-14.3/boost_filesystem-vc143-mt-gd-x64-1_85.dll"  # Add boost_filesystem DLL
+	)
+endif()
 
 # Copy Boost DLLs after building the executables
 foreach(DLL ${BOOST_DLLS})
@@ -77,12 +80,32 @@ foreach(DLL ${BOOST_DLLS})
     )
 endforeach()
 
-# Specify configuration files to copy with updated paths
-set(CONFIG_FILES
-    "D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/config.ini"
-    "D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/server.ini"
-    "D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/wordlist.txt"
-)
+if(WIN32)
+	# Specify configuration files to copy with updated paths
+	set(CONFIG_FILES
+    	"D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/config.ini"
+    	"D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/server.ini"
+    	"D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/wordlist.txt"
+	)
+endif()
+
+if(UNIX)
+    # Set the correct source directory for the Boost DLLs
+    set(SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")  # Adjust this path as needed
+    set(DEST_DIR "${CMAKE_BINARY_DIR}")
+
+    # Copy the required Boost libraries
+    file(COPY "${SRC_DIR}/boost_thread-vc143-mt-gd-x64-1_85.dll"
+        DESTINATION "${DEST_DIR}")
+    file(COPY "${SRC_DIR}/boost_filesystem-vc143-mt-gd-x64-1_85.dll"
+        DESTINATION "${DEST_DIR}")
+    file(COPY "${SRC_DIR}/config.ini"
+        DESTINATION "${DEST_DIR}")
+    file(COPY "${SRC_DIR}/server.ini"
+        DESTINATION "${DEST_DIR}")
+    file(COPY "${SRC_DIR}/wordlist.txt"
+        DESTINATION "${DEST_DIR}")
+endif()
 
 # Copy config files after building the executables
 foreach(FILE ${CONFIG_FILES})
