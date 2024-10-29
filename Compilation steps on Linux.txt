@@ -2,7 +2,13 @@ g++ -o DistributedHashCracker Distributed-Hash-Cracker-CPP-Client.cpp -Iinclude 
 
 g++ Distributed-Hash-Cracker-CPP-Server.cpp -o Server -lboost_system -lboost_filesystem -lssl -lboost_thread -lboost_chrono -lpthread
 
-(in case libncrypt.so is not present.)
+(in case boost is not present on system.)
+sudo apt install libboost-all-dev
+
+(in case ssl is not present on system.)
+sudo apt install libssl-dev
+
+(in case libbcrypt.so is not present.)
 gcc -shared -fPIC -o libbcrypt.so bcrypt.c
 
 sudo cp libbcrypt.so /usr/local/lib
