@@ -5397,10 +5397,6 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(129,1): warning C4820:   
 C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(129,1): warning C4820:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(39,10): warning C4459: declaration of 'buffer' hides global declaration
-      D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(35,6):
-      see declaration of 'buffer'
-  
 C:\boost\boost\asio\detail\is_buffer_sequence.hpp(52,1): warning C4623: 'boost::asio::detail::buffer_sequence_memfns_derived<T>': default constructor was implicitly defined as deleted
 C:\boost\boost\asio\detail\is_buffer_sequence.hpp(52,1): warning C4623:         with
 C:\boost\boost\asio\detail\is_buffer_sequence.hpp(52,1): warning C4623:         [
@@ -7843,12 +7839,12 @@ C:\boost\boost\system\detail\system_category_message_win32.hpp(195): message : f
 C:\boost\boost\system\detail\system_category_message_win32.hpp(190): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\system\detail\system_category_message_win32.hpp(190): message : index 'r' range checked by comparison on this line
 C:\boost\boost\system\detail\system_category_message_win32.hpp(190): message : feeds call on this line
-C:\boost\boost\asio\buffer.hpp(911): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\buffer.hpp(911): message : index '' range checked by comparison on this line
-C:\boost\boost\asio\buffer.hpp(911): message : feeds call on this line
 C:\boost\boost\asio\buffer.hpp(615): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\buffer.hpp(615): message : index '' range checked by comparison on this line
 C:\boost\boost\asio\buffer.hpp(615): message : feeds call on this line
+C:\boost\boost\asio\buffer.hpp(911): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\buffer.hpp(911): message : index '' range checked by comparison on this line
+C:\boost\boost\asio\buffer.hpp(911): message : feeds call on this line
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(382): message : index 'i' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383): message : feeds call on this line
@@ -7873,24 +7869,24 @@ C:\boost\boost\asio\detail\timer_queue.hpp(300): message : feeds call on this li
 C:\boost\boost\asio\detail\timer_queue.hpp(297): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\timer_queue.hpp(295): message : index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(297): message : feeds call on this line
-C:\boost\boost\asio\detail\thread_info_base.hpp(112): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\detail\thread_info_base.hpp(106): message : index 'i' range checked by comparison on this line
-C:\boost\boost\asio\detail\thread_info_base.hpp(112): message : feeds call on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(255): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\timer_queue.hpp(252): message : index 'index' range checked by comparison on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(255): message : feeds call on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(272): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\timer_queue.hpp(266): message : index 'child' range checked by comparison on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(272): message : feeds call on this line
+C:\boost\boost\asio\detail\thread_info_base.hpp(112): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\detail\thread_info_base.hpp(106): message : index 'i' range checked by comparison on this line
+C:\boost\boost\asio\detail\thread_info_base.hpp(112): message : feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(602): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(597): message : index 'timeout_usec' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(602): message : feeds call on this line
-C:\boost\boost\asio\detail\timer_queue.hpp(365): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\detail\timer_queue.hpp(364): message : index '' range checked by comparison on this line
-C:\boost\boost\asio\detail\timer_queue.hpp(365): message : feeds call on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(351): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\timer_queue.hpp(350): message : index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\timer_queue.hpp(351): message : feeds call on this line
+C:\boost\boost\asio\detail\timer_queue.hpp(365): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\detail\timer_queue.hpp(364): message : index '' range checked by comparison on this line
+C:\boost\boost\asio\detail\timer_queue.hpp(365): message : feeds call on this line
 C:\boost\boost\asio\detail\thread_info_base.hpp(158): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\thread_info_base.hpp(154): message : index 'mem_index' range checked by comparison on this line
 C:\boost\boost\asio\detail\thread_info_base.hpp(160): message : feeds call on this line
