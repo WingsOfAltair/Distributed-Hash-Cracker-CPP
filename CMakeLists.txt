@@ -92,27 +92,25 @@ foreach(DLL ${BOOST_DLLS})
     )
 endforeach()
 
-if(WIN32)
-    set(SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")  # Path to the Debug folder
-    set(DEST_DIR "${CMAKE_BINARY_DIR}")
+set(SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")  # Path to the Debug folder
+set(DEST_DIR "${CMAKE_BINARY_DIR}")
 
-    # List of configuration files to copy
-    set(CONFIG_FILES
-        config.ini
-        server.ini
-        wordlist.txt
+# List of configuration files to copy
+set(CONFIG_FILES
+    config.ini
+    server.ini
+    wordlist.txt
+)
+
+# Copy configuration files after building the executables
+foreach(FILE ${CONFIG_FILES})
+    add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
+       COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerClient>
     )
 
-    # Copy configuration files after building the executables
-    foreach(FILE ${CONFIG_FILES})
-        add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerClient>
-        )
-
-        add_custom_command(TARGET DistributedHashCrackerServer POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerServer>
-        )
-    endforeach()
-endif()
+    add_custom_command(TARGET DistributedHashCrackerServer POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+       "${SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerServer>
+    )
+endforeach()
