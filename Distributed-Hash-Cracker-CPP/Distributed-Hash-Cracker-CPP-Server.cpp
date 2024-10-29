@@ -90,35 +90,53 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
     }
     total_clients++;
 
-    while (true) {
-        char buffer[1024];
-        boost::system::error_code error;
-        size_t len = clients.back()->read_some(boost::asio::buffer(buffer), error);
-        if (error == boost::asio::error::eof) break;  // Client disconnected
-        std::string message(buffer, len);
+    try {
+        while (true) {
+            char buffer[1024];
+            boost::system::error_code error;
+            size_t len = clients.back()->read_some(boost::asio::buffer(buffer), error);
+            
+            if (error == boost::asio::error::eof || error) {
+                if (error) {
+                    std::cerr << "Client disconnected with error: " << error.message() << std::endl;
+                }
+                break;
+            }
 
-        // Handle client messages
-        if (message.find("MATCH:") == 0) {
-            std::string match_info = message.substr(6); // Remove "MATCH:"
-            std::cout << "Client " << client_socket << " Match found: " << match_info << std::endl;
-            match_found = true;
-            for (auto& client : clients) {
-                boost::asio::write(*client, boost::asio::buffer("STOP"));
+            std::string message(buffer, len);
+
+            // Handle client messages
+            if (message.find("MATCH:") == 0) {
+                std::string match_info = message.substr(6); // Remove "MATCH:"
+                std::cout << "Client " << client_socket << " Match found: " << match_info << std::endl;
+                match_found = true;
+                for (auto& client : clients) {
+                    boost::asio::write(*client, boost::asio::buffer("STOP"));
+                }
             }
-        }
-        else if (message.find("NO_MATCH") == 0) {
-            std::cout << "Match not found in client: " << client_socket << std::endl;
-        }
-        else if (message == "Ready to accept new requests.") {
-            clients_ready[client_key] = true;
-            bool all_ready = std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; });
-            if (all_ready) {
-                ready = true;
+            else if (message.find("NO_MATCH") == 0) {
+                std::cout << "Match not found in client: " << client_socket << std::endl;
             }
+            else if (message == "Ready to accept new requests.") {
+                clients_ready[client_key] = true;
+                bool all_ready = std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; });
+                if (all_ready) {
+                    ready = true;
+                }
+            }
+            clients_responses++;
         }
-        clients_responses++;
+    }
+    catch (const boost::system::system_error& e) {
+        std::cerr << "Boost system error: " << e.what() << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Exception in client handling: " << e.what() << std::endl;
     }
 
+    // Cleanup client on disconnect
+    clients.erase(std::remove(clients.begin(), clients.end(), client_socket), clients.end());
+    clients_ready.erase(client_key);
     total_clients--;
 }
 
