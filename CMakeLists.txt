@@ -42,6 +42,8 @@ link_directories(Distributed-Hash-Cracker-CPP-Client/include/bcrypt)  # Add bcry
 add_executable(DistributedHashCrackerClient 
     Distributed-Hash-Cracker-CPP-Client/Distributed-Hash-Cracker-CPP-Client.cpp
 )
+
+if(UNIX)
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
     ${Boost_LIBRARIES}
     OpenSSL::SSL
@@ -49,6 +51,16 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     bcrypt  # Link bcrypt library
     crypt   # Link the crypt library
 )
+endif()
+
+if(WIN32)
+target_link_libraries(DistributedHashCrackerClient PRIVATE 
+    ${Boost_LIBRARIES}
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    bcrypt  # Link bcrypt library
+)
+endif()
 
 add_executable(DistributedHashCrackerServer 
     Distributed-Hash-Cracker-CPP/Distributed-Hash-Cracker-CPP-Server.cpp
@@ -81,41 +93,26 @@ foreach(DLL ${BOOST_DLLS})
 endforeach()
 
 if(WIN32)
-	# Specify configuration files to copy with updated paths
-	set(CONFIG_FILES
-    	"D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/config.ini"
-    	"D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/server.ini"
-    	"D:/GitHub/Distributed-Hash-Cracker-CPP/x64/Debug/wordlist.txt"
-	)
-endif()
-
-if(UNIX)
-    # Set the correct source directory for the Boost DLLs
-    set(SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")  # Adjust this path as needed
+    set(SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")  # Path to the Debug folder
     set(DEST_DIR "${CMAKE_BINARY_DIR}")
 
-    # Copy the required Boost libraries
-    file(COPY "${SRC_DIR}/boost_thread-vc143-mt-gd-x64-1_85.dll"
-        DESTINATION "${DEST_DIR}")
-    file(COPY "${SRC_DIR}/boost_filesystem-vc143-mt-gd-x64-1_85.dll"
-        DESTINATION "${DEST_DIR}")
-    file(COPY "${SRC_DIR}/config.ini"
-        DESTINATION "${DEST_DIR}")
-    file(COPY "${SRC_DIR}/server.ini"
-        DESTINATION "${DEST_DIR}")
-    file(COPY "${SRC_DIR}/wordlist.txt"
-        DESTINATION "${DEST_DIR}")
+    # List of configuration files to copy
+    set(CONFIG_FILES
+        config.ini
+        server.ini
+        wordlist.txt
+    )
+
+    # Copy configuration files after building the executables
+    foreach(FILE ${CONFIG_FILES})
+        add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerClient>
+        )
+
+        add_custom_command(TARGET DistributedHashCrackerServer POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerServer>
+        )
+    endforeach()
 endif()
-
-# Copy config files after building the executables
-foreach(FILE ${CONFIG_FILES})
-    add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerClient>
-    )
-
-    add_custom_command(TARGET DistributedHashCrackerServer POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${FILE}" $<TARGET_FILE_DIR:DistributedHashCrackerServer>
-    )
-endforeach()
