@@ -185,7 +185,7 @@ void socket_reader() {
 
         if (message.find("STOP") != std::string::npos) {
             std::cout << "Received STOP command. Stopping processing.\n";
-            stop_processing = true;
+            stop_processing.store(true, std::memory_order_release);
             break;
         }
 
@@ -212,7 +212,10 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
 
     // Process assigned chunk
     for (int i = start_line; i < end_line && std::getline(wordlist, utf8_word); ++i) {
-        if (stop_processing) return;
+        if (stop_processing.load(std::memory_order_acquire)) {
+            std::this_thread::yield(); // allow other threads to run
+            return;
+        }
 
         std::string utf8_word_str(utf8_word.begin(), utf8_word.end());
 
