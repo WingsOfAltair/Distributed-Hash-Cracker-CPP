@@ -22,7 +22,7 @@ namespace asio = boost::asio;
 
 using boost::asio::ip::tcp;
 
-// Initialize Boost ASIO
+// Globals
 asio::io_context io_context;
 tcp::socket client_socket(io_context);
 
@@ -33,29 +33,10 @@ int SERVER_PORT = 0;
 std::mutex send_mutex;           // Mutex for sending messages to the server
 std::atomic<bool> stop_processing(false);  // Global flag for stopping threads
 
+// Pointer to client socket, shared for reading thread and workers
+boost::asio::ip::tcp::socket* global_socket_ptr = nullptr;
+
 char buffer[1024];
-
-/*void RestartApplication() {
-    // Get the current executable's path
-    char buffer[MAX_PATH];
-    GetModuleFileNameA(NULL, buffer, MAX_PATH);
-    std::string exePath = buffer;
-
-    // Create a new process to restart the application
-    STARTUPINFOA si = { sizeof(si) };
-    PROCESS_INFORMATION pi;
-    if (CreateProcessA(exePath.c_str(), NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
-        // Successfully started the new instance
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-    }
-    else {
-        std::cerr << "Failed to restart application." << std::endl;
-    }
-
-    // Exit the current instance
-    ExitProcess(0);
-}*/
 
 // Function to read config file
 std::map<std::string, std::string> readConfig(const std::string& filename) {
@@ -166,19 +147,11 @@ argon2_type detect_argon2_type(const std::string& encoded_hash) {
 }
 
 bool verify_argon2_encoded(const std::string& password, const std::string& encoded_hash) {
-    // Argon2 variant is inferred from the encoded string prefix ($argon2id$, $argon2i$, $argon2d$)
-
     argon2_type type = detect_argon2_type(encoded_hash);
 
     int result = argon2_verify(encoded_hash.c_str(), password.c_str(), password.size(), type);
 
-    if (result == ARGON2_OK) {
-        return true;  // Password matches
-    }
-    else {
-        //std::cerr << "Verification failed: " << argon2_error_message(result) << std::endl;
-        return false;
-    }
+    return result == ARGON2_OK;
 }
 
 // Function to report match found to the server
@@ -187,129 +160,83 @@ void report_match(const std::string& word, int line, boost::asio::ip::tcp::socke
     match_message_self << "Match found: " << word << " in wordlist: " << wordlist_file
         << ", line: " << line;
 
-    std::string match_message = "MATCH:" + word + " in wordlist: " + WORDLIST_FILE + ", line: " + std::to_string(line);
-    std::lock_guard<std::mutex> lock(send_mutex);  // Protect sending message
-    boost::asio::write(socket, boost::asio::buffer(match_message));
+    std::string match_message = "MATCH:" + word + " in wordlist: " + wordlist_file + ", line: " + std::to_string(line);
+    {
+        std::lock_guard<std::mutex> lock(send_mutex);
+        boost::asio::write(socket, boost::asio::buffer(match_message));
+    }
     std::cout << match_message_self.str() << std::endl;
 }
 
-// Function to process a chunk of the wordlist
-void process_chunk(int start_line, int end_line, const std::string& hash_type, const std::string& hash_value, const std::string& salt, boost::asio::ip::tcp::socket& socket) {
-    if (socket.available()) {
-        char buffer[1024];
-        boost::system::error_code ec;
-        size_t bytes_received = socket.read_some(boost::asio::buffer(buffer), ec);
+// Dedicated socket reader thread function
+void socket_reader() {
+    char buffer[1024];
+    boost::system::error_code ec;
+
+    while (!stop_processing) {
+        size_t bytes_received = global_socket_ptr->read_some(boost::asio::buffer(buffer), ec);
         if (ec) {
             std::cerr << "Disconnected from server or error occurred: " << ec.message() << std::endl;
-            stop_processing = true; // Stop processing if there's a socket error
+            stop_processing = true;
+            break;
         }
 
         std::string message(buffer, bytes_received);
-        if (message.find('STOP')) {
+
+        if (message.find("STOP") != std::string::npos) {
             std::cout << "Received STOP command. Stopping processing.\n";
             stop_processing = true;
-            return;
-            //RestartApplication();
+            break;
         }
+
+        // You can handle other server messages here if needed
+    }
+}
+
+// Process chunk - NO socket reading here!
+void process_chunk(int start_line, int end_line, const std::string& hash_type, const std::string& hash_value, const std::string& salt) {
+    std::wifstream wordlist(WORDLIST_FILE);
+    if (!wordlist.is_open()) {
+        std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+        return;
     }
 
-    // Check if processing should stop before moving to the next word
-    if (stop_processing) {
-        return;  // Exit early if stop_processing was triggered
-    } else if (!stop_processing) {
-        std::wifstream wordlist(WORDLIST_FILE);
-        wordlist.seekg(0, std::ios::beg);
-        std::wstring utf8_word;
+    wordlist.seekg(0, std::ios::beg);
+    std::wstring utf8_word;
+    int current_line = 0;
 
-        int current_line = 0;
+    // Skip lines to start_line
+    for (int i = 0; i < start_line && std::getline(wordlist, utf8_word); ++i) {
+        current_line++;
+    }
 
-        // Skip to the start line
-        for (int i = 0; i < start_line && std::getline(wordlist, utf8_word); ++i) {
-            if (stop_processing)
-                return;
-            current_line++;
-            if (socket.available()) {
-                char buffer[1024];
-                boost::system::error_code ec;
-                size_t bytes_received = socket.read_some(boost::asio::buffer(buffer), ec);
-                if (ec) {
-                    std::cerr << "Disconnected from server or error occurred: " << ec.message() << std::endl;
-                    stop_processing = true; // Stop processing if there's a socket error
-                }
+    // Process assigned chunk
+    for (int i = start_line; i < end_line && std::getline(wordlist, utf8_word); ++i) {
+        if (stop_processing) return;
 
-                std::string message(buffer, bytes_received);
-                if (message.find('STOP')) {
-                    std::cout << "Received STOP command. Stopping processing.\n";
-                    stop_processing = true;
-                    return;
-                    //RestartApplication();
-                }
+        std::string utf8_word_str(utf8_word.begin(), utf8_word.end());
+
+        if (to_lowercase(hash_type) == "bcrypt") {
+            std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+            if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
             }
         }
-
-        // Process the chunk
-        for (int i = start_line; i < end_line && std::getline(wordlist, utf8_word); ++i) {
-            if (stop_processing)
-                return;
-            if (socket.available()) {
-                char buffer[1024];
-                boost::system::error_code ec;
-                size_t bytes_received = socket.read_some(boost::asio::buffer(buffer), ec);
-                if (ec) {
-                    std::cerr << "Disconnected from server or error occurred: " << ec.message() << std::endl;
-                    stop_processing = true; // Stop processing if there's a socket error
-                }
-
-                std::string message(buffer, bytes_received);
-                if (message.find('STOP')) {
-                    std::cout << "Received STOP command. Stopping processing.\n";
-                    stop_processing = true;
-                    return;
-                    //RestartApplication();
-                }
+        else if (to_lowercase(hash_type) == "argon2") {
+            std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+            if (verify_argon2_encoded(utf8_word_str, hash_value)) {
+                report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
             }
-            // Create a timer that checks for STOP signal after processing each word
-            boost::asio::steady_timer timer(socket.get_executor());
-
-            // Set the timer to expire immediately
-            timer.expires_after(std::chrono::milliseconds(1));
-
-            if (!stop_processing) {
-                // Convert to string for processing
-                std::string utf8_word_str(utf8_word.begin(), utf8_word.end());
-
-                // Hash validation logic
-                if (to_lowercase(hash_type) == "bcrypt") {
-                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                    if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                        report_match(utf8_word_str, current_line, socket, WORDLIST_FILE);
-                    }
-                }
-                else if (to_lowercase(hash_type) == "argon2") {
-                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                    if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                        report_match(utf8_word_str, current_line, socket, WORDLIST_FILE);
-                    }
-                }
-                else {
-                    std::string input_with_salt = utf8_word_str + salt;
-                    std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
-                    std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
-
-                    if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                        report_match(utf8_word_str, current_line, socket, WORDLIST_FILE);
-                    }
-                }
+        }
+        else {
+            std::string input_with_salt = utf8_word_str + salt;
+            std::string calculated_hash = calculate_hash(hash_type, input_with_salt);      
+            std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+            if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
             }
-
-            current_line++;
         }
-
-        // If no match was found in this chunk
-        if (!stop_processing) {
-            std::lock_guard<std::mutex> lock(send_mutex);
-            boost::asio::write(socket, boost::asio::buffer("NO_MATCH"));
-        }
+        current_line++;
     }
 }
 
@@ -336,6 +263,8 @@ int main() {
         }
     }
 
+    global_socket_ptr = &client_socket;
+
     while (true) {
         std::string readyStr = "Ready to accept new requests.";
         std::cout << readyStr << std::endl;
@@ -352,57 +281,73 @@ int main() {
             break;
         }
 
-        buffer[bytes_received] = '\0';
-        std::string message(buffer);
+        std::string message(buffer, bytes_received);
         size_t delimiter_pos = message.find(':');
 
-        if (delimiter_pos != std::string::npos) {
-            std::string hash_type = message.substr(0, delimiter_pos);
-            std::string hash_value, salt;
-            size_t second_delimiter_pos = message.find(':', delimiter_pos + 1);
+        if (delimiter_pos == std::string::npos) {
+            std::cerr << "Malformed request from server: " << message << std::endl;
+            continue;
+        }
 
-            if (second_delimiter_pos != std::string::npos) {
-                hash_value = message.substr(delimiter_pos + 1, second_delimiter_pos - delimiter_pos - 1);
-                salt = message.substr(second_delimiter_pos + 1);
-            }
-            else {
-                hash_value = message.substr(delimiter_pos + 1);
-            }
+        std::string hash_type = message.substr(0, delimiter_pos);
+        std::string hash_value, salt;
+        size_t second_delimiter_pos = message.find(':', delimiter_pos + 1);
 
-            std::wifstream wordlist(WORDLIST_FILE);
-            if (!wordlist.is_open()) {
-                std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
-                continue;
-            }
+        if (second_delimiter_pos != std::string::npos) {
+            hash_value = message.substr(delimiter_pos + 1, second_delimiter_pos - delimiter_pos - 1);
+            salt = message.substr(second_delimiter_pos + 1);
+        }
+        else {
+            hash_value = message.substr(delimiter_pos + 1);
+            salt = "";
+        }
 
-            int total_lines = 0;
-            std::wstring temp_line;
-            while (std::getline(wordlist, temp_line)) {
-                ++total_lines;
-            }
+        // Count total lines in wordlist
+        std::wifstream wordlist(WORDLIST_FILE);
+        if (!wordlist.is_open()) {
+            std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+            continue;
+        }
+        int total_lines = 0;
+        std::wstring temp_line;
+        while (std::getline(wordlist, temp_line)) {
+            ++total_lines;
+        }
+        wordlist.close();
 
-            wordlist.clear();
-            wordlist.seekg(0, std::ios::beg);
+        int num_threads = boost::thread::hardware_concurrency();
+        if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable
+        int chunk_size = total_lines / num_threads;
 
-            int num_threads = boost::thread::hardware_concurrency();
-            int chunk_size = total_lines / num_threads;
+        stop_processing = false;  // Reset the flag before starting new work
 
-            std::vector<boost::thread> threads;
-            stop_processing = false;  // Reset the flag before starting new work
+        // Start the socket reader thread
+        boost::thread reader_thread(socket_reader);
 
-            for (int i = 0; i < num_threads; ++i) {
-                int start_line = i * chunk_size;
-                int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size;
+        // Start worker threads
+        std::vector<boost::thread> threads;
+        for (int i = 0; i < num_threads; ++i) {
+            int start_line = i * chunk_size;
+            int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size;
 
-                threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt, std::ref(client_socket));
-            }
+            threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);
+        }
 
-            // Join threads after processing
-            for (auto& t : threads) {
-                if (t.joinable()) {
-                    t.join();
-                }
-            }
+        // Join worker threads
+        for (auto& t : threads) {
+            if (t.joinable()) t.join();
+        }
+
+        // Stop the socket reader thread if still running
+        if (!stop_processing) {
+            stop_processing = true;
+        }
+        if (reader_thread.joinable()) reader_thread.join();
+
+        // Notify server no match if none found
+        if (!stop_processing) {
+            std::lock_guard<std::mutex> lock(send_mutex);
+            boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH"));
         }
     }
 
