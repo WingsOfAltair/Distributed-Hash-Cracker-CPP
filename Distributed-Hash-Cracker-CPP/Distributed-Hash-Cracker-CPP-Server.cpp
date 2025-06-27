@@ -62,6 +62,10 @@ bool isBcryptHash(const std::string& hash) {
 
 // Determine hash type by length
 std::string getHashType(const std::string& hash) {
+    if (hash.rfind("$argon2id$", 0) == 0) return "Argon2id";
+    if (hash.rfind("$argon2i$", 0) == 0) return "Argon2i";
+    if (hash.rfind("$argon2d$", 0) == 0) return "Argon2d";
+
     std::map<std::string, size_t> hashTypes = {
         {"MD5", 32}, {"SHA-1 or RIPEMD-160", 40}, {"SHA-224 or SHA3-224", 56},
         {"SHA-256 or SHA3-256", 64}, {"SHA-384 or SHA3-384", 96}, {"SHA-512 or SHA3-512", 128} };
@@ -166,7 +170,7 @@ int main() {
     // Main loop for hash input
     while (true) {
         while (ready) {
-            std::cout << "Hash type (BCRYPT, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
+            std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
@@ -193,7 +197,7 @@ int main() {
                 }
             }
 
-            std::cout << "Enter the salt (leave empty if none, or BCRYPT): ";
+            std::cout << "Enter the salt (leave empty if none, or BCRYPT or argon2): ";
             std::getline(std::cin, salt);
 
             if (!hash_type.empty() && !hash.empty()) {

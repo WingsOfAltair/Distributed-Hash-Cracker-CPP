@@ -16,6 +16,7 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <filesystem>
+#include "argon2/argon2.h"
 
 namespace asio = boost::asio;
 
@@ -145,6 +146,41 @@ std::string to_lowercase(const std::string& str) {
     return lower_str;
 }
 
+// Convert hex string to binary
+std::vector<uint8_t> from_hex(const std::string& hex) {
+    std::vector<uint8_t> result;
+    for (size_t i = 0; i < hex.length(); i += 2) {
+        std::string byteString = hex.substr(i, 2);
+        uint8_t byte = static_cast<uint8_t>(strtol(byteString.c_str(), nullptr, 16));
+        result.push_back(byte);
+    }
+    return result;
+}
+
+argon2_type detect_argon2_type(const std::string& encoded_hash) {
+    if (encoded_hash.rfind("$argon2id$", 0) == 0) return Argon2_id;
+    if (encoded_hash.rfind("$argon2i$", 0) == 0) return Argon2_i;
+    if (encoded_hash.rfind("$argon2d$", 0) == 0) return Argon2_d;
+    // Default fallback or invalid format
+    return Argon2_id;
+}
+
+bool verify_argon2_encoded(const std::string& password, const std::string& encoded_hash) {
+    // Argon2 variant is inferred from the encoded string prefix ($argon2id$, $argon2i$, $argon2d$)
+
+    argon2_type type = detect_argon2_type(encoded_hash);
+
+    int result = argon2_verify(encoded_hash.c_str(), password.c_str(), password.size(), type);
+
+    if (result == ARGON2_OK) {
+        return true;  // Password matches
+    }
+    else {
+        //std::cerr << "Verification failed: " << argon2_error_message(result) << std::endl;
+        return false;
+    }
+}
+
 // Function to report match found to the server
 void report_match(const std::string& word, int line, boost::asio::ip::tcp::socket& socket, const std::string& wordlist_file) {
     std::ostringstream match_message_self;
@@ -246,6 +282,12 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(hash_type) == "bcrypt") {
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                     if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                        report_match(utf8_word_str, current_line, socket, WORDLIST_FILE);
+                    }
+                }
+                else if (to_lowercase(hash_type) == "argon2") {
+                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (verify_argon2_encoded(utf8_word_str, hash_value)) {
                         report_match(utf8_word_str, current_line, socket, WORDLIST_FILE);
                     }
                 }
