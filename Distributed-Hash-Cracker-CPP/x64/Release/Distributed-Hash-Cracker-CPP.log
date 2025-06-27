@@ -1,0 +1,2 @@
+﻿  Distributed-Hash-Cracker-CPP-Server.cpp
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Server.cpp(1,10): error C1083: Cannot open include file: 'boost/asio.hpp': No such file or directory
