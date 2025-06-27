@@ -19,7 +19,6 @@ std::unordered_map<std::string, bool> clients_ready;
 std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
-bool ready = true;
 
 // Read config file
 std::map<std::string, std::string> readConfig(const std::string& filename) {
@@ -89,9 +88,6 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
     clients.push_back(client_socket);
     auto client_endpoint = client_socket->remote_endpoint();
     std::string client_key = client_endpoint.address().to_string() + ":" + std::to_string(client_endpoint.port());
-    if (clients_ready.find(client_key) == clients_ready.end()) {
-        clients_ready[client_key] = false;
-    }
     total_clients++;
 
     try {
@@ -123,10 +119,6 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
             }
             else if (message == "Ready to accept new requests.") {
                 clients_ready[client_key] = true;
-                bool all_ready = std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; });
-                if (all_ready) {
-                    ready = true;
-                }
             }
             clients_responses++;
         }
@@ -169,7 +161,7 @@ int main() {
 
     // Main loop for hash input
     while (true) {
-        while (ready || total_clients == 0) {
+        while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) || total_clients == 0) {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "Enter the hash type: ";
@@ -201,15 +193,20 @@ int main() {
             std::getline(std::cin, salt);
 
             if (!hash_type.empty() && !hash.empty()) {
-                ready = false;
                 notify_clients(hash_type, hash, salt);
                 match_found = false;
                 clients_responses = 0;
 
+                for (auto& pair : clients_ready) {
+                    pair.second = false;
+                }
+
                 std::cout << "Processing entered hash, please wait...\n";
                 while (clients_responses < total_clients) {
                     boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
-                    if (match_found) break;
+                    if (match_found) {
+                        break;
+                    }
                 }
 
                 if (!match_found && clients_responses == total_clients) {
@@ -220,7 +217,10 @@ int main() {
                 }
             }
             else {
-                std::cout << "No hash or hash type entered. Try again.\n";
+                std::cout << "No hash or hash type entered. Try again.\n";   
+                for (auto& pair : clients_ready) {
+                    pair.second = true; // example: mark all clients as not ready
+                }
             }
         }
     }

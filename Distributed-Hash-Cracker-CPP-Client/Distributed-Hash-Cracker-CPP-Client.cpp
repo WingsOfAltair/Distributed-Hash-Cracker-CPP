@@ -363,7 +363,7 @@ int main() {
         }
 
         // Only send NO_MATCH once if no password was found
-        if (!match_found) {
+        if (!match_found && (message.find("STOP") != std::string::npos)) {
             std::lock_guard<std::mutex> lock(send_mutex);
             boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH"));
         }
