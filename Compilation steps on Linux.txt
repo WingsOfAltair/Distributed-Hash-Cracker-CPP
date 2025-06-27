@@ -3,9 +3,11 @@ MAKE SURE YOU SETUP ALL DEPENDENCIES BEFORE YOU ATTEMPT TO COMPILE
 ==================================================================
 
 (in case boost is not present on system.)
+
 sudo apt install libboost-all-dev
 ==================================================================
 (in case ssl is not present on system.)
+
 sudo apt install libssl-dev
 ==================================================================
 (in case libbcrypt.so is not present on system.)
@@ -17,6 +19,7 @@ gcc -shared -fPIC -o libbcrypt.so bcrypt.c
 sudo cp libbcrypt.so /usr/local/lib
 ==================================================================
 (in case libargon2 is not present on system.)
+
 sudo apt install libargon2-dev
 
 ==================================================================

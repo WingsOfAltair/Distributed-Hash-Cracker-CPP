@@ -124,12 +124,14 @@ foreach(FILE ${CONFIG_FILES})
         )
     endforeach()
 endforeach()
-                   
+       
 # ------------------------------
 # Copy DLL files
 # ------------------------------
-add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/argon2/argon2.dll"
-        "$<TARGET_FILE_DIR:DistributedHashCrackerClient>"
-)
+if (WIN32)              
+    add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/argon2/argon2.dll"
+            "$<TARGET_FILE_DIR:DistributedHashCrackerClient>"
+    )
+endif()
