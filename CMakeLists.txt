@@ -60,6 +60,7 @@ add_executable(DistributedHashCrackerClient
     Distributed-Hash-Cracker-CPP-Client/Distributed-Hash-Cracker-CPP-Client.cpp
 )
 
+if (WIN32)
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
     ${Boost_LIBRARIES}
     OpenSSL::SSL
@@ -67,6 +68,16 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     "${BCRYPT_LIB_PATH}"
     "${ARGON2_LIB_PATH}"
 )
+else()
+target_link_libraries(DistributedHashCrackerClient PRIVATE 
+    ${Boost_LIBRARIES}
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    bcrypt
+    argon2
+    crypt
+)
+endif()
 
 # ------------------------------
 # Server executable

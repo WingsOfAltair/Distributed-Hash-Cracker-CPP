@@ -1,14 +1,31 @@
-g++ -o DistributedHashCracker Distributed-Hash-Cracker-CPP-Client.cpp -Iinclude -Linclude/bcrypt -lboost_system -lssl -lcrypto -lboost_thread -lboost_chrono -lpthread -lbcrypt -lcrypt
-
-g++ Distributed-Hash-Cracker-CPP-Server.cpp -o Server -lboost_system -lboost_filesystem -lssl -lboost_thread -lboost_chrono -lpthread
-
 (in case boost is not present on system.)
 sudo apt install libboost-all-dev
 
 (in case ssl is not present on system.)
 sudo apt install libssl-dev
 
-(in case libbcrypt.so is not present.)
+(in case libbcrypt.so is not present on system.)
+
+-- Extract bcrypt.7z, then navigate to it, and perform both commands below. --
+
 gcc -shared -fPIC -o libbcrypt.so bcrypt.c
 
 sudo cp libbcrypt.so /usr/local/lib
+
+(in case libargon2 is not present on system.)
+sudo apt install libargon2-dev
+
+then you do below commands to compile:
+
+mkdir -p build
+cd build
+cmake ..
+make -j$(nproc)
+
+================================
+IGNORE BELOW UNLESS IF EXPERT.
+================================
+
+g++ -o DistributedHashCracker Distributed-Hash-Cracker-CPP-Client.cpp -Iinclude -Linclude/bcrypt -lboost_system -lssl -lcrypto -lboost_thread -lboost_chrono -lpthread -lbcrypt -lcrypt -largon2
+
+g++ Distributed-Hash-Cracker-CPP-Server.cpp -o Server -lboost_system -lboost_filesystem -lssl -lboost_thread -lboost_chrono -lpthread
