@@ -30,6 +30,16 @@ cmake ..
 make -j$(nproc)
 
 ==================================================================
+IMPORTANT, DO NOT IGNORE OR YOUR CLIENT WILL PROBABLY CRASH
+==================================================================
+
+Do not forget to modify the location of the client's wordlist when
+changing between OSes and different machines by modifying
+the config.ini and server.ini files, also make sure that the ip
+of the server and port match properly.
+
+
+==================================================================
 IGNORE BELOW UNLESS IF EXPERT.
 ==================================================================
 
