@@ -169,7 +169,7 @@ int main() {
 
     // Main loop for hash input
     while (true) {
-        while (ready) {
+        while (ready || total_clients == 0) {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "Enter the hash type: ";

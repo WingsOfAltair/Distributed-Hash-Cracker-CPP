@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{17FDEA37-7B9F-4C5D-A1C7-53D474B2E90B}|Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP.vcxproj|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17FDEA37-7B9F-4C5D-A1C7-53D474B2E90B}|Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP.vcxproj|solutionrelative:Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{01608A47-2232-4294-AE71-4B9B5F9F5083}|Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.vcxproj|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{01608A47-2232-4294-AE71-4B9B5F9F5083}|Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.vcxproj|solutionrelative:Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{17FDEA37-7B9F-4C5D-A1C7-53D474B2E90B}|Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP.vcxproj|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{17FDEA37-7B9F-4C5D-A1C7-53D474B2E90B}|Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP.vcxproj|solutionrelative:Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,44 +22,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CMakeLists.txt",
               "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\CMakeLists.txt",
               "RelativeDocumentMoniker": "CMakeLists.txt",
               "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\CMakeLists.txt",
               "RelativeToolTip": "CMakeLists.txt",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAGkAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAD4v34AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-06-26T16:20:14.277Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Distributed-Hash-Cracker-CPP-Client.cpp",
               "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
               "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
               "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
               "RelativeToolTip": "Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAD4AAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-01T07:57:41.42Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T07:57:41.42Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Distributed-Hash-Cracker-CPP-Server.cpp",
               "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
               "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
               "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
               "RelativeToolTip": "Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
-              "ViewState": "AgIAAJ8AAAAAAAAAAAAEwLMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAQwI4AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-01T07:56:30.943Z"
+              "WhenOpened": "2024-10-01T07:56:30.943Z",
+              "EditorCaption": ""
             }
           ]
         }
