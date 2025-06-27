@@ -16,7 +16,7 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <filesystem>
-#include "../argon2/include/argon2.h"
+#include "argon2/argon2.h"
 
 namespace asio = boost::asio;
 
