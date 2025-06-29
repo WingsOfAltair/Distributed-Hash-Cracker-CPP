@@ -79,7 +79,7 @@ std::string getHashType(const std::string& hash) {
 void notify_clients(const std::string& hash_type, const std::string& hash, const std::string& salt = "") {
     std::string message = hash_type + ":" + hash + (salt.empty() ? "" : ":" + salt);
     for (auto& client : clients) {
-        boost::asio::write(*client, boost::asio::buffer(message));
+        boost::asio::write(*client, boost::asio::buffer(message + "\n"));
     }
 }
 
@@ -111,7 +111,7 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
                 std::cout << "Client " << client_socket << " Match found: " << match_info << std::endl;
                 match_found = true;
                 for (auto& client : clients) {
-                    boost::asio::write(*client, boost::asio::buffer("STOP"));
+                    boost::asio::write(*client, boost::asio::buffer("STOP\n"));
                 }
             }
             else if (message.find("NO_MATCH") == 0) {
