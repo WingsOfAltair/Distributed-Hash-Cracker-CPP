@@ -299,11 +299,11 @@ int main() {
     }
 
     global_socket_ptr = &client_socket;
-    boost::thread reader_thread(socket_reader);
 
     while (true) {
         match_found = false;
         stop_processing.store(false);
+        boost::thread reader_thread(socket_reader);
         std::string readyStr = "Ready to accept new requests.";
         std::cout << readyStr << std::endl;
 
@@ -357,9 +357,6 @@ int main() {
         int num_threads = boost::thread::hardware_concurrency();
         if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable
         int chunk_size = total_lines / num_threads;
-
-        // Start the socket reader thread
-        boost::thread reader_thread(socket_reader);
 
         // Start worker threads
         std::vector<boost::thread> threads;
