@@ -5343,11 +5343,7 @@ C:\boost\boost\type_traits\is_complete.hpp(45,38): warning C4820: 'boost::detail
   
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(353,25): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(357,25): warning C4365: 'initializing': conversion from 'unsigned int' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(362,23): warning C4456: declaration of 'reader_thread' hides previous local declaration
-      D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(302,19):
-      see declaration of 'reader_thread'
-  
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(379,41): warning C4456: declaration of 'lock' hides previous local declaration
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(376,41): warning C4456: declaration of 'lock' hides previous local declaration
       D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(313,38):
       see declaration of 'lock'
   
@@ -7036,12 +7032,12 @@ C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151,1): warning C5045: C
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145) : note: feeds call on this line
-C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: index '' range checked by comparison on this line
-C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: feeds call on this line
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: feeds call on this line
+C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: index '' range checked by comparison on this line
+C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(382) : note: index 'i' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(383) : note: feeds call on this line
