@@ -17,6 +17,7 @@
 #include <openssl/err.h>
 #include <filesystem>
 #include "argon2/argon2.h"
+#include <queue>
 
 namespace asio = boost::asio;
 
@@ -39,7 +40,10 @@ std::atomic<bool> stop_processing(false);  // Global flag for stopping threads
 // Pointer to client socket, shared for reading thread and workers
 boost::asio::ip::tcp::socket* global_socket_ptr = nullptr;
 
-char buffer[1024];
+// Thread-safe message queue
+std::queue<std::string> message_queue;
+std::mutex queue_mutex;
+std::condition_variable queue_cv;
 
 // Function to read config file
 std::map<std::string, std::string> readConfig(const std::string& filename) {
@@ -174,26 +178,37 @@ void report_match(const std::string& word, int line, boost::asio::ip::tcp::socke
 
 // Dedicated socket reader thread function
 void socket_reader() {
-    char buffer[1024];
+    char temp[1024];
     boost::system::error_code ec;
 
     while (!stop_processing) {
-        size_t bytes_received = global_socket_ptr->read_some(boost::asio::buffer(buffer), ec);
+        size_t bytes_received = global_socket_ptr->read_some(boost::asio::buffer(temp), ec);
         if (ec) {
             std::cerr << "Disconnected from server or error occurred: " << ec.message() << std::endl;
             stop_processing = true;
             break;
         }
 
-        std::string message(buffer, bytes_received);
+        std::string message(temp, bytes_received);
 
         if (message.find("STOP") != std::string::npos) {
             std::cout << "Received STOP command. Stopping processing.\n";
             stop_processing.store(true, std::memory_order_release);
-            break;
+            break;  // Exit the reader thread or continue to clean shutdown
         }
 
-        // You can handle other server messages here if needed
+        size_t newline_pos;
+        while ((newline_pos = message.find('\n')) != std::string::npos) {
+            std::string line = message.substr(0, newline_pos);   // Extract one line
+            message.erase(0, newline_pos + 1);                    // Remove extracted line + '\n' from the original string
+            boost::algorithm::trim(line);                         // Trim the extracted line
+
+            {
+                std::lock_guard<std::mutex> lock(queue_mutex);
+                message_queue.push(line);
+            }
+            queue_cv.notify_one();
+        }
     }
 }
 
@@ -273,7 +288,7 @@ int main() {
 
     // Attempt to connect to the server in a loop
     tcp::resolver resolver(io_context);
-    tcp::resolver::results_type endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
+    auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
 
     while (true) {
         try {
@@ -287,6 +302,7 @@ int main() {
     }
 
     global_socket_ptr = &client_socket;
+    boost::thread reader_thread(socket_reader);
 
     while (true) {
         match_found = false;
@@ -297,16 +313,19 @@ int main() {
         // Send ready message to server
         asio::write(client_socket, asio::buffer(readyStr));
 
-        char buffer[1024];
-        boost::system::error_code error;
-        size_t bytes_received = client_socket.read_some(asio::buffer(buffer), error);
+        std::unique_lock<std::mutex> lock(queue_mutex);
+        queue_cv.wait(lock, [] { return !message_queue.empty(); });
 
-        if (error) {
-            std::cerr << "Disconnected from server or error occurred: " << error.message() << std::endl;
-            break;
+        std::string message = message_queue.front();
+        message_queue.pop();
+        lock.unlock();                   
+
+        if (message == "STOP") {
+            std::cout << "Received STOP command. Stopping processing.\n";
+            stop_processing = true;
+            continue;
         }
 
-        std::string message(buffer, bytes_received);
         size_t delimiter_pos = message.find(':');
 
         if (delimiter_pos == std::string::npos) {
@@ -333,11 +352,9 @@ int main() {
             std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
             continue;
         }
-        int total_lines = 0;
-        std::string line;
-        while (std::getline(wordlist, line)) {
-            ++total_lines;
-        }
+
+        int total_lines = std::count(std::istreambuf_iterator<char>(wordlist),
+            std::istreambuf_iterator<char>(), '\n');
         wordlist.close();
 
         int num_threads = boost::thread::hardware_concurrency();
