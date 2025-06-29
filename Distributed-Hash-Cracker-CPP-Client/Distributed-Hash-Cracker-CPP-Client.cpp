@@ -171,7 +171,7 @@ void report_match(const std::string& word, int line, boost::asio::ip::tcp::socke
     std::string match_message = "MATCH:" + word + " in wordlist: " + wordlist_file + ", line: " + std::to_string(line);
     {
         std::lock_guard<std::mutex> lock(send_mutex);
-        boost::asio::write(socket, boost::asio::buffer(match_message));
+        boost::asio::write(socket, boost::asio::buffer(match_message + "\n"));
     }
     std::cout << match_message_self.str() << std::endl;
 }
@@ -191,7 +191,7 @@ void socket_reader() {
 
         std::string message(temp, bytes_received);
 
-        if (message.find("STOP") != std::string::npos) {
+        if (message.find("STOP") == 0) {
             std::cout << "Received STOP command. Stopping processing.\n";
             stop_processing.store(true, std::memory_order_release);
             break;  // Exit the reader thread or continue to clean shutdown
@@ -237,10 +237,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
     // Process assigned chunk
     for (int i = start_line; i < end_line && std::getline(wordlist, utf8_word); ++i) {
         if (stop_processing.load(std::memory_order_acquire)) {
-            if (stop_processing) {
-                std::this_thread::yield(); // allow other threads to run
-            }
-            return;
+            break;
         }
 
         if (wordlist.eof()) {
@@ -311,7 +308,7 @@ int main() {
         std::cout << readyStr << std::endl;
 
         // Send ready message to server
-        asio::write(client_socket, asio::buffer(readyStr));
+        asio::write(client_socket, asio::buffer(readyStr + "\n"));
 
         std::unique_lock<std::mutex> lock(queue_mutex);
         queue_cv.wait(lock, [] { return !message_queue.empty(); });
@@ -320,7 +317,7 @@ int main() {
         message_queue.pop();
         lock.unlock();                   
 
-        if (message == "STOP") {
+        if (message.find("STOP") == 0) {
             std::cout << "Received STOP command. Stopping processing.\n";
             stop_processing = true;
             continue;
@@ -361,8 +358,6 @@ int main() {
         if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable
         int chunk_size = total_lines / num_threads;
 
-        stop_processing = false;  // Reset the flag before starting new work
-
         // Start the socket reader thread
         boost::thread reader_thread(socket_reader);
 
@@ -380,9 +375,9 @@ int main() {
         }
 
         // Only send NO_MATCH once if no password was found
-        if (!match_found && (message.find("STOP") != std::string::npos)) {
+        if (!match_found && (message.find("STOP") == 0)) {
             std::lock_guard<std::mutex> lock(send_mutex);
-            boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH"));
+            boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH\n"));
         }
     }
 

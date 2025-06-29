@@ -91,19 +91,24 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
     total_clients++;
 
     try {
+        boost::asio::streambuf buffer;
         while (true) {
-            char buffer[1024];
             boost::system::error_code error;
-            size_t len = clients.back()->read_some(boost::asio::buffer(buffer), error);
+            size_t len = boost::asio::read_until(*client_socket, buffer, "\n", error);
             
-            if (error == boost::asio::error::eof || error) {
-                if (error) {
-                    std::cerr << "Client disconnected with error: " << error.message() << std::endl;
-                }
+            if (error == boost::asio::error::eof) {
+                std::cout << "Client disconnected normally.\n";
+                break;
+            }
+            else if (error) {
+                std::cerr << "Client read error: " << error.message() << std::endl;
                 break;
             }
 
-            std::string message(buffer, len);
+            std::istream is(&buffer);
+            std::string message;
+            std::getline(is, message);
+            boost::algorithm::trim(message);
 
             // Handle client messages
             if (message.find("MATCH:") == 0) {
@@ -117,14 +122,12 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
             else if (message.find("NO_MATCH") == 0) {
                 std::cout << "Match not found in client: " << client_socket << std::endl;
             }
-            else if (message == "Ready to accept new requests.") {
+            else if (message.find("Ready") == 0) {
                 clients_ready[client_key] = true;
+                std::cout << "Client " << client_key << " is ready.\n";
             }
             clients_responses++;
         }
-    }
-    catch (const boost::system::system_error& e) {
-        std::cerr << "Boost system error: " << e.what() << std::endl;
     }
     catch (const std::exception& e) {
         std::cerr << "Exception in client handling: " << e.what() << std::endl;
@@ -161,7 +164,7 @@ int main() {
 
     // Main loop for hash input
     while (true) {
-        while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) || total_clients == 0) {
+        while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && total_clients > 0) {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "Enter the hash type: ";
