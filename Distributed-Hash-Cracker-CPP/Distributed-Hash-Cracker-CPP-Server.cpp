@@ -113,7 +113,7 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
             // Handle client messages
             if (message.find("MATCH:") == 0) {
                 std::string match_info = message.substr(6); // Remove "MATCH:"
-                std::cout << "Client " << client_socket << " Match found: " << match_info << std::endl;
+                std::cout << "Client " << client_key << " Match found: " << match_info << std::endl;
                 match_found = true;
                 for (auto& client : clients) {
                     boost::asio::write(*client, boost::asio::buffer("STOP\n"));
