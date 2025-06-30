@@ -10,6 +10,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <boost/algorithm/string/trim.hpp>
 
 using boost::asio::ip::tcp;
 
@@ -51,6 +52,18 @@ std::string to_lowercase(const std::string& str) {
     std::transform(lower_str.begin(), lower_str.end(), lower_str.begin(),
         [](unsigned char c) { return std::tolower(c); });
     return lower_str;
+}
+
+bool is_valid_hashtype(const std::string& hash_type) {
+	std::vector<std::string> valid_types = {
+		"BCRYPT", "argon2",
+		"MD5", "SHA1", "SHA256", "SHA384", "SHA512",
+		"sha3-224", "sha3-256", "sha3-384", "sha3-512"
+	};
+	if (std::find(valid_types.begin(), valid_types.end(), to_lowercase(hash_type)) != valid_types.end()) {
+		return true;
+	}
+    return false;
 }
 
 // Check bcrypt hash format
@@ -170,6 +183,11 @@ int main() {
             std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
 
+            if (!is_valid_hashtype(hash_type)) {
+                std::cout << "Unknown hash type." << std::endl;
+                continue;
+            }
+
             std::cout << "Enter the hash: ";
             std::getline(std::cin, hash);
 
@@ -220,7 +238,7 @@ int main() {
                 }
             }
             else {
-                std::cout << "No hash or hash type entered. Try again.\n";   
+                std::cout << "No hash entered. Try again.\n";   
                 for (auto& pair : clients_ready) {
                     pair.second = true; // example: mark all clients as not ready
                 }

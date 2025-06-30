@@ -31,11 +31,13 @@ std::string WORDLIST_FILE = "";
 std::string SERVER_IP = "";
 int SERVER_PORT = 0;
 std::string SHOW_PROGRESS = "";
+std::string AUTO_RECONNECT = "";
 
 bool match_found = false;
 
 std::mutex send_mutex;           // Mutex for sending messages to the server
 std::atomic<bool> stop_processing(false);  // Global flag for stopping threads
+std::atomic<bool> server_disconnected(false);
 
 // Pointer to client socket, shared for reading thread and workers
 boost::asio::ip::tcp::socket* global_socket_ptr = nullptr;
@@ -186,7 +188,9 @@ void socket_reader() {
         if (ec) {
             std::cerr << "Disconnected from server or error occurred: " << ec.message() << std::endl;
             stop_processing = true;
-            break;
+            server_disconnected.store(true);
+            queue_cv.notify_all();  // Wake up main thread if it's waiting
+            return;
         }
 
         std::string message(temp, bytes_received);
@@ -282,102 +286,118 @@ int main() {
     SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
     WORDLIST_FILE = config["WORDLIST_FILE"];
     SHOW_PROGRESS = config["SHOW_PROGRESS"];
+    AUTO_RECONNECT = "true";
+    server_disconnected.store(true);
 
     // Attempt to connect to the server in a loop
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
 
-    while (true) {
-        try {
-            asio::connect(client_socket, endpoints);
-            break; // Successfully connected
-        }
-        catch (std::exception& e) {
-            std::cerr << "Connection failed: " << e.what() << ". Retrying..." << std::endl;
-            boost::this_thread::sleep_for(boost::chrono::seconds(1));
-        }
-    }
-
-    global_socket_ptr = &client_socket;
-
-    while (true) {
-        match_found = false;
-        stop_processing.store(false);
-        boost::thread reader_thread(socket_reader);
-        std::string readyStr = "Ready to accept new requests.";
-        std::cout << readyStr << std::endl;
-
-        // Send ready message to server
-        asio::write(client_socket, asio::buffer(readyStr + "\n"));
-
-        std::unique_lock<std::mutex> lock(queue_mutex);
-        queue_cv.wait(lock, [] { return !message_queue.empty(); });
-
-        std::string message = message_queue.front();
-        message_queue.pop();
-        lock.unlock();                   
-
-        if (message.find("STOP") == 0) {
-            std::cout << "Received STOP command. Stopping processing.\n";
-            stop_processing = true;
-            continue;
+    while (to_lowercase(AUTO_RECONNECT) == "true" && server_disconnected && !stop_processing) {
+        AUTO_RECONNECT = config["AUTO_RECONNECT"];
+        while (server_disconnected) {
+            try {
+                asio::connect(client_socket, endpoints);
+                server_disconnected.store(false);
+                break; // Successfully connected
+            }
+            catch (std::exception& e) {
+                std::cerr << "Connection failed: " << e.what() << ". Retrying..." << std::endl;
+                boost::this_thread::sleep_for(boost::chrono::seconds(1));
+            }
         }
 
-        size_t delimiter_pos = message.find(':');
+        global_socket_ptr = &client_socket;
 
-        if (delimiter_pos == std::string::npos) {
-            std::cerr << "Malformed request from server: " << message << std::endl;
-            continue;
+        while (!server_disconnected) {
+            match_found = false;
+            stop_processing.store(false);
+            boost::thread reader_thread(socket_reader);
+            std::string readyStr = "Ready to accept new requests.";
+            std::cout << readyStr << std::endl;
+
+            // Send ready message to server
+            asio::write(client_socket, asio::buffer(readyStr + "\n"));
+
+            std::unique_lock<std::mutex> lock(queue_mutex);
+            queue_cv.wait(lock, [] { return !message_queue.empty() || server_disconnected.load(); });
+
+			if (server_disconnected.load()) {
+                stop_processing.store(false);
+				continue; // Exit the loop if server is disconnected
+			}
+
+            std::string message = message_queue.front();
+            message_queue.pop();
+            lock.unlock();
+
+            if (message.find("STOP") == 0) {
+                std::cout << "Received STOP command. Stopping processing.\n";
+                stop_processing = true;
+                continue;
+            }
+
+            size_t delimiter_pos = message.find(':');
+
+            if (delimiter_pos == std::string::npos) {
+                std::cerr << "Malformed request from server: " << message << std::endl;
+                continue;
+            }
+
+            std::string hash_type = message.substr(0, delimiter_pos);
+            std::string hash_value, salt;
+            size_t second_delimiter_pos = message.find(':', delimiter_pos + 1);
+
+            if (second_delimiter_pos != std::string::npos) {
+                hash_value = message.substr(delimiter_pos + 1, second_delimiter_pos - delimiter_pos - 1);
+                salt = message.substr(second_delimiter_pos + 1);
+            }
+            else {
+                hash_value = message.substr(delimiter_pos + 1);
+                salt = "";
+            }
+
+			if (hash_type.empty() || hash_value.empty()) {
+				std::cerr << "Invalid request from server: " << message << std::endl;
+				continue;
+			}
+
+            // Count total lines in wordlist
+            std::ifstream wordlist(WORDLIST_FILE);
+            if (!wordlist.is_open()) {
+                std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+                continue;
+            }
+
+            int total_lines = std::count(std::istreambuf_iterator<char>(wordlist),
+                std::istreambuf_iterator<char>(), '\n');
+            wordlist.close();
+
+            int num_threads = boost::thread::hardware_concurrency();
+            if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable
+            int chunk_size = total_lines / num_threads;
+
+            // Start worker threads
+            std::vector<boost::thread> threads;
+            for (int i = 0; i < num_threads; ++i) {
+                int start_line = i * chunk_size;
+                int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size;
+                threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);
+            }
+
+            // Join worker threads
+            for (auto& t : threads) {
+                if (t.joinable()) t.join();
+            }
+
+            // Only send NO_MATCH once if no password was found
+            if (!match_found && (message.find("STOP") == 0)) {
+                std::lock_guard<std::mutex> lock(send_mutex);
+                boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH\n"));
+            }
         }
-
-        std::string hash_type = message.substr(0, delimiter_pos);
-        std::string hash_value, salt;
-        size_t second_delimiter_pos = message.find(':', delimiter_pos + 1);
-
-        if (second_delimiter_pos != std::string::npos) {
-            hash_value = message.substr(delimiter_pos + 1, second_delimiter_pos - delimiter_pos - 1);
-            salt = message.substr(second_delimiter_pos + 1);
-        }
-        else {
-            hash_value = message.substr(delimiter_pos + 1);
-            salt = "";
-        }
-
-        // Count total lines in wordlist
-        std::ifstream wordlist(WORDLIST_FILE);
-        if (!wordlist.is_open()) {
-            std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
-            continue;
-        }
-
-        int total_lines = std::count(std::istreambuf_iterator<char>(wordlist),
-            std::istreambuf_iterator<char>(), '\n');
-        wordlist.close();
-
-        int num_threads = boost::thread::hardware_concurrency();
-        if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable
-        int chunk_size = total_lines / num_threads;
-
-        // Start worker threads
-        std::vector<boost::thread> threads;
-        for (int i = 0; i < num_threads; ++i) {
-            int start_line = i * chunk_size;
-            int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size;
-            threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);
-        }
-
-        // Join worker threads
-        for (auto& t : threads) {
-            if (t.joinable()) t.join();
-        }
-
-        // Only send NO_MATCH once if no password was found
-        if (!match_found && (message.find("STOP") == 0)) {
-            std::lock_guard<std::mutex> lock(send_mutex);
-            boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH\n"));
-        }
-    }
 
     client_socket.close();
+    }
     return 0;
 }
