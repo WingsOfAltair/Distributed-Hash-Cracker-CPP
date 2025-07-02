@@ -18,6 +18,10 @@
 #include <filesystem>
 #include "argon2/argon2.h"
 #include <queue>
+#include <cwctype>   
+#include <locale>
+#include <codecvt>
+#include <algorithm>
 
 namespace asio = boost::asio;
 
@@ -32,6 +36,7 @@ std::string SERVER_IP = "";
 int SERVER_PORT = 0;
 std::string SHOW_PROGRESS = "";
 std::string AUTO_RECONNECT = "";
+std::vector<std::string> MUTATION_RULES;
 
 bool match_found = false;
 
@@ -134,6 +139,112 @@ std::string to_lowercase(const std::string& str) {
     std::transform(lower_str.begin(), lower_str.end(), lower_str.begin(),
         [](unsigned char c) { return std::tolower(c); });
     return lower_str;
+}
+
+// Returns a trimmed copy of the input string
+inline std::string trim(const std::string& s) {
+    auto start = std::find_if_not(s.begin(), s.end(),
+        [](unsigned char ch) { return std::isspace(ch); });
+
+    auto end = std::find_if_not(s.rbegin(), s.rend(),
+        [](unsigned char ch) { return std::isspace(ch); }).base();
+
+    if (start >= end) return ""; // All whitespace or empty
+    return std::string(start, end);
+}
+
+// Converts UTF-8 string to wide string (UTF-32 or UTF-16 depending on platform)
+std::wstring utf8_to_wstring(const std::string& str) {
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+    return conv.from_bytes(str);
+}
+
+// Converts wide string back to UTF-8
+std::string wstring_to_utf8(const std::wstring& wstr) {
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+    return conv.to_bytes(wstr);
+}
+
+std::string applyRule(const std::string& password, const std::string& rule) {
+    // Convert UTF-8 input to wide string for Unicode-safe processing
+    std::wstring wresult = utf8_to_wstring(password);
+
+    for (size_t i = 0; i < rule.size(); ++i) {
+        char cmd = rule[i];
+
+        switch (cmd) {
+        case 'l': // Lowercase (Unicode-aware)
+            std::transform(wresult.begin(), wresult.end(), wresult.begin(),
+                [](wchar_t ch) { return std::towlower(ch); });
+            break;
+
+        case 'u': // Uppercase (Unicode-aware)
+            std::transform(wresult.begin(), wresult.end(), wresult.begin(),
+                [](wchar_t ch) { return std::towupper(ch); });
+            break;
+
+        case 'r': // Reverse
+            std::reverse(wresult.begin(), wresult.end());
+            break;
+
+        case 'c': // Capitalize first letter (Unicode-aware)
+            if (!wresult.empty())
+                wresult[0] = std::towupper(wresult[0]);
+            break;
+
+        case 't': // Toggle case (Unicode-aware)
+            for (wchar_t& ch : wresult) {
+                if (std::iswlower(ch))
+                    ch = std::towupper(ch);
+                else if (std::iswupper(ch))
+                    ch = std::towlower(ch);
+                // else leave as is (e.g., digits, punctuation)
+            }
+            break;
+
+        case 'd': // Duplicate
+            wresult += wresult;
+            break;
+
+        case 's': // Substitute sXY (simple char replacement on wide chars)
+            if (i + 2 < rule.size()) {
+                // Convert src and dst from char (assumed ASCII) to wchar_t for substitution
+                wchar_t src = static_cast<wchar_t>(rule[++i]);
+                wchar_t dst = static_cast<wchar_t>(rule[++i]);
+                for (wchar_t& ch : wresult) {
+                    if (ch == src)
+                        ch = dst;
+                }
+            }
+            break;
+
+        case 'n': // Append Numbers (append ASCII digits as wide chars)
+            wresult.append(utf8_to_wstring("123"));
+
+        case '3': // L33tSpeak substitution - works only on ASCII letters
+        {
+            static const std::unordered_map<wchar_t, wchar_t> leet = {
+                {L'a', L'@'}, {L'e', L'3'}, {L'i', L'1'}, {L'o', L'0'}, {L's', L'$'}, {L't', L'7'}
+            };
+
+            for (wchar_t& ch : wresult) {
+                wchar_t lower = std::towlower(ch);
+                auto it = leet.find(lower);
+                if (it != leet.end()) {
+                    ch = it->second;
+                }
+            }
+            break;
+        }
+
+        default:
+            std::cerr << "Unsupported rule command: " << cmd << '\n';
+            break;
+        }
+    }
+
+    // Convert back to UTF-8 before returning
+    return wstring_to_utf8(wresult);
 }
 
 // Convert hex string to binary
@@ -239,42 +350,56 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
     }
 
     // Process assigned chunk
-    for (int i = start_line; i < end_line && std::getline(wordlist, utf8_word); ++i) {
+    for (int i = start_line; i <= end_line && std::getline(wordlist, utf8_word); ++i) {
         if (stop_processing.load(std::memory_order_acquire)) {
             break;
         }
 
-        if (wordlist.eof()) {
-            std::cerr << "[DEBUG] Reached EOF early at line: " << i << std::endl;
-            return;
-        }
-
         std::string utf8_word_str = utf8_word;
 
-        if (to_lowercase(hash_type) == "bcrypt") {
-            if (to_lowercase(SHOW_PROGRESS) == "true")
-                std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-            if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+        for (const std::string& rule : MUTATION_RULES) {
+            std::string mutated = applyRule(utf8_word_str, rule);
+            std::cout << "Rule: " << rule << " = " << mutated << std::endl;
+
+            if (to_lowercase(hash_type) == "bcrypt") {
+                if (to_lowercase(SHOW_PROGRESS) == "true")
+                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                    report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                }
             }
-        }
-        else if (to_lowercase(hash_type) == "argon2") {
-            if (to_lowercase(SHOW_PROGRESS) == "true")
-                std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-            if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+            else if (to_lowercase(hash_type) == "argon2") {
+                if (to_lowercase(SHOW_PROGRESS) == "true")
+                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                if (verify_argon2_encoded(utf8_word_str, hash_value)) {
+                    report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                }
             }
-        }
-        else {
-            std::string input_with_salt = utf8_word_str + salt;
-            std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
-            if (to_lowercase(SHOW_PROGRESS) == "true")
-                std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
-            if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+            else {
+                std::string input_with_salt = utf8_word_str + salt;
+                std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
+                if (to_lowercase(SHOW_PROGRESS) == "true")
+                    std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                    report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                }
             }
         }
         current_line++;
+    }
+}                
+
+void splitAndAppend(const std::string& input, std::vector<std::string>& output) {
+    std::stringstream ss(input);
+    std::string token;
+
+    while (std::getline(ss, token, ',')) {
+        std::stringstream subss(token);
+        std::string word;
+
+        while (subss >> word) {
+            output.push_back(word);
+        }
     }
 }
 
@@ -286,6 +411,11 @@ int main() {
     SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
     WORDLIST_FILE = config["WORDLIST_FILE"];
     SHOW_PROGRESS = config["SHOW_PROGRESS"];
+    std::string MUTE_RULES = config["MUTATION_RULES"];
+
+    if (!trim(MUTE_RULES).empty())
+        splitAndAppend(config["MUTATION_RULES"], MUTATION_RULES);
+
     AUTO_RECONNECT = "true";
     server_disconnected.store(true);
 
