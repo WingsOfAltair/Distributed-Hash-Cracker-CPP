@@ -576,10 +576,7 @@ int main() {
                 std::istreambuf_iterator<char>(), '\n');
             wordlist.close();
 
-            if (total_lines <= 0) {
-                std::cerr << "Wordlist is empty or unreadable.\n";
-                continue;
-            }
+            total_lines++;
 
             int num_threads = boost::thread::hardware_concurrency();
             if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable   
