@@ -576,16 +576,28 @@ int main() {
                 std::istreambuf_iterator<char>(), '\n');
             wordlist.close();
 
+            if (total_lines <= 0) {
+                std::cerr << "Wordlist is empty or unreadable.\n";
+                continue;
+            }
+
             int num_threads = boost::thread::hardware_concurrency();
-            if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable
+            if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable   
+            if (total_lines < num_threads) {
+                num_threads = total_lines; // avoid having more threads than lines
+            }
             int chunk_size = total_lines / num_threads;
+            int remainder = total_lines % num_threads; // for better load balancing
+
+            int current_line = 0;
 
             // Start worker threads
             std::vector<boost::thread> threads;
             for (int i = 0; i < num_threads; ++i) {
-                int start_line = i * chunk_size;
-                int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size;
+                int start_line = current_line;
+                int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size + (i < remainder ? 1 : 0);
                 threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);
+                current_line = end_line; // Update for next thread
             }
 
             // Join worker threads
