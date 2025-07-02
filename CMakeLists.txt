@@ -114,7 +114,7 @@ endif()
 # Copy configuration files
 # ------------------------------
 set(CONFIG_SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")
-set(CONFIG_FILES config.ini server.ini wordlist.txt mutation_list.txt)
+set(CONFIG_FILES config.ini server.ini wordlist.txt mutation_list.txt mutation_list_generator_upto_n_times.py)
 
 foreach(FILE ${CONFIG_FILES})
     foreach(target DistributedHashCrackerClient DistributedHashCrackerServer)
