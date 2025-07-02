@@ -180,18 +180,14 @@ int main() {
         while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && total_clients > 0) {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
+            std::cout << "To check connected clients, enter 'connections'." << std::endl;
             std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
 
-            if (!is_valid_hashtype(hash_type)) {
-                std::cout << "Unknown hash type." << std::endl;
-                continue;
-            }
-
-            std::cout << "Enter the hash: ";
-            std::getline(std::cin, hash);
-
             if (to_lowercase(hash_type) == "type") {
+                std::cout << "Enter the hash: ";
+                std::getline(std::cin, hash);
+
                 std::string hashType = getHashType(hash);
                 if (hashType == "Unknown hash type") {
                     bool isBcrypt = isBcryptHash(hash);
@@ -209,6 +205,22 @@ int main() {
                     continue;
                 }
             }
+
+            if (to_lowercase(hash_type) == "connections") {
+                std::cout << "Connected clients (" << total_clients << "):\n";
+                for (const auto& entry : clients_ready) {
+                    std::cout << " - " << entry.first << (entry.second ? " [Ready]" : " [Not Ready]") << "\n";
+                }
+                continue;
+            }
+
+            if (!is_valid_hashtype(hash_type)) {
+                std::cout << "Unknown hash type." << std::endl;
+                continue;
+            }
+
+            std::cout << "Enter the hash: ";
+            std::getline(std::cin, hash);
 
             std::cout << "Enter the salt (leave empty if none, or BCRYPT or argon2): ";
             std::getline(std::cin, salt);
