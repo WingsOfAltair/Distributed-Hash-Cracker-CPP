@@ -356,23 +356,66 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
         }
 
         std::string utf8_word_str = utf8_word;
+        bool matchfound = false;
 
-        for (const std::string& rule : MUTATION_RULES) {
-            std::string mutated = applyRule(utf8_word_str, rule);
-            std::cout << "Rule: " << rule << " = " << mutated << std::endl;
+        if (MUTATION_RULES.size() > 0)
+        {
+            for (const std::string& rule : MUTATION_RULES) {
+                std::string mutated = applyRule(utf8_word_str, rule);
+                std::cout << "Rule: " << rule << " = " << mutated << std::endl;
 
+                if (to_lowercase(hash_type) == "bcrypt") {
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                        if (!matchfound) {
+                            matchfound = true;
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+                else if (to_lowercase(hash_type) == "argon2") {
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (verify_argon2_encoded(utf8_word_str, hash_value)) {
+                        if (!matchfound) {
+                            matchfound = true;
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+                else {
+                    std::string input_with_salt = utf8_word_str + salt;
+                    std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                    if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                        if (!matchfound) {
+                            matchfound = true;
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+            }
+        } else {
             if (to_lowercase(hash_type) == "bcrypt") {
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                 if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                    report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    if (!matchfound) {
+                        matchfound = true;
+                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    }
                 }
             }
             else if (to_lowercase(hash_type) == "argon2") {
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                 if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                    report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    if (!matchfound) {
+                        matchfound = true;
+                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    }
                 }
             }
             else {
@@ -381,7 +424,10 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
                 if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                    report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    if (!matchfound) {
+                        matchfound = true;
+                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    }
                 }
             }
         }
