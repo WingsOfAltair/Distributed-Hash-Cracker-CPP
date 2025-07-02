@@ -220,6 +220,7 @@ std::string applyRule(const std::string& password, const std::string& rule) {
 
         case 'n': // Append Numbers (append ASCII digits as wide chars)
             wresult.append(utf8_to_wstring("123"));
+            break;
 
         case '3': // L33tSpeak substitution - works only on ASCII letters
         {
@@ -360,7 +361,6 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
         }
 
         std::string utf8_word_str = utf8_word;
-        bool matchfound = false;
 
         if (MUTATION_RULES.size() > 0)
         {
@@ -368,8 +368,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                 if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                    if (!matchfound) {
-                        matchfound = true;
+                    if (!match_found) {
                         report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                     }
                 }
@@ -378,8 +377,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                 if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                    if (!matchfound) {
-                        matchfound = true;
+                    if (!match_found) {
                         report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                     }
                 }
@@ -390,8 +388,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
                 if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                    if (!matchfound) {
-                        matchfound = true;
+                    if (!match_found) {
                         report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                     }
                 }
@@ -404,8 +401,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Validating the hash against the word: " << mutated << std::endl;
                     if (BCrypt::validatePassword(mutated, hash_value)) {
-                        if (!matchfound) {
-                            matchfound = true;
+                        if (!match_found) {
                             report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
                     }
@@ -414,8 +410,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Validating the hash against the word: " << mutated << std::endl;
                     if (verify_argon2_encoded(mutated, hash_value)) {
-                        if (!matchfound) {
-                            matchfound = true;
+                        if (!match_found) {
                             report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
                     }
@@ -426,8 +421,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Calculated password: " << mutated << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
                     if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                        if (!matchfound) {
-                            matchfound = true;
+                        if (!match_found) {
                             report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
                     }
@@ -438,8 +432,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                 if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                    if (!matchfound) {
-                        matchfound = true;
+                    if (!match_found) {
                         report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                     }
                 }
@@ -448,8 +441,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                 if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                    if (!matchfound) {
-                        matchfound = true;
+                    if (!match_found) {
                         report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                     }
                 }
@@ -460,8 +452,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(SHOW_PROGRESS) == "true")
                     std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
                 if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                    if (!matchfound) {
-                        matchfound = true;
+                    if (!match_found) {
                         report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                     }
                 }
