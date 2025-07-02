@@ -74,6 +74,30 @@ std::map<std::string, std::string> readConfig(const std::string& filename) {
         std::cerr << "Unable to open config file: " << filename << std::endl;
     }
     return configMap;
+}  
+
+// Function to read config file
+std::map<std::string, std::string> readMutationList(const std::string& filename) {
+    std::map<std::string, std::string> mutationListMap;
+    std::filesystem::path fullPath = std::filesystem::absolute(filename);
+    std::ifstream mutationListFile(fullPath);
+    std::string line;
+
+    if (mutationListFile.is_open()) {
+        while (std::getline(mutationListFile, line)) {
+            size_t delimiterPos = line.find('=');
+            if (delimiterPos != std::string::npos) {
+                std::string key = line.substr(0, delimiterPos);
+                std::string value = line.substr(delimiterPos + 1);
+                mutationListMap[key] = value;
+            }
+        }
+        mutationListFile.close();
+    }
+    else {
+        std::cerr << "Unable to open mutation list file: " << filename << std::endl;
+    }
+    return mutationListMap;
 }
 
 // Function to calculate hash using EVP
@@ -176,21 +200,21 @@ std::string applyRule(const std::string& password, const std::string& rule) {
         case 'l': // Lowercase (Unicode-aware)
             std::transform(wresult.begin(), wresult.end(), wresult.begin(),
                 [](wchar_t ch) { return std::towlower(ch); });
-            break;
+            continue;
 
         case 'u': // Uppercase (Unicode-aware)
             std::transform(wresult.begin(), wresult.end(), wresult.begin(),
                 [](wchar_t ch) { return std::towupper(ch); });
-            break;
+            continue;
 
         case 'r': // Reverse
             std::reverse(wresult.begin(), wresult.end());
-            break;
+            continue;
 
         case 'c': // Capitalize first letter (Unicode-aware)
             if (!wresult.empty())
                 wresult[0] = std::towupper(wresult[0]);
-            break;
+            continue;
 
         case 't': // Toggle case (Unicode-aware)
             for (wchar_t& ch : wresult) {
@@ -200,11 +224,11 @@ std::string applyRule(const std::string& password, const std::string& rule) {
                     ch = std::towlower(ch);
                 // else leave as is (e.g., digits, punctuation)
             }
-            break;
+            continue;
 
         case 'd': // Duplicate
             wresult += wresult;
-            break;
+            continue;
 
         case 's': // Substitute sXY (simple char replacement on wide chars)
             if (i + 2 < rule.size()) {
@@ -216,11 +240,11 @@ std::string applyRule(const std::string& password, const std::string& rule) {
                         ch = dst;
                 }
             }
-            break;
+            continue;
 
         case 'n': // Append Numbers (append ASCII digits as wide chars)
             wresult.append(utf8_to_wstring("123"));
-            break;
+            continue;
 
         case '3': // L33tSpeak substitution - works only on ASCII letters
         {
@@ -235,7 +259,7 @@ std::string applyRule(const std::string& password, const std::string& rule) {
                     ch = it->second;
                 }
             }
-            break;
+            continue;
         }
 
         default:
@@ -479,15 +503,16 @@ void splitAndAppend(const std::string& input, std::vector<std::string>& output) 
 int main() {
     // Read configuration from the file
     std::map<std::string, std::string> config = readConfig("config.ini");
+    std::map<std::string, std::string> mutation_list = readConfig("mutation_list.txt");
 
     SERVER_IP = config["SERVER_IP"];
     SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
     WORDLIST_FILE = config["WORDLIST_FILE"];
     SHOW_PROGRESS = config["SHOW_PROGRESS"];
-    std::string MUTE_RULES = config["MUTATION_RULES"];
+    std::string MUTE_RULES = mutation_list["MUTATION_RULES"];
 
     if (!trim(MUTE_RULES).empty())
-        splitAndAppend(config["MUTATION_RULES"], MUTATION_RULES);
+        splitAndAppend(MUTE_RULES, MUTATION_RULES);
 
     AUTO_RECONNECT = "true";
     server_disconnected.store(true);
