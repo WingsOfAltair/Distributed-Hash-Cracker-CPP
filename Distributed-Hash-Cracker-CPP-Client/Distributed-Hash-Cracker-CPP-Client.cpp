@@ -52,8 +52,8 @@ std::queue<std::string> message_queue;
 std::mutex queue_mutex;
 std::condition_variable queue_cv;
 
-// Function to read config file
-std::map<std::string, std::string> readConfig(const std::string& filename) {
+// Function to read config/settings files
+std::map<std::string, std::string> readFile(const std::string& filename) {
     std::map<std::string, std::string> configMap;
     std::filesystem::path fullPath = std::filesystem::absolute(filename);
     std::ifstream configFile(fullPath);
@@ -75,30 +75,6 @@ std::map<std::string, std::string> readConfig(const std::string& filename) {
     }
     return configMap;
 }  
-
-// Function to read config file
-std::map<std::string, std::string> readMutationList(const std::string& filename) {
-    std::map<std::string, std::string> mutationListMap;
-    std::filesystem::path fullPath = std::filesystem::absolute(filename);
-    std::ifstream mutationListFile(fullPath);
-    std::string line;
-
-    if (mutationListFile.is_open()) {
-        while (std::getline(mutationListFile, line)) {
-            size_t delimiterPos = line.find('=');
-            if (delimiterPos != std::string::npos) {
-                std::string key = line.substr(0, delimiterPos);
-                std::string value = line.substr(delimiterPos + 1);
-                mutationListMap[key] = value;
-            }
-        }
-        mutationListFile.close();
-    }
-    else {
-        std::cerr << "Unable to open mutation list file: " << filename << std::endl;
-    }
-    return mutationListMap;
-}
 
 // Function to calculate hash using EVP
 std::string calculate_hash(const std::string& hash_type, const std::string& input) {
@@ -502,8 +478,8 @@ void splitAndAppend(const std::string& input, std::vector<std::string>& output) 
 
 int main() {
     // Read configuration from the file
-    std::map<std::string, std::string> config = readConfig("config.ini");
-    std::map<std::string, std::string> mutation_list = readConfig("mutation_list.txt");
+    std::map<std::string, std::string> config = readFile("config.ini");
+    std::map<std::string, std::string> mutation_list = readFile("mutation_list.txt");
 
     SERVER_IP = config["SERVER_IP"];
     SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
