@@ -419,7 +419,8 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
             }
             for (const std::string& rule : MUTATION_RULES) {
                 std::string mutated = applyRule(utf8_word_str, rule);
-                std::cout << "Rule: " << rule << " = " << mutated << std::endl;
+                if (to_lowercase(SHOW_PROGRESS) == "true")
+                    std::cout << "Rule: " << rule << " = " << mutated << std::endl;
 
                 if (to_lowercase(hash_type) == "bcrypt") {
                     if (to_lowercase(SHOW_PROGRESS) == "true")
