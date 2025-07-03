@@ -22,6 +22,7 @@
 #include <locale>
 #include <codecvt>
 #include <algorithm>
+#include "../shared/AsyncLogger.h"
 
 namespace asio = boost::asio;
 
@@ -37,6 +38,7 @@ int SERVER_PORT = 0;
 std::string SHOW_PROGRESS = "";
 std::string AUTO_RECONNECT = "";
 std::vector<std::string> MUTATION_RULES;
+AsyncLogger logger("client.log");
 
 bool match_found = false;
 
@@ -169,6 +171,10 @@ std::string applyRule(const std::string& password, const std::string& rule) {
     // Convert UTF-8 input to wide string for Unicode-safe processing
     std::wstring wresult = utf8_to_wstring(password);
 
+    if (rule == "normal") {
+        return password;
+    }
+
     for (size_t i = 0; i < rule.size(); ++i) {
         char cmd = rule[i];
 
@@ -222,23 +228,23 @@ std::string applyRule(const std::string& password, const std::string& rule) {
             wresult.append(utf8_to_wstring("123"));
             continue;
 
-        case '!p': // Prepends !
+        case '1': // Prepends !
             wresult.insert(wresult.begin(), L'!');
             continue;
 
-        case 'p!': // Postpends !   
+        case '2': // Postpends !   
             wresult.append(utf8_to_wstring("!"));
             continue;
 
-        case '@p': // Prepends @
+        case '3': // Prepends @
             wresult.insert(wresult.begin(), L'@');
             continue;
 
-        case 'p@': // Postpends @   
+        case '4': // Postpends @   
             wresult.append(utf8_to_wstring("@"));
             continue;
 
-        case 's@4': // Replaces @ with 4
+        case '5': // Replaces @ with 4
             for (auto& ch : wresult) {
                 if (ch == L'@') {
                     ch = L'4';
@@ -246,7 +252,7 @@ std::string applyRule(const std::string& password, const std::string& rule) {
             }
             continue;
 
-        case '3': // L33tSpeak substitution - works only on ASCII letters
+        case 'p': // L33tSpeak substitution - works only on ASCII letters
         {
             static const std::unordered_map<wchar_t, wchar_t> leet = {
                 {L'a', L'@'}, {L'e', L'3'}, {L'i', L'1'}, {L'o', L'0'}, {L's', L'$'}, {L't', L'7'}
@@ -312,6 +318,7 @@ void report_match(const std::string& word, int line, boost::asio::ip::tcp::socke
 
     std::string match_message = "MATCH:" + word + " in wordlist: " + wordlist_file + ", line: " + std::to_string(line);
     {
+        logger.log(match_message);
         std::lock_guard<std::mutex> lock(send_mutex);
         boost::asio::write(socket, boost::asio::buffer(match_message + "\n"));
     }
@@ -383,107 +390,95 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
         if (stop_processing.load(std::memory_order_acquire)) {
             break;
         }
+        std::string utf8_word_str;
 
-        std::string utf8_word_str = utf8_word;
+        try {
+            utf8_word_str = utf8_word;
 
-        if (MUTATION_RULES.size() > 0)
-        {
-            if (to_lowercase(hash_type) == "bcrypt") {
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                    if (!match_found) {
-                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+            if (MUTATION_RULES.size() > 0)
+            {
+                for (const std::string& rule : MUTATION_RULES) {
+                    if (stop_processing.load(std::memory_order_acquire)) {
+                        break;
                     }
-                }
-            }
-            else if (to_lowercase(hash_type) == "argon2") {
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                    if (!match_found) {
-                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                    std::string mutated = applyRule(utf8_word_str, rule);
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Rule: " << rule << " = " << mutated << std::endl;
+
+                    if (to_lowercase(hash_type) == "bcrypt") {
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Validating the hash against the word: " << mutated << std::endl;
+                        if (BCrypt::validatePassword(mutated, hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
+                    else if (to_lowercase(hash_type) == "argon2") {
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Validating the hash against the word: " << mutated << std::endl;
+                        if (verify_argon2_encoded(mutated, hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
+                    else {
+                        std::string input_with_salt = mutated + salt;
+                        std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Calculated password: " << mutated << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                        if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
                     }
                 }
             }
             else {
-                std::string input_with_salt = utf8_word_str + salt;
-                std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
-                if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                    if (!match_found) {
-                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
-                    }
-                }
-            }
-            for (const std::string& rule : MUTATION_RULES) {
-                std::string mutated = applyRule(utf8_word_str, rule);
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Rule: " << rule << " = " << mutated << std::endl;
-
                 if (to_lowercase(hash_type) == "bcrypt") {
                     if (to_lowercase(SHOW_PROGRESS) == "true")
-                        std::cout << "Validating the hash against the word: " << mutated << std::endl;
-                    if (BCrypt::validatePassword(mutated, hash_value)) {
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
                         if (!match_found) {
-                            report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
                     }
                 }
                 else if (to_lowercase(hash_type) == "argon2") {
                     if (to_lowercase(SHOW_PROGRESS) == "true")
-                        std::cout << "Validating the hash against the word: " << mutated << std::endl;
-                    if (verify_argon2_encoded(mutated, hash_value)) {
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (verify_argon2_encoded(utf8_word_str, hash_value)) {
                         if (!match_found) {
-                            report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
                     }
                 }
                 else {
-                    std::string input_with_salt = mutated + salt;
+                    std::string input_with_salt = utf8_word_str + salt;
                     std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
                     if (to_lowercase(SHOW_PROGRESS) == "true")
-                        std::cout << "Calculated password: " << mutated << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                        std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
                     if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
                         if (!match_found) {
-                            report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
                     }
                 }
             }
-        } else {
-            if (to_lowercase(hash_type) == "bcrypt") {
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
-                    if (!match_found) {
-                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
-                    }
-                }
-            }
-            else if (to_lowercase(hash_type) == "argon2") {
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                if (verify_argon2_encoded(utf8_word_str, hash_value)) {
-                    if (!match_found) {
-                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
-                    }
-                }
-            }
-            else {
-                std::string input_with_salt = utf8_word_str + salt;
-                std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
-                if (to_lowercase(SHOW_PROGRESS) == "true")
-                    std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
-                if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
-                    if (!match_found) {
-                        report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
-                    }
-                }
-            }
+            current_line++;
         }
-        current_line++;
+        catch (const std::exception& err) { 
+            std::ostringstream oss;
+            oss << "Error occurred during processing word: " << utf8_word_str
+                << " on line: " << current_line << "." << std::endl
+                << err.what();
+            std::string errText = oss.str();
+            std::cerr << errText << std::endl;
+            logger.log(errText);
+            current_line++;
+        }
     }
 }                
 
