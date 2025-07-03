@@ -99,6 +99,7 @@ if(WIN32)
     set(BOOST_DLLS
         "C:/boost/lib64-msvc-14.3/boost_thread-vc143-mt-gd-x64-1_85.dll"
         "C:/boost/lib64-msvc-14.3/boost_filesystem-vc143-mt-gd-x64-1_85.dll"
+        "C:/boost/lib64-msvc-14.3/boost_locale-vc143-mt-gd-x64-1_85.dll"
     )
 
     foreach(target DistributedHashCrackerClient DistributedHashCrackerServer)
