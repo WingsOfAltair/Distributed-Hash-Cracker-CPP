@@ -10,7 +10,10 @@
 #include <map>
 #include <fstream>
 #include <sstream>
-#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/trim.hpp>        
+#include "../shared/AsyncLogger.h" 
+
+AsyncLogger logger("server.log");
 
 using boost::asio::ip::tcp;
 
@@ -128,6 +131,7 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
                 std::string match_info = message.substr(6); // Remove "MATCH:"
                 std::cout << "Client " << client_key << " Match found: " << match_info << std::endl;
                 match_found = true;
+                logger.log(match_info + " by Client " + client_key + ".");
                 for (auto& client : clients) {
                     boost::asio::write(*client, boost::asio::buffer("STOP\n"));
                 }
@@ -246,7 +250,7 @@ int main() {
                     std::cout << "No matches found, please wait until you can enter a new hash...\n";
                 }
                 else if (match_found) {
-                    std::cout << "Match found, please wait until you can enter a new hash...\n";
+                    std::cout << "Match found, please wait until you can enter a new hash... This may take a while depending on your hardware.\n";
                 }
             }
             else {
