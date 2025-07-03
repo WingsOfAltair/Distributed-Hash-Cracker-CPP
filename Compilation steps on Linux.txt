@@ -6,6 +6,11 @@ MAKE SURE YOU SETUP ALL DEPENDENCIES BEFORE YOU ATTEMPT TO COMPILE
 
 sudo apt install libboost-all-dev
 ==================================================================
+
+(in case ICU is not present on system.)
+
+sudo apt-get install libicu-dev
+==================================================================
 (in case ssl is not present on system.)
 
 sudo apt install libssl-dev

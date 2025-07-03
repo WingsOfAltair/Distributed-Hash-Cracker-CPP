@@ -17,7 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/incl
 # ------------------------------
 # Boost
 # ------------------------------
-find_package(Boost REQUIRED COMPONENTS system filesystem thread chrono)
+find_package(Boost REQUIRED COMPONENTS system filesystem thread chrono locale)
 if(Boost_FOUND)
     message(STATUS "Boost version: ${Boost_VERSION}")
     include_directories(${Boost_INCLUDE_DIRS})
