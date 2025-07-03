@@ -158,6 +158,34 @@ inline std::string trim(const std::string& s) {
 
     if (start >= end) return ""; // All whitespace or empty
     return std::string(start, end);
+}     
+
+int count_lines(const std::string& filepath) {
+    std::ifstream file(filepath, std::ios::binary);  // Binary mode to avoid newline translation
+    if (!file) {
+        std::cerr << "Failed to open file: " << filepath << std::endl;
+        return -1;
+    }
+
+    int lines = 0;
+    char ch;
+    bool last_char_was_newline = true;
+
+    while (file.get(ch)) {
+        if (ch == '\n') {
+            ++lines;
+            last_char_was_newline = true;
+        }
+        else {
+            last_char_was_newline = false;
+        }
+    }
+
+    // If the file doesn't end in a newline, count the last line
+    if (!last_char_was_newline)
+        ++lines;
+
+    return lines;
 }
 
 std::string applyRule(const std::wstring& password, const std::string& rule) {
@@ -358,7 +386,7 @@ void socket_reader() {
 
 // Process chunk - NO socket reading here!
 void process_chunk(int start_line, int end_line, const std::string& hash_type, const std::string& hash_value, const std::string& salt) {
-    std::ifstream wordlist(WORDLIST_FILE);
+    std::ifstream wordlist(WORDLIST_FILE, std::ios::binary);
     if (!wordlist.is_open()) {
         std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
         return;
@@ -373,13 +401,13 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
     std::string utf8_word;
     int current_line = 0;
 
-    // Skip lines to start_line
-    for (int i = 0; i < start_line && std::getline(wordlist, utf8_word); ++i) {
-        current_line++;
+    // Skip lines before the chunk
+    while (current_line < start_line && std::getline(wordlist, utf8_word)) {
+        ++current_line;
     }
 
     // Process assigned chunk
-    for (int i = start_line; i <= end_line && std::getline(wordlist, utf8_word); ++i) {
+    while (current_line < end_line && std::getline(wordlist, utf8_word)) { 
         if (stop_processing.load(std::memory_order_acquire)) {
             break;
         }
@@ -593,11 +621,8 @@ int main() {
                 continue;
             }
 
-            int total_lines = std::count(std::istreambuf_iterator<char>(wordlist),
-                std::istreambuf_iterator<char>(), '\n');
+            int total_lines = count_lines(WORDLIST_FILE);
             wordlist.close();
-
-            total_lines++;
 
             int num_threads = boost::thread::hardware_concurrency();
             if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable   
@@ -607,15 +632,14 @@ int main() {
             int chunk_size = total_lines / num_threads;
             int remainder = total_lines % num_threads; // for better load balancing
 
-            int current_line = 0;
-
+            int start_line = 0;
             // Start worker threads
             std::vector<boost::thread> threads;
             for (int i = 0; i < num_threads; ++i) {
-                int start_line = current_line;
-                int end_line = (i == num_threads - 1) ? total_lines : (i + 1) * chunk_size + (i < remainder ? 1 : 0);
-                threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);
-                current_line = end_line; // Update for next thread
+                int lines_for_this_thread = chunk_size + (i < remainder ? 1 : 0);
+                int end_line = start_line + lines_for_this_thread;
+                threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);     
+                start_line = end_line;
             }
 
             // Join worker threads
