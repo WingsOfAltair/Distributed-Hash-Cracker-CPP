@@ -58,15 +58,15 @@ std::string to_lowercase(const std::string& str) {
 }
 
 bool is_valid_hashtype(const std::string& hash_type) {
-	std::vector<std::string> valid_types = {
-		"BCRYPT", "argon2",
-		"MD5", "SHA1", "SHA256", "SHA384", "SHA512",
-		"sha3-224", "sha3-256", "sha3-384", "sha3-512"
-	};
-	if (std::find(valid_types.begin(), valid_types.end(), to_lowercase(hash_type)) != valid_types.end()) {
-		return true;
-	}
-    return false;
+    static const std::vector<std::string> valid_types = {
+        "bcrypt", "argon2",
+        "md5", "sha1", "sha256", "sha384", "sha512",
+        "sha3-224", "sha3-256", "sha3-384", "sha3-512"
+    };
+
+    std::string lower_hash_type = to_lowercase(hash_type);
+
+    return std::find(valid_types.begin(), valid_types.end(), lower_hash_type) != valid_types.end();
 }
 
 // Check bcrypt hash format
