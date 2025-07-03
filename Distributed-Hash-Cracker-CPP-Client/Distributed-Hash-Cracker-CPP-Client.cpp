@@ -490,6 +490,9 @@ void splitAndAppend(const std::string& input, std::vector<std::string>& output) 
 }
 
 int main() {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
     std::locale::global(boost::locale::generator().generate("en_US.UTF-8"));
     std::wcin.imbue(std::locale());
     std::wcout.imbue(std::locale());

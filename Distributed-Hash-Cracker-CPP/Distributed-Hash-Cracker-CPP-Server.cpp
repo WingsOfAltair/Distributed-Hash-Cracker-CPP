@@ -158,6 +158,13 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
 
 // Main function to initialize server and manage client connections
 int main() {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+    std::locale::global(boost::locale::generator().generate("en_US.UTF-8"));
+    std::wcin.imbue(std::locale());
+    std::wcout.imbue(std::locale());
+
     auto config = readConfig("server.ini");
     SERVER_PORT = std::stoi(config["SERVER_PORT"]);
 
