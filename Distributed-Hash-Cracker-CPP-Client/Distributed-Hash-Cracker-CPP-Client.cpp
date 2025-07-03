@@ -141,6 +141,11 @@ std::string to_lowercase(const std::string& str) {
     std::transform(lower_str.begin(), lower_str.end(), lower_str.begin(),
         [](unsigned char c) { return std::tolower(c); });
     return lower_str;
+}  
+
+std::string wstring_to_utf8(const std::wstring& wstr) {
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+    return conv.to_bytes(wstr);
 }
 
 // Returns a trimmed copy of the input string
@@ -155,20 +160,12 @@ inline std::string trim(const std::string& s) {
     return std::string(start, end);
 }
 
-std::wstring utf8_to_wstring(const std::string& str) {
-    return boost::locale::conv::to_utf<wchar_t>(str, "UTF-8");
-}
-
-std::string wstring_to_utf8(const std::wstring& wstr) {
-    return boost::locale::conv::from_utf<wchar_t>(wstr, "UTF-8");
-}
-
-std::string applyRule(const std::string& password, const std::string& rule) {
+std::string applyRule(const std::wstring& password, const std::string& rule) {
     // Convert UTF-8 input to wide string for Unicode-safe processing
-    std::wstring wresult = utf8_to_wstring(password);
+    std::wstring wresult = password;
 
     if (rule == "normal") {
-        return password;
+        return wstring_to_utf8(password);
     }
 
     for (size_t i = 0; i < rule.size(); ++i) {
@@ -221,7 +218,7 @@ std::string applyRule(const std::string& password, const std::string& rule) {
             continue;
 
         case 'n': // Append Numbers (append ASCII digits as wide chars)
-            wresult.append(utf8_to_wstring("123"));
+            wresult.append(boost::locale::conv::to_utf<wchar_t>("123", "UTF-8"));
             continue;
 
         case '1': // Prepends !
@@ -229,7 +226,7 @@ std::string applyRule(const std::string& password, const std::string& rule) {
             continue;
 
         case '2': // Postpends !   
-            wresult.append(utf8_to_wstring("!"));
+            wresult.append(boost::locale::conv::to_utf<wchar_t>("!", "UTF-8"));
             continue;
 
         case '3': // Prepends @
@@ -237,7 +234,7 @@ std::string applyRule(const std::string& password, const std::string& rule) {
             continue;
 
         case '4': // Postpends @   
-            wresult.append(utf8_to_wstring("@"));
+            wresult.append(boost::locale::conv::to_utf<wchar_t>("@", "UTF-8"));
             continue;
 
         case '5': // Replaces @ with 4
@@ -386,10 +383,10 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
         if (stop_processing.load(std::memory_order_acquire)) {
             break;
         }
-        std::string utf8_word_str;
+        std::wstring utf8_word_str_w = boost::locale::conv::to_utf<wchar_t>(utf8_word, "UTF-8");  
+        std::string utf8_word_str= wstring_to_utf8(utf8_word_str_w);
 
         try {
-            utf8_word_str = utf8_word;
 
             if (MUTATION_RULES.size() > 0)
             {
@@ -397,7 +394,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                     if (stop_processing.load(std::memory_order_acquire)) {
                         break;
                     }
-                    std::string mutated = applyRule(utf8_word_str, rule);
+                    std::string mutated = applyRule(utf8_word_str_w, rule);
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Rule: " << rule << " = " << mutated << std::endl;
 
@@ -493,6 +490,12 @@ void splitAndAppend(const std::string& input, std::vector<std::string>& output) 
 }
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
+
+    std::locale::global(boost::locale::generator().generate("en_US.UTF-8"));
+    std::wcin.imbue(std::locale());
+    std::wcout.imbue(std::locale());
+
     // Read configuration from the file
     std::map<std::string, std::string> config = readFile("config.ini");
     std::map<std::string, std::string> mutation_list = readFile("mutation_list.txt");
@@ -508,8 +511,6 @@ int main() {
 
     AUTO_RECONNECT = "true";
     server_disconnected.store(true);
-
-    std::locale::global(boost::locale::generator().generate("en_US.UTF-8"));
 
     // Attempt to connect to the server in a loop
     tcp::resolver resolver(io_context);
