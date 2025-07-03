@@ -18,8 +18,8 @@
 #include <filesystem>
 #include "argon2/argon2.h"
 #include <queue>
-#include <cwctype>   
-#include <locale>
+#include <cwctype> 
+#include <boost/locale.hpp>
 #include <codecvt>
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
@@ -155,16 +155,12 @@ inline std::string trim(const std::string& s) {
     return std::string(start, end);
 }
 
-// Converts UTF-8 string to wide string (UTF-32 or UTF-16 depending on platform)
 std::wstring utf8_to_wstring(const std::string& str) {
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-    return conv.from_bytes(str);
+    return boost::locale::conv::to_utf<wchar_t>(str, "UTF-8");
 }
 
-// Converts wide string back to UTF-8
 std::string wstring_to_utf8(const std::wstring& wstr) {
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-    return conv.to_bytes(wstr);
+    return boost::locale::conv::from_utf<wchar_t>(wstr, "UTF-8");
 }
 
 std::string applyRule(const std::string& password, const std::string& rule) {
@@ -512,6 +508,8 @@ int main() {
 
     AUTO_RECONNECT = "true";
     server_disconnected.store(true);
+
+    std::locale::global(boost::locale::generator().generate("en_US.UTF-8"));
 
     // Attempt to connect to the server in a loop
     tcp::resolver resolver(io_context);
