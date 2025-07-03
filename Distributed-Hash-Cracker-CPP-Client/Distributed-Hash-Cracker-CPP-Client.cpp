@@ -222,6 +222,30 @@ std::string applyRule(const std::string& password, const std::string& rule) {
             wresult.append(utf8_to_wstring("123"));
             continue;
 
+        case '!p': // Prepends !
+            wresult.insert(wresult.begin(), L'!');
+            continue;
+
+        case 'p!': // Postpends !   
+            wresult.append(utf8_to_wstring("!"));
+            continue;
+
+        case '@p': // Prepends @
+            wresult.insert(wresult.begin(), L'@');
+            continue;
+
+        case 'p@': // Postpends @   
+            wresult.append(utf8_to_wstring("@"));
+            continue;
+
+        case 's@4': // Replaces @ with 4
+            for (auto& ch : wresult) {
+                if (ch == L'@') {
+                    ch = L'4';
+                }
+            }
+            continue;
+
         case '3': // L33tSpeak substitution - works only on ASCII letters
         {
             static const std::unordered_map<wchar_t, wchar_t> leet = {

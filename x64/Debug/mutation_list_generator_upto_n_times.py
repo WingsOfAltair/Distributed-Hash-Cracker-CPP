@@ -1,7 +1,7 @@
 from itertools import product
 
-chars = ['l', 'u', 'r', 'c', 't', 'd', 's', 'n', '3']
-max_len = 6
+chars = ['l', 'u', 'r', 'c', 't', 'd', 's', 'n', '!p', 'p!', '@p', 'p@', 's@4', '3']
+max_len = 3
 start_writing = False
 
 with open("mutation_list.txt", "w", encoding="utf-8") as f:
@@ -19,6 +19,11 @@ with open("mutation_list.txt", "w", encoding="utf-8") as f:
     f.write("# d = duplicate\n")
     f.write("# s = substitute sXY\n")
     f.write("# n = append numbers\n")
+    f.write("# !p = prepends !\n")
+    f.write("# p! = postpends !\n")
+    f.write("# @p = prepends @\n")
+    f.write("# p@ = postpends @\n")
+    f.write("# s@4 = replaces @ with 4\n")
     f.write("# 3 = l33tsp3@k\n")
     f.write("\n")
     f.write("MUTATION_RULES=")
