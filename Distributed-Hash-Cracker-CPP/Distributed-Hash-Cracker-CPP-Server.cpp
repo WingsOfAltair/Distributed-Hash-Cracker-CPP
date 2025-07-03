@@ -250,7 +250,7 @@ int main() {
                     std::cout << "No matches found, please wait until you can enter a new hash...\n";
                 }
                 else if (match_found) {
-                    std::cout << "Match found, please wait until you can enter a new hash... This may take a while depending on your hardware.\n";
+                    std::cout << "Match found, please wait until you can enter a new hash...\nThis may take a while depending on your clients' hardware/os.\n";
                 }
             }
             else {
