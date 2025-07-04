@@ -171,7 +171,13 @@ int count_lines(const std::string& filepath) {
     char ch;
     bool last_char_was_newline = true;
 
+    std::cout << "Counting lines in wordlist..." << std::endl;
+
     while (file.get(ch)) {
+        if (stop_processing.load(std::memory_order_acquire)) {
+            lines = 0;
+            break;
+        }
         if (ch == '\n') {
             ++lines;
             last_char_was_newline = true;
@@ -403,6 +409,9 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
 
     // Skip lines before the chunk
     while (current_line < start_line && std::getline(wordlist, utf8_word)) {
+        if (stop_processing.load(std::memory_order_acquire)) {
+            break;
+        }
         ++current_line;
     }
 
@@ -545,12 +554,14 @@ int main() {
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
 
-    while (to_lowercase(AUTO_RECONNECT) == "true" && server_disconnected && !stop_processing) {
+    while (to_lowercase(AUTO_RECONNECT) == "true") {
         AUTO_RECONNECT = config["AUTO_RECONNECT"];
         while (server_disconnected) {
             try {
                 asio::connect(client_socket, endpoints);
                 server_disconnected.store(false);
+                stop_processing.store(false);
+                std::cout << "Connected to server." << std::endl;
                 break; // Successfully connected
             }
             catch (std::exception& e) {
@@ -561,7 +572,17 @@ int main() {
 
         global_socket_ptr = &client_socket;
 
-        while (!server_disconnected) {
+        // Count total lines in wordlist
+        std::ifstream wordlist(WORDLIST_FILE);
+        if (!wordlist.is_open()) {
+            std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+            continue;
+        }
+
+        int total_lines = count_lines(WORDLIST_FILE);
+        wordlist.close();
+
+        while (!server_disconnected && total_lines > 0) {
             match_found = false;
             stop_processing.store(false);
             boost::thread reader_thread(socket_reader);
@@ -614,16 +635,6 @@ int main() {
 				continue;
 			}
 
-            // Count total lines in wordlist
-            std::ifstream wordlist(WORDLIST_FILE);
-            if (!wordlist.is_open()) {
-                std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
-                continue;
-            }
-
-            int total_lines = count_lines(WORDLIST_FILE);
-            wordlist.close();
-
             int num_threads = boost::thread::hardware_concurrency();
             if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable   
             if (total_lines < num_threads) {
@@ -636,6 +647,9 @@ int main() {
             // Start worker threads
             std::vector<boost::thread> threads;
             for (int i = 0; i < num_threads; ++i) {
+                if (stop_processing.load(std::memory_order_acquire)) {
+                    break;
+                }
                 int lines_for_this_thread = chunk_size + (i < remainder ? 1 : 0);
                 int end_line = start_line + lines_for_this_thread;
                 threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);     
@@ -653,8 +667,7 @@ int main() {
                 boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH\n"));
             }
         }
-
-    client_socket.close();
     }
+    client_socket.close();
     return 0;
 }
