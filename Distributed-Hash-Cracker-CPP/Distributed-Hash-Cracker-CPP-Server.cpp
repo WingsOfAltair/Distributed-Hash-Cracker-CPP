@@ -105,14 +105,20 @@ void notify_clients(
     message += "\n";
 
     std::lock_guard<std::mutex> lock(clients_mutex);
-    for (const auto& [client_id, client] : clients) {
-        if (client && client->is_open()) {
-            try {
-                boost::asio::write(*client, boost::asio::buffer(message));
-            }
-            catch (const boost::system::system_error& e) {
-                std::cerr << "Failed to notify client " << client_id << ": " << e.what() << "\n";
-                // Optional: handle disconnect or remove client here
+    for (const auto& [client_id, is_ready] : clients_ready) {
+        if (is_ready) {
+            auto it = clients.find(client_id);
+            if (it != clients.end() && it->second && it->second->is_open()) {
+                try {
+                    boost::asio::write(*it->second, boost::asio::buffer(message));
+                    for (auto& pair : clients_ready) {
+                        pair.second = false;
+                    }
+                }
+                catch (const boost::system::system_error& e) {
+                    // Optional: handle disconnect or remove client here
+                    std::cerr << "Failed to notify client " << client_id << ": " << e.what() << "\n";
+                }
             }
         }
     }

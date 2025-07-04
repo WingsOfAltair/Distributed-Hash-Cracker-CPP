@@ -464,7 +464,8 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
         if (stop_processing.load(std::memory_order_acquire)) {
             break;
         }
-        std::wstring utf8_word_str_w = boost::locale::conv::to_utf<wchar_t>(utf8_word, "UTF-8");  
+        std::wstring utf8_word_str_w = boost::locale::conv::to_utf<wchar_t>(utf8_word, "UTF-8");
+        boost::algorithm::trim_right_if(utf8_word_str_w, boost::is_any_of("\r\n"));
         std::string utf8_word_str= wstring_to_utf8(utf8_word_str_w);
 
         try {
@@ -610,7 +611,7 @@ int main() {
 
     while (to_lowercase(AUTO_RECONNECT) == "true") {
         AUTO_RECONNECT = config["AUTO_RECONNECT"];
-        while (server_disconnected) {
+        while (server_disconnected && total_lines >  0) {
             try {
                 asio::connect(client_socket, endpoints);
                 server_disconnected.store(false);
@@ -622,6 +623,14 @@ int main() {
                 std::cerr << "Connection failed: " << e.what() << ". Retrying..." << std::endl;
                 boost::this_thread::sleep_for(boost::chrono::seconds(1));
             }
+        }
+
+        if (total_lines == -1)
+        {
+            std::string message = "Shutting down due to incorrect wordlist file.";
+            std::cout << message << std::endl;
+            logger.log(message);
+            return 0;
         }
 
         global_socket_ptr = &client_socket;
