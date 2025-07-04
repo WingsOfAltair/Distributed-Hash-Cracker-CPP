@@ -550,6 +550,17 @@ int main() {
     AUTO_RECONNECT = "true";
     server_disconnected.store(true);
 
+    // Count total lines in wordlist
+    std::ifstream wordlist(WORDLIST_FILE);
+    if (!wordlist.is_open()) {
+        std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+        logger.log("Failed to open wordlist file: " + WORDLIST_FILE);
+        return 0;
+    }
+
+    int total_lines = count_lines(WORDLIST_FILE);
+    wordlist.close();
+
     // Attempt to connect to the server in a loop
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
@@ -571,16 +582,6 @@ int main() {
         }
 
         global_socket_ptr = &client_socket;
-
-        // Count total lines in wordlist
-        std::ifstream wordlist(WORDLIST_FILE);
-        if (!wordlist.is_open()) {
-            std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
-            continue;
-        }
-
-        int total_lines = count_lines(WORDLIST_FILE);
-        wordlist.close();
 
         while (!server_disconnected && total_lines > 0) {
             match_found = false;
