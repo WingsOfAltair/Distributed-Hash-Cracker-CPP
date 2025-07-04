@@ -129,6 +129,9 @@ void reload_ready_clients() {
             if (it != clients.end() && it->second && it->second->is_open()) {
                 try {
                     boost::asio::write(*it->second, boost::asio::buffer(message));
+                    for (auto& pair : clients_ready) {
+                        pair.second = false;
+                    }
                 } catch (const boost::system::system_error& e) {
                     std::cerr << "Failed to send reload to client " << client_id << ": " << e.what() << "\n";
                 }
@@ -341,10 +344,7 @@ int main() {
                 }
             }
             else {
-                std::cout << "No hash entered. Try again.\n";   
-                for (auto& pair : clients_ready) {
-                    pair.second = true; // example: mark all clients as not ready
-                }
+                std::cout << "No hash entered. Try again.\n";
             }
         }
     }

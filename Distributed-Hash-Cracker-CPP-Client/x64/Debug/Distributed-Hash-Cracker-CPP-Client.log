@@ -5431,7 +5431,7 @@ C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(363,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(577,19):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(581,19):
           see reference to class template instantiation 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\ip\basic_resolver.hpp(1104,15):
           see reference to class template instantiation 'boost::asio::detail::io_object_impl<boost::asio::detail::resolver_service<InternetProtocol>,Executor>' being compiled
@@ -5510,7 +5510,7 @@ C:\boost\boost\asio\ip\basic_resolver_query.hpp(39,7): warning C4626:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\ip\basic_resolver_query.hpp(39,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(578,39):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(582,39):
           see reference to class template instantiation 'boost::asio::ip::basic_resolver_query<InternetProtocol>' being compiled
           with
           [
@@ -5521,9 +5521,9 @@ C:\boost\boost\type_traits\is_complete.hpp(45,38): warning C4820: 'boost::detail
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\type_traits\is_complete.hpp(45,38):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(617,69):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(621,69):
           while compiling class template member function 'boost::chrono::duration<int_least64_t,std::ratio<1,1>>::duration(const Rep2 &,boost::enable_if<boost::mpl::and_<boost::is_convertible<Rep2,__int64>,boost::mpl::or_<boost::chrono::treat_as_floating_point<__int64>,boost::mpl::and_<boost::mpl::not_<boost::chrono::treat_as_floating_point<__int64>>,boost::mpl::not_<boost::chrono::treat_as_floating_point<Rep2>>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,boost::mpl::false_,boost::mpl::false_,boost::mpl::false_>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,void>::type *)'
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(617,69):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(621,69):
           see reference to class template instantiation 'boost::enable_if<boost::mpl::and_<boost::is_convertible<int,__int64>,boost::mpl::or_<boost::chrono::treat_as_floating_point<__int64>,boost::mpl::and_<boost::mpl::not_<boost::chrono::treat_as_floating_point<__int64>>,boost::mpl::not_<boost::chrono::treat_as_floating_point<int>>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,boost::mpl::false_,boost::mpl::false_,boost::mpl::false_>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,void>' being compiled
           C:\boost\boost\core\enable_if.hpp(41,47):
           see reference to class template instantiation 'boost::mpl::and_<boost::is_convertible<int,__int64>,boost::mpl::or_<boost::chrono::treat_as_floating_point<__int64>,boost::mpl::and_<boost::mpl::not_<boost::chrono::treat_as_floating_point<__int64>>,boost::mpl::not_<boost::chrono::treat_as_floating_point<int>>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,boost::mpl::false_,boost::mpl::false_,boost::mpl::false_>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>' being compiled
@@ -5538,9 +5538,9 @@ C:\boost\boost\type_traits\is_complete.hpp(45,38): warning C4820: 'boost::detail
           C:\boost\boost\type_traits\is_complete.hpp(54,137):
           see reference to class template instantiation 'boost::detail::ok_tag<4>' being compiled
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(676,29): warning C4365: 'initializing': conversion from 'unsigned int' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(704,45): warning C4456: declaration of 'lock' hides previous local declaration
-      D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(633,42):
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(680,29): warning C4365: 'initializing': conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(708,45): warning C4456: declaration of 'lock' hides previous local declaration
+      D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(637,42):
       see declaration of 'lock'
   
 C:\boost\boost\asio\detail\thread_info_base.hpp(168,39): warning C4365: '=': conversion from 'int' to 'unsigned char', signed/unsigned mismatch
@@ -6504,13 +6504,13 @@ C:\boost\boost\asio\execution_context.hpp(356,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(356,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(577,27):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(581,27):
           see reference to function template instantiation 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::basic_resolver<boost::asio::io_context>(ExecutionContext &,int)' being compiled
           with
           [
               ExecutionContext=boost::asio::io_context
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(577,27):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(581,27):
               see the first reference to 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::basic_resolver' in 'main'
           C:\boost\boost\asio\ip\basic_resolver.hpp(126,12):
           see reference to function template instantiation 'boost::asio::detail::io_object_impl<boost::asio::detail::resolver_service<InternetProtocol>,Executor>::io_object_impl<ExecutionContext>(int,int,ExecutionContext &)' being compiled
@@ -6563,7 +6563,7 @@ C:\boost\boost\asio\ip\basic_resolver_entry.hpp(104,17): warning C4820:         
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\ip\basic_resolver_entry.hpp(104,17):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(581,15):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(585,15):
           see reference to function template instantiation 'boost::asio::ip::tcp::endpoint boost::asio::connect<Protocol,Executor,boost::asio::ip::basic_resolver_results<InternetProtocol>>(boost::asio::basic_socket<Protocol,Executor> &,const EndpointSequence &,int)' being compiled
           with
           [
@@ -6601,7 +6601,7 @@ C:\boost\boost\asio\detail\resolver_service.hpp(84,5): warning C4365: 'argument'
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\resolver_service.hpp(84,5):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(577,19):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(581,19):
           see reference to class template instantiation 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\ip\basic_resolver.hpp(1104,15):
           see reference to class template instantiation 'boost::asio::detail::io_object_impl<boost::asio::detail::resolver_service<InternetProtocol>,Executor>' being compiled
@@ -6630,7 +6630,7 @@ C:\boost\boost\asio\detail\resolver_service.hpp(84,5): warning C4365: 'argument'
           ]
               C:\boost\boost\asio\ip\basic_resolver.hpp(314,5):
               see the first reference to 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::resolve' in 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::resolve'
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(578,20):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(582,20):
               see the first reference to 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::resolve' in 'main'
   
 C:\boost\boost\asio\detail\keyword_tss_ptr.hpp(31,7): warning C4625: 'boost::asio::detail::keyword_tss_ptr<T>': copy constructor was implicitly defined as deleted
@@ -7226,36 +7226,36 @@ C:\boost\boost\thread\win32\basic_timed_mutex.hpp(249,1): warning C5045: C:\boos
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(905) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(906) : note: feeds call on this line
+C:\boost\boost\system\detail\system_category_message_win32.hpp(195,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\system\detail\system_category_message_win32.hpp(195,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(195) : note: index 'r' range checked by comparison on this line
+C:\boost\boost\system\detail\system_category_message_win32.hpp(195,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(195) : note: feeds call on this line
+C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(190) : note: index 'r' range checked by comparison on this line
+C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(190) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(164,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(164,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(164,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(164) : note: feeds call on this line
-C:\boost\boost\system\detail\system_category_message_win32.hpp(195,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\system\detail\system_category_message_win32.hpp(195,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(195) : note: index 'r' range checked by comparison on this line
-C:\boost\boost\system\detail\system_category_message_win32.hpp(195,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(195) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(160,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(160,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(160,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(160) : note: feeds call on this line
-C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(190) : note: index 'r' range checked by comparison on this line
-C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C5045: C:\boost\boost\system\detail\system_category_message_win32.hpp(190) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145) : note: feeds call on this line
+C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(382) : note: index 'i' range checked by comparison on this line
+C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(383) : note: feeds call on this line
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: feeds call on this line
 C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: feeds call on this line
-C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(382) : note: index 'i' range checked by comparison on this line
-C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(383) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1514) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515) : note: feeds call on this line

@@ -397,7 +397,7 @@ void socket_reader() {
         }
 
         if (message.find("reload") == 0) {
-            std::cout << "Received Reload command. Reloading wordlist & mutations' options list.\n";
+            std::cout << "Received Reload command. Disconnecting & reloading wordlist & mutations' options list.\n";
 
             config = readFile("config.ini");
             mutation_list = readFile("mutation_list.txt");
@@ -412,7 +412,11 @@ void socket_reader() {
                 splitAndAppend(MUTE_RULES, MUTATION_RULES);
 
             total_lines = count_lines(WORDLIST_FILE);
-            continue;
+            stop_processing.store(true, std::memory_order_release);
+            client_socket.close();
+            server_disconnected.store(true);
+            queue_cv.notify_all();  // Wake up main thread if it's waiting
+            break;
         }
 
         size_t newline_pos;
