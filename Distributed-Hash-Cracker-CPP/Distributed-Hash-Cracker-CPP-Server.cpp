@@ -149,6 +149,7 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
         std::lock_guard<std::mutex> lock(clients_mutex);
         clients[client_key] = client_socket;
         clients_ready[client_key] = false;
+        std::cout << "Client " << client_key << " has connected.\n";
         ++total_clients;
     }
 
@@ -159,11 +160,11 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
             size_t len = boost::asio::read_until(*client_socket, buffer, "\n", error);
             
             if (error == boost::asio::error::eof) {
-                std::cout << "Client disconnected normally.\n";
+                std::cout << "Client " << client_key << " disconnected normally.\n";
                 break;
             }
             else if (error) {
-                std::cerr << "Client read error: " << error.message() << std::endl;
+                std::cerr << "Client " << client_key << " read error: " << error.message() << std::endl;
                 break;
             }
 
@@ -248,7 +249,7 @@ int main() {
 
     // Main loop for hash input
     while (true) {
-        while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && clients_ready.size() > 0) {
+        while (clients_ready.size() > 0 && std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && clients_ready.size() > 0) {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "To check connected clients, enter 'connections'." << std::endl;
