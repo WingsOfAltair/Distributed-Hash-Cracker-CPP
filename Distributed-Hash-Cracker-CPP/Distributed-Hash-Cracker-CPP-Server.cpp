@@ -18,8 +18,9 @@ AsyncLogger logger("server.log");
 using boost::asio::ip::tcp;
 
 int SERVER_PORT = 0;
-std::vector<std::shared_ptr<tcp::socket>> clients;
+std::unordered_map<std::string, std::shared_ptr<tcp::socket>> clients;
 std::unordered_map<std::string, bool> clients_ready;
+std::mutex clients_mutex;  // Protect shared containers
 std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
@@ -92,19 +93,61 @@ std::string getHashType(const std::string& hash) {
 }
 
 // Notify clients with new hash
-void notify_clients(const std::string& hash_type, const std::string& hash, const std::string& salt = "") {
-    std::string message = hash_type + ":" + hash + (salt.empty() ? "" : ":" + salt);
-    for (auto& client : clients) {
-        boost::asio::write(*client, boost::asio::buffer(message + "\n"));
+void notify_clients(
+    const std::string& hash_type,
+    const std::string& hash,
+    const std::string& salt = "")
+{
+    std::string message = hash_type + ":" + hash;
+    if (!salt.empty()) {
+        message += ":" + salt;
+    }
+    message += "\n";
+
+    std::lock_guard<std::mutex> lock(clients_mutex);
+    for (const auto& [client_id, client] : clients) {
+        if (client && client->is_open()) {
+            try {
+                boost::asio::write(*client, boost::asio::buffer(message));
+            }
+            catch (const boost::system::system_error& e) {
+                std::cerr << "Failed to notify client " << client_id << ": " << e.what() << "\n";
+                // Optional: handle disconnect or remove client here
+            }
+        }
+    }
+}
+
+// Notify ready clients to reload wordlist/mutation options
+void reload_ready_clients() {
+    std::string message = "reload\n";
+
+    std::lock_guard<std::mutex> lock(clients_mutex);
+    for (const auto& [client_id, is_ready] : clients_ready) {
+        if (is_ready) {
+            auto it = clients.find(client_id);
+            if (it != clients.end() && it->second && it->second->is_open()) {
+                try {
+                    boost::asio::write(*it->second, boost::asio::buffer(message));
+                } catch (const boost::system::system_error& e) {
+                    std::cerr << "Failed to send reload to client " << client_id << ": " << e.what() << "\n";
+                }
+            }
+        }
     }
 }
 
 // Handle each client connection
 void handle_client(std::shared_ptr<tcp::socket> client_socket) {
-    clients.push_back(client_socket);
-    auto client_endpoint = client_socket->remote_endpoint();
-    std::string client_key = client_endpoint.address().to_string() + ":" + std::to_string(client_endpoint.port());
-    total_clients++;
+    std::string client_key = client_socket->remote_endpoint().address().to_string() + ":" +
+        std::to_string(client_socket->remote_endpoint().port());
+
+    {
+        std::lock_guard<std::mutex> lock(clients_mutex);
+        clients[client_key] = client_socket;
+        clients_ready[client_key] = false;
+        ++total_clients;
+    }
 
     try {
         boost::asio::streambuf buffer;
@@ -132,28 +175,42 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
                 std::cout << "Client " << client_key << " Match found: " << match_info << std::endl;
                 match_found = true;
                 logger.log(match_info + " by Client " + client_key + ".");
-                for (auto& client : clients) {
-                    boost::asio::write(*client, boost::asio::buffer("STOP\n"));
+                {
+                    std::lock_guard<std::mutex> lock(clients_mutex);
+                    for (const auto& [cid, client] : clients) {
+                        if (client && client->is_open()) {
+                            try {
+                                boost::asio::write(*client, boost::asio::buffer("STOP\n"));
+                            }
+                            catch (const boost::system::system_error& e) {
+                                std::cerr << "Failed to send STOP to client: " << e.what() << std::endl;
+                            }
+                        }
+                    }
                 }
             }
             else if (message.find("NO_MATCH") == 0) {
                 std::cout << "Match not found in client: " << client_socket << std::endl;
             }
             else if (message.find("Ready") == 0) {
+                std::lock_guard<std::mutex> lock(clients_mutex);
                 clients_ready[client_key] = true;
                 std::cout << "Client " << client_key << " is ready.\n";
             }
-            clients_responses++;
+            ++clients_responses;
         }
     }
     catch (const std::exception& e) {
         std::cerr << "Exception in client handling: " << e.what() << std::endl;
     }
 
-    // Cleanup client on disconnect
-    clients.erase(std::remove(clients.begin(), clients.end(), client_socket), clients.end());
-    clients_ready.erase(client_key);
-    total_clients--;
+    // Cleanup client on disconnect with lock
+    {
+        std::lock_guard<std::mutex> lock(clients_mutex);
+        clients.erase(client_key);
+        clients_ready.erase(client_key);
+        --total_clients;
+    }
 }
 
 // Main function to initialize server and manage client connections
@@ -192,6 +249,7 @@ int main() {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "To check connected clients, enter 'connections'." << std::endl;
+            std::cout << "To reload connected clients' settings (wordlist/mutation options), enter 'reload'." << std::endl;
             std::cout << "Enter the hash type: ";
             std::getline(std::cin, hash_type);
 
@@ -228,6 +286,16 @@ int main() {
                 }
                 continue;
             }
+
+            if (to_lowercase(hash_type) == "reload") {
+                reload_ready_clients();
+                continue;
+            }
+
+            if (!is_valid_hashtype(hash_type)) {
+                std::cout << "Unknown hash type." << std::endl;
+                continue;
+            }  
 
             if (!is_valid_hashtype(hash_type)) {
                 std::cout << "Unknown hash type." << std::endl;

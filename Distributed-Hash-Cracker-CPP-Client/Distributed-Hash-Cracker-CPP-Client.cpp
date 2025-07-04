@@ -32,6 +32,9 @@ using boost::asio::ip::tcp;
 asio::io_context io_context;
 tcp::socket client_socket(io_context);
 
+std::map<std::string, std::string> config;
+std::map<std::string, std::string> mutation_list;
+
 std::string WORDLIST_FILE = "";
 std::string SERVER_IP = "";
 int SERVER_PORT = 0;
@@ -41,6 +44,8 @@ std::vector<std::string> MUTATION_RULES;
 AsyncLogger logger("client.log");
 
 bool match_found = false;
+
+int total_lines;
 
 std::mutex send_mutex;           // Mutex for sending messages to the server
 std::atomic<bool> stop_processing(false);  // Global flag for stopping threads
@@ -158,7 +163,21 @@ inline std::string trim(const std::string& s) {
 
     if (start >= end) return ""; // All whitespace or empty
     return std::string(start, end);
-}     
+}
+
+void splitAndAppend(const std::string& input, std::vector<std::string>& output) {
+    std::stringstream ss(input);
+    std::string token;
+
+    while (std::getline(ss, token, ',')) {
+        std::stringstream subss(token);
+        std::string word;
+
+        while (subss >> word) {
+            output.push_back(word);
+        }
+    }
+}
 
 int count_lines(const std::string& filepath) {
     std::ifstream file(filepath, std::ios::binary);  // Binary mode to avoid newline translation
@@ -190,6 +209,8 @@ int count_lines(const std::string& filepath) {
     // If the file doesn't end in a newline, count the last line
     if (!last_char_was_newline)
         ++lines;
+
+    std::cout << "Line count in wordlist: " + filepath + " is: " + std::to_string(lines) << std::endl;
 
     return lines;
 }
@@ -375,6 +396,25 @@ void socket_reader() {
             break;  // Exit the reader thread or continue to clean shutdown
         }
 
+        if (message.find("reload") == 0) {
+            std::cout << "Received Reload command. Reloading wordlist & mutations' options list.\n";
+
+            config = readFile("config.ini");
+            mutation_list = readFile("mutation_list.txt");
+
+            SERVER_IP = config["SERVER_IP"];
+            SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
+            WORDLIST_FILE = config["WORDLIST_FILE"];
+            SHOW_PROGRESS = config["SHOW_PROGRESS"];
+            std::string MUTE_RULES = mutation_list["MUTATION_RULES"];
+
+            if (!trim(MUTE_RULES).empty())
+                splitAndAppend(MUTE_RULES, MUTATION_RULES);
+
+            total_lines = count_lines(WORDLIST_FILE);
+            continue;
+        }
+
         size_t newline_pos;
         while ((newline_pos = message.find('\n')) != std::string::npos) {
             std::string line = message.substr(0, newline_pos);   // Extract one line
@@ -510,21 +550,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
             current_line++;
         }
     }
-}                
-
-void splitAndAppend(const std::string& input, std::vector<std::string>& output) {
-    std::stringstream ss(input);
-    std::string token;
-
-    while (std::getline(ss, token, ',')) {
-        std::stringstream subss(token);
-        std::string word;
-
-        while (subss >> word) {
-            output.push_back(word);
-        }
-    }
-}
+}  
 
 int main() {
 #ifdef _WIN32
@@ -535,8 +561,8 @@ int main() {
     std::wcout.imbue(std::locale());
 
     // Read configuration from the file
-    std::map<std::string, std::string> config = readFile("config.ini");
-    std::map<std::string, std::string> mutation_list = readFile("mutation_list.txt");
+    config = readFile("config.ini");
+    mutation_list = readFile("mutation_list.txt");
 
     SERVER_IP = config["SERVER_IP"];
     SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
@@ -547,8 +573,23 @@ int main() {
     if (!trim(MUTE_RULES).empty())
         splitAndAppend(MUTE_RULES, MUTATION_RULES);
 
+    // Attempt to connect to the server in a loop
+    tcp::resolver resolver(io_context);
+    auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
+
+    try {
+        asio::connect(client_socket, endpoints);
+        server_disconnected.store(false);
+        stop_processing.store(false);
+        std::cout << "Connected to server." << std::endl;
+    }
+    catch (std::exception& e) {
+        std::cerr << "Server is offline or the ip/port combination is incorrect." << 
+            std::endl << e.what() << "." << std::endl;
+        server_disconnected.store(true);
+    }
+
     AUTO_RECONNECT = "true";
-    server_disconnected.store(true);
 
     // Count total lines in wordlist
     std::ifstream wordlist(WORDLIST_FILE);
@@ -558,12 +599,8 @@ int main() {
         return 0;
     }
 
-    int total_lines = count_lines(WORDLIST_FILE);
+    total_lines = count_lines(WORDLIST_FILE);
     wordlist.close();
-
-    // Attempt to connect to the server in a loop
-    tcp::resolver resolver(io_context);
-    auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
 
     while (to_lowercase(AUTO_RECONNECT) == "true") {
         AUTO_RECONNECT = config["AUTO_RECONNECT"];
