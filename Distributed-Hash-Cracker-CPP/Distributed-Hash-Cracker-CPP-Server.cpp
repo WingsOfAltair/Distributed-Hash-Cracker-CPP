@@ -188,7 +188,7 @@ int main() {
 
     // Main loop for hash input
     while (true) {
-        while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && total_clients > 0) {
+        while (std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && clients_ready.size() > 0) {
             std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "To check connected clients, enter 'connections'." << std::endl;
@@ -219,6 +219,10 @@ int main() {
 
             if (to_lowercase(hash_type) == "connections") {
                 std::cout << "Connected clients (" << total_clients << "):\n";
+                if (clients_ready.size() < total_clients)
+                {
+                    std::cout << "There are client(s) connected but still getting ready." << std::endl;
+                }
                 for (const auto& entry : clients_ready) {
                     std::cout << " - " << entry.first << (entry.second ? " [Ready]" : " [Not Ready]") << "\n";
                 }
@@ -236,6 +240,14 @@ int main() {
             std::cout << "Enter the salt (leave empty if none, or BCRYPT or argon2): ";
             std::getline(std::cin, salt);
 
+            if (clients_ready.size() == 0)
+            {
+                std::cout << "There are no ready clients. Forfieting request." << std::endl;
+                match_found = false;
+                clients_responses = 0;
+                continue;
+            }
+
             if (!hash_type.empty() && !hash.empty()) {
                 notify_clients(hash_type, hash, salt);
                 match_found = false;
@@ -246,14 +258,14 @@ int main() {
                 }
 
                 std::cout << "Processing entered hash, please wait...\n";
-                while (clients_responses < total_clients) {
+                while (clients_responses < clients_ready.size()) {
                     boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
                     if (match_found) {
                         break;
                     }
                 }
 
-                if (!match_found && clients_responses == total_clients) {
+                if (!match_found && clients_responses == clients_ready.size()) {
                     std::cout << "No matches found, please wait until you can enter a new hash...\n";
                 }
                 else if (match_found) {
