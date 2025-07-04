@@ -585,7 +585,9 @@ int main() {
         asio::connect(client_socket, endpoints);
         server_disconnected.store(false);
         stop_processing.store(false);
-        std::cout << "Connected to server." << std::endl;
+        std::cout << "Server is online." << std::endl;
+        client_socket.close();
+        server_disconnected.store(true);
     }
     catch (std::exception& e) {
         std::cerr << "Server is offline or the ip/port combination is incorrect." << 
