@@ -36,6 +36,7 @@ std::map<std::string, std::string> config;
 std::map<std::string, std::string> mutation_list;
 
 std::string WORDLIST_FILE = "";
+std::string LINE_COUNT = "";
 std::string SERVER_IP = "";
 int SERVER_PORT = 0;
 std::string SHOW_PROGRESS = "";
@@ -406,14 +407,29 @@ void socket_reader() {
             SERVER_IP = config["SERVER_IP"];
             SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
             WORDLIST_FILE = config["WORDLIST_FILE"];
+            LINE_COUNT = config["LINE_COUNT"];
             SHOW_PROGRESS = config["SHOW_PROGRESS"];
+            MULTI_THREADED = config["MULTI_THREADED"];
             std::string MUTE_RULES = mutation_list["MUTATION_RULES"];
 
             if (!trim(MUTE_RULES).empty())
                 splitAndAppend(MUTE_RULES, MUTATION_RULES);
 
-            if(to_lowercase(MULTI_THREADED) == "true")
-                total_lines = count_lines(WORDLIST_FILE);
+            if (to_lowercase(MULTI_THREADED) == "true")
+            {
+                if (to_lowercase(LINE_COUNT) == "auto")
+                {
+                    total_lines = -1;
+                }
+                else {
+                    total_lines = std::stoi(LINE_COUNT);
+                }
+
+                if (total_lines == -1) {
+                    total_lines = count_lines(WORDLIST_FILE);
+                }
+            }
+
             stop_processing.store(true, std::memory_order_release);
             client_socket.close();
             server_disconnected.store(true);
@@ -689,13 +705,24 @@ int main() {
     SERVER_IP = config["SERVER_IP"];
     SERVER_PORT = boost::lexical_cast<int>(config["SERVER_PORT"]);
     WORDLIST_FILE = config["WORDLIST_FILE"];
+    LINE_COUNT = config["LINE_COUNT"];
     SHOW_PROGRESS = config["SHOW_PROGRESS"];
+    MULTI_THREADED = config["MULTI_THREADED"];
+
+    if (to_lowercase(LINE_COUNT) == "auto")
+    {
+        total_lines = -1;
+    }
+    else {
+        total_lines = std::stoi(LINE_COUNT);
+    }
+
     std::string MUTE_RULES = mutation_list["MUTATION_RULES"];
 
     if (!trim(MUTE_RULES).empty())
         splitAndAppend(MUTE_RULES, MUTATION_RULES);
 
-    // Attempt to connect to the server in a loop
+    // Attempt to check if server is online or offline.
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
 
@@ -719,20 +746,24 @@ int main() {
 
     if (to_lowercase(MULTI_THREADED) == "true")
     {
-        // Count total lines in wordlist
-        if (!wordlist.is_open()) {
-            std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
-            logger.log("Failed to open wordlist file: " + WORDLIST_FILE);
-            return 0;
-        }
+        if (total_lines == -1)
+        {
+            // Count total lines in wordlist
+            if (!wordlist.is_open()) {
+                std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+                logger.log("Failed to open wordlist file: " + WORDLIST_FILE);
+                return 0;
+            }
 
-        total_lines = count_lines(WORDLIST_FILE);
-        wordlist.close();
+            total_lines = count_lines(WORDLIST_FILE);
+            wordlist.close();
+        }
     }
 
     while (to_lowercase(AUTO_RECONNECT) == "true") {
         AUTO_RECONNECT = config["AUTO_RECONNECT"];
-        while (server_disconnected && total_lines >= 0) {
+        // Attempt to connect to the server in a loop
+        while (server_disconnected && ((to_lowercase(MULTI_THREADED) == "true" && total_lines >= 0) || (to_lowercase(MULTI_THREADED) == "false" && total_lines == -1))) {
             try {
                 asio::connect(client_socket, endpoints);
                 server_disconnected.store(false);
@@ -758,7 +789,7 @@ int main() {
 
         global_socket_ptr = &client_socket;
 
-        while (!server_disconnected && total_lines >= 0) {
+        while (!server_disconnected && ((to_lowercase(MULTI_THREADED) == "true" && total_lines >= 0) || (to_lowercase(MULTI_THREADED) == "false" && total_lines == -1))) {
             match_found = false;
             stop_processing.store(false);
             boost::thread reader_thread(socket_reader);
