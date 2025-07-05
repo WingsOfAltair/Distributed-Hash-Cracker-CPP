@@ -182,39 +182,33 @@ void splitAndAppend(const std::string& input, std::vector<std::string>& output) 
 }
 
 int count_lines(const std::string& filepath) {
-    std::ifstream file(filepath, std::ios::binary);  // Binary mode to avoid newline translation
-    if (!file) {
+    std::ifstream file(filepath, std::ios::binary);
+    if (!file.is_open()) {
         std::cerr << "Failed to open file: " << filepath << std::endl;
-        return -1;
+        return 0;
     }
 
-    int lines = 0;
-    char ch;
-    bool last_char_was_newline = true;
+    const size_t buffer_size = 1024 * 1024; // 1 MB buffer
+    char* buffer = new char[buffer_size];
+    std::uintmax_t line_count = 0;
 
     std::cout << "Counting lines in wordlist..." << std::endl;
 
-    while (file.get(ch)) {
-        if (stop_processing.load(std::memory_order_acquire)) {
-            lines = 0;
-            break;
-        }
-        if (ch == '\n') {
-            ++lines;
-            last_char_was_newline = true;
-        }
-        else {
-            last_char_was_newline = false;
+    while (file) {
+        file.read(buffer, buffer_size);
+        std::streamsize bytes_read = file.gcount();
+        for (std::streamsize i = 0; i < bytes_read; ++i) {
+            if (buffer[i] == '\n') {
+                ++line_count;
+            }
         }
     }
 
-    // If the file doesn't end in a newline, count the last line
-    if (!last_char_was_newline)
-        ++lines;
+    delete[] buffer;
 
-    std::cout << "Line count in wordlist: " + filepath + " is: " + std::to_string(lines) << std::endl;
+    std::cout << "Line count in wordlist: " + filepath + " is: " + std::to_string(++line_count) << std::endl;
 
-    return lines;
+    return line_count;
 }
 
 std::string applyRule(const std::wstring& password, const std::string& rule) {
