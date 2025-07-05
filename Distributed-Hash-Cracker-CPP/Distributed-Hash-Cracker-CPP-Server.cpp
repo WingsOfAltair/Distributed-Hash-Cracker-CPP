@@ -25,6 +25,9 @@ std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
 
+auto start = std::chrono::high_resolution_clock::now();
+auto end = std::chrono::high_resolution_clock::now();
+
 // Read config file
 std::map<std::string, std::string> readConfig(const std::string& filename) {
     std::map<std::string, std::string> configMap;
@@ -181,8 +184,12 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
 
             // Handle client messages
             if (message.find("MATCH:") == 0) {
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> duration_ms = end - start;
+
                 std::string match_info = message.substr(6); // Remove "MATCH:"
-                std::cout << "Client " << client_key << " Match found: " << match_info << std::endl;
+                std::cout << "Client " << client_key << " Match found: " << match_info << std::endl
+                    << "Elapsed time: " << duration_ms.count() << " ms" << std::endl;
                 match_found = true;
                 logger.log(match_info + " by Client " + client_key + ".");
                 {
@@ -327,6 +334,7 @@ int main() {
             }
 
             if (!hash_type.empty() && !hash.empty()) {
+                start = std::chrono::high_resolution_clock::now();
                 notify_clients(hash_type, hash, salt);
                 match_found = false;
                 clients_responses = 0;
@@ -344,7 +352,11 @@ int main() {
                 }
 
                 if (!match_found && clients_responses == clients_ready.size()) {
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> duration_ms = end - start;
                     std::cout << "No matches found, please wait until you can enter a new hash...\n";
+                    std::cout << "Elapsed time: " << duration_ms.count() << " ms\n";
+
                 }
                 else if (match_found) {
                     std::cout << "Match found, please wait until you can enter a new hash...\nThis may take a while depending on your clients' hardware/os.\n";

@@ -188,6 +188,8 @@ int count_lines(const std::string& filepath) {
         return 0;
     }
 
+    auto start = std::chrono::high_resolution_clock::now();
+
     const size_t buffer_size = 1024 * 1024; // 1 MB buffer
     char* buffer = new char[buffer_size];
     std::uintmax_t line_count = 0;
@@ -206,7 +208,11 @@ int count_lines(const std::string& filepath) {
 
     delete[] buffer;
 
-    std::cout << "Line count in wordlist: " + filepath + " is: " + std::to_string(++line_count) << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_ms = end - start;
+
+    std::cout << "Line count in wordlist: " + filepath + " is: " + std::to_string(++line_count) <<
+        std::endl << "Counting elapsed time: " << duration_ms.count() << " ms." << std::endl;
 
     return line_count;
 }
