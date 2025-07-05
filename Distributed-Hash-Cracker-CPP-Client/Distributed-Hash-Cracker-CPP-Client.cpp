@@ -693,6 +693,47 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
     }
 }
 
+bool udp_ping(const std::string& ip, int port, int timeout_ms = 1000) {
+    using namespace boost::asio;
+    io_service io;
+    ip::udp::socket socket(io);
+    boost::system::error_code ec;
+
+    socket.open(ip::udp::v4(), ec);
+    if (ec) return false;
+
+    ip::udp::endpoint server_endpoint(ip::address::from_string(ip), port);
+    ip::udp::endpoint sender_endpoint;
+
+    // Send "ping"
+    std::string message = "ping";
+    socket.send_to(buffer(message), server_endpoint, 0, ec);
+    if (ec) return false;
+
+    // Set receive timeout
+    socket.non_blocking(true);
+    char reply[128];
+    std::size_t len = 0;
+
+    auto start = std::chrono::steady_clock::now();
+    while (true) {
+        ec.clear();
+        len = socket.receive_from(buffer(reply), sender_endpoint, 0, ec);
+
+        if (!ec && len > 0) {
+            std::string response(reply, len);
+            return response == "pong";  // or whatever your expected response is
+        }
+
+        if ((std::chrono::steady_clock::now() - start) > std::chrono::milliseconds(timeout_ms)) {
+            return false;  // timeout
+        }
+
+        // Yield to avoid CPU burn
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
+
 int main() {
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
@@ -735,17 +776,14 @@ int main() {
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
 
-    try {
-        asio::connect(client_socket, endpoints);
-        server_disconnected.store(false);
-        stop_processing.store(false);
+    if (udp_ping(SERVER_IP, SERVER_PORT))
+    {
         std::cout << "Server is online." << std::endl;
-        client_socket.close();
+        stop_processing.store(false);
         server_disconnected.store(true);
     }
-    catch (std::exception& e) {
-        std::cerr << "Server is offline or the ip/port combination is incorrect." <<
-            std::endl << e.what() << "." << std::endl;
+    else {
+        std::cerr << "Server is offline or the ip/port combination is incorrect." << std::endl;
         server_disconnected.store(true);
     }
 

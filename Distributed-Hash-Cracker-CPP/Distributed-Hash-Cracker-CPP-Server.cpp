@@ -230,6 +230,45 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
     }
 }
 
+void run_udp_echo_server(unsigned short port) {
+    boost::asio::io_service io_service;
+
+    // Create UDP socket bound to given port
+    boost::asio::ip::udp::socket socket(
+        io_service,
+        boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)
+    );
+
+    char data[128];  // buffer for incoming data
+    boost::asio::ip::udp::endpoint sender_endpoint;
+
+    std::cout << "Ping echo server is listening on port " << port << " UDP..." << std::endl;
+
+    while (true) {
+        boost::system::error_code ec;
+
+        // Receive a packet
+        std::size_t length = socket.receive_from(
+            boost::asio::buffer(data), sender_endpoint, 0, ec
+        );
+
+        if (ec && ec != boost::asio::error::message_size) {
+            std::cerr << "Receive error: " << ec.message() << std::endl;
+            continue;
+        }
+
+        std::cout << "Received: " << std::string(data, length)
+            << " from " << sender_endpoint.address().to_string() << ":" << sender_endpoint.port() << std::endl;
+
+        // Send response
+        std::string response = "pong";
+        socket.send_to(boost::asio::buffer(response), sender_endpoint, 0, ec);
+        if (ec) {
+            std::cerr << "Send error: " << ec.message() << std::endl;
+        }
+    }
+}
+
 // Main function to initialize server and manage client connections
 int main() {
 #ifdef _WIN32
@@ -242,6 +281,9 @@ int main() {
     auto config = readConfig("server.ini");
     SERVER_PORT = std::stoi(config["SERVER_PORT"]);
 
+    std::vector<boost::thread> threads;
+    threads.emplace_back(run_udp_echo_server, SERVER_PORT);
+
     std::string hash_type;
     std::string hash;
     std::string salt;
@@ -249,7 +291,7 @@ int main() {
     boost::asio::io_context io_context;
     tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), SERVER_PORT));
 
-    std::cout << "Server is listening on port " << SERVER_PORT << "\n";
+    std::cout << "Server is listening on port " << SERVER_PORT << " TCP\n";
 
     // Thread to accept clients
     boost::thread client_handler([&]() {
