@@ -40,6 +40,7 @@ std::string SERVER_IP = "";
 int SERVER_PORT = 0;
 std::string SHOW_PROGRESS = "";
 std::string AUTO_RECONNECT = "";
+std::string MULTI_THREADED = "";
 std::vector<std::string> MUTATION_RULES;
 AsyncLogger logger("client.log");
 
@@ -411,7 +412,8 @@ void socket_reader() {
             if (!trim(MUTE_RULES).empty())
                 splitAndAppend(MUTE_RULES, MUTATION_RULES);
 
-            total_lines = count_lines(WORDLIST_FILE);
+            if(to_lowercase(MULTI_THREADED) == "true")
+                total_lines = count_lines(WORDLIST_FILE);
             stop_processing.store(true, std::memory_order_release);
             client_socket.close();
             server_disconnected.store(true);
@@ -555,7 +557,122 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
             current_line++;
         }
     }
-}  
+}
+
+// Process chunk - NO socket reading here!
+void process_chunk_single_threaded(const std::string& hash_type, const std::string& hash_value, const std::string& salt) {
+    std::ifstream wordlist(WORDLIST_FILE, std::ios::binary);
+    if (!wordlist.is_open()) {
+        std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+        return;
+    }
+
+    // Skip UTF-8 BOM if present
+    char bom[3] = { 0 };
+    wordlist.read(bom, 3);
+    if (!(bom[0] == '\xEF' && bom[1] == '\xBB' && bom[2] == '\xBF')) {
+        wordlist.seekg(0);  // rewind if no BOM
+    }
+    std::string utf8_word;
+    int current_line = 0;
+
+    // Process assigned chunk
+    while (std::getline(wordlist, utf8_word)) {
+        if (stop_processing.load(std::memory_order_acquire)) {
+            break;
+        }
+        std::wstring utf8_word_str_w = boost::locale::conv::to_utf<wchar_t>(utf8_word, "UTF-8");
+        boost::algorithm::trim_right_if(utf8_word_str_w, boost::is_any_of("\r\n"));
+        std::string utf8_word_str = wstring_to_utf8(utf8_word_str_w);
+
+        try {
+
+            if (MUTATION_RULES.size() > 0)
+            {
+                for (const std::string& rule : MUTATION_RULES) {
+                    if (stop_processing.load(std::memory_order_acquire)) {
+                        break;
+                    }
+                    std::string mutated = applyRule(utf8_word_str_w, rule);
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Rule: " << rule << " = " << mutated << std::endl;
+
+                    if (to_lowercase(hash_type) == "bcrypt") {
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Validating the hash against the word: " << mutated << std::endl;
+                        if (BCrypt::validatePassword(mutated, hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
+                    else if (to_lowercase(hash_type) == "argon2") {
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Validating the hash against the word: " << mutated << std::endl;
+                        if (verify_argon2_encoded(mutated, hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
+                    else {
+                        std::string input_with_salt = mutated + salt;
+                        std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Calculated password: " << mutated << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                        if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                if (to_lowercase(hash_type) == "bcrypt") {
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                        if (!match_found) {
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+                else if (to_lowercase(hash_type) == "argon2") {
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (verify_argon2_encoded(utf8_word_str, hash_value)) {
+                        if (!match_found) {
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+                else {
+                    std::string input_with_salt = utf8_word_str + salt;
+                    std::string calculated_hash = calculate_hash(hash_type, input_with_salt);
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Calculated password: " << utf8_word_str << " with salt: " << salt << ", calculated hash: " << calculated_hash << std::endl;
+                    if (to_lowercase(calculated_hash) == to_lowercase(hash_value)) {
+                        if (!match_found) {
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+            }
+            current_line++;
+        }
+        catch (const std::exception& err) {
+            std::ostringstream oss;
+            oss << "Error occurred during processing word: " << utf8_word_str
+                << " on line: " << current_line << "." << std::endl
+                << err.what();
+            std::string errText = oss.str();
+            std::cerr << errText << std::endl;
+            logger.log(errText);
+            current_line++;
+        }
+    }
+}
 
 int main() {
 #ifdef _WIN32
@@ -591,27 +708,31 @@ int main() {
         server_disconnected.store(true);
     }
     catch (std::exception& e) {
-        std::cerr << "Server is offline or the ip/port combination is incorrect." << 
+        std::cerr << "Server is offline or the ip/port combination is incorrect." <<
             std::endl << e.what() << "." << std::endl;
         server_disconnected.store(true);
     }
 
     AUTO_RECONNECT = "true";
 
-    // Count total lines in wordlist
     std::ifstream wordlist(WORDLIST_FILE);
-    if (!wordlist.is_open()) {
-        std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
-        logger.log("Failed to open wordlist file: " + WORDLIST_FILE);
-        return 0;
-    }
 
-    total_lines = count_lines(WORDLIST_FILE);
-    wordlist.close();
+    if (to_lowercase(MULTI_THREADED) == "true")
+    {
+        // Count total lines in wordlist
+        if (!wordlist.is_open()) {
+            std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
+            logger.log("Failed to open wordlist file: " + WORDLIST_FILE);
+            return 0;
+        }
+
+        total_lines = count_lines(WORDLIST_FILE);
+        wordlist.close();
+    }
 
     while (to_lowercase(AUTO_RECONNECT) == "true") {
         AUTO_RECONNECT = config["AUTO_RECONNECT"];
-        while (server_disconnected && total_lines >  0) {
+        while (server_disconnected && total_lines >= 0) {
             try {
                 asio::connect(client_socket, endpoints);
                 server_disconnected.store(false);
@@ -625,17 +746,19 @@ int main() {
             }
         }
 
-        if (total_lines == -1)
-        {
-            std::string message = "Shutting down due to incorrect wordlist file.";
-            std::cout << message << std::endl;
-            logger.log(message);
-            return 0;
+        if (to_lowercase(MULTI_THREADED) == "true") {
+            if (total_lines == -1)
+            {
+                std::string message = "Shutting down due to incorrect wordlist file.";
+                std::cout << message << std::endl;
+                logger.log(message);
+                return 0;
+            }
         }
 
         global_socket_ptr = &client_socket;
 
-        while (!server_disconnected && total_lines > 0) {
+        while (!server_disconnected && total_lines >= 0) {
             match_found = false;
             stop_processing.store(false);
             boost::thread reader_thread(socket_reader);
@@ -688,30 +811,36 @@ int main() {
 				continue;
 			}
 
-            int num_threads = boost::thread::hardware_concurrency();
-            if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable   
-            if (total_lines < num_threads) {
-                num_threads = total_lines; // avoid having more threads than lines
-            }
-            int chunk_size = total_lines / num_threads;
-            int remainder = total_lines % num_threads; // for better load balancing
-
-            int start_line = 0;
-            // Start worker threads
-            std::vector<boost::thread> threads;
-            for (int i = 0; i < num_threads; ++i) {
-                if (stop_processing.load(std::memory_order_acquire)) {
-                    break;
+            if (to_lowercase(MULTI_THREADED) == "true")
+            {
+                int num_threads = boost::thread::hardware_concurrency();
+                if (num_threads == 0) num_threads = 2; // fallback to 2 if undetectable   
+                if (total_lines < num_threads) {
+                    num_threads = total_lines; // avoid having more threads than lines
                 }
-                int lines_for_this_thread = chunk_size + (i < remainder ? 1 : 0);
-                int end_line = start_line + lines_for_this_thread;
-                threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);     
-                start_line = end_line;
-            }
+                int chunk_size = total_lines / num_threads;
+                int remainder = total_lines % num_threads; // for better load balancing
 
-            // Join worker threads
-            for (auto& t : threads) {
-                if (t.joinable()) t.join();
+                int start_line = 0;
+                // Start worker threads
+                std::vector<boost::thread> threads;
+                for (int i = 0; i < num_threads; ++i) {
+                    if (stop_processing.load(std::memory_order_acquire)) {
+                        break;
+                    }
+                    int lines_for_this_thread = chunk_size + (i < remainder ? 1 : 0);
+                    int end_line = start_line + lines_for_this_thread;
+                    threads.emplace_back(process_chunk, start_line, end_line, hash_type, hash_value, salt);
+                    start_line = end_line;
+                }
+
+                // Join worker threads
+                for (auto& t : threads) {
+                    if (t.joinable()) t.join();
+                }
+            }
+            else {
+                process_chunk_single_threaded(hash_type, hash_value, salt);
             }
 
             // Only send NO_MATCH once if no password was found
