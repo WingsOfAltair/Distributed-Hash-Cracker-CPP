@@ -429,6 +429,9 @@ void socket_reader() {
                     total_lines = count_lines(WORDLIST_FILE);
                 }
             }
+            else {
+                total_lines = -1;
+            }
 
             stop_processing.store(true, std::memory_order_release);
             client_socket.close();
@@ -709,12 +712,18 @@ int main() {
     SHOW_PROGRESS = config["SHOW_PROGRESS"];
     MULTI_THREADED = config["MULTI_THREADED"];
 
-    if (to_lowercase(LINE_COUNT) == "auto")
+    if (to_lowercase(MULTI_THREADED) == "true")
     {
-        total_lines = -1;
+        if (to_lowercase(LINE_COUNT) == "auto")
+        {
+            total_lines = -1;
+        }
+        else {
+            total_lines = std::stoi(LINE_COUNT);
+        }
     }
     else {
-        total_lines = std::stoi(LINE_COUNT);
+        total_lines = -1;
     }
 
     std::string MUTE_RULES = mutation_list["MUTATION_RULES"];
