@@ -344,6 +344,22 @@ std::vector<std::string> split(const std::string& s, char delimiter) {
     return tokens;
 }
 
+bool is_base64_char(char c) {
+    return (std::isalnum(static_cast<unsigned char>(c)) || c == '+' || c == '/' || c == '=');
+}
+
+bool is_base64_scrypt_hash(const std::string& hash) {
+    // Check length roughly 43-44
+    if (hash.length() < 43 || hash.length() > 44)
+        return false;
+
+    // Check all chars are valid base64 chars
+    for (char c : hash) {
+        if (!is_base64_char(c)) return false;
+    }
+    return true;
+}
+
 // Base64 decode with PHP tweaks (replace '.' with '+', strip '$')
 std::vector<unsigned char> base64_decode_php(const std::string& input) {
     std::string modified = input;
@@ -378,11 +394,42 @@ bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsig
     return sodium_memcmp(a.data(), b.data(), a.size()) == 0;
 } 
 
-// Verify libsodium modular crypt hash: $s0$... format
-bool verify_libsodium_hash(const std::string& password, const std::string& hash) {
-    // Use libsodium's function to verify modular crypt hashes:
-    // Available in libsodium >= 1.0.12
-    return crypto_pwhash_str_verify(hash.c_str(), password.c_str(), password.size()) == 0;
+// Hash a password using libsodium's low-level Scrypt and a custom salt.
+// Returns the hash as a base64 string.
+std::string scrypt_hash_password_libsodium(const std::string& password, const std::string& salt_str) {
+    const std::size_t HASH_LEN = 32;
+    const std::uint64_t N = 1 << 15;  // CPU cost
+    const std::uint32_t r = 8;        // Memory cost
+    const std::uint32_t p = 1;        // Parallelism
+
+    unsigned char hash[HASH_LEN];
+
+    const uint8_t* salt = reinterpret_cast<const uint8_t*>(salt_str.data());
+    std::size_t salt_len = salt_str.size();
+
+    if (crypto_pwhash_scryptsalsa208sha256_ll(
+        reinterpret_cast<const uint8_t*>(password.data()), password.size(),
+        salt, salt_len,
+        N, r, p,
+        hash, HASH_LEN) != 0) {
+        throw std::runtime_error("Scrypt hash failed (likely out of memory)");
+    }
+
+    // Calculate base64 buffer size manually
+    size_t base64_len = 4 * ((HASH_LEN + 2) / 3) + 1;
+
+    std::vector<char> b64(base64_len);
+
+    sodium_bin2base64(b64.data(), base64_len, hash, HASH_LEN, sodium_base64_VARIANT_ORIGINAL);
+
+    return std::string(b64.data());
+}
+
+bool verify_libsodium_hash(const std::string& password, const std::string& stored_b64_hash, const std::string& salt_str) {
+    std::string computed_b64_hash = scrypt_hash_password_libsodium(password, salt_str);
+
+    // Constant-time comparison to avoid timing attacks
+    return sodium_memcmp(computed_b64_hash.data(), stored_b64_hash.data(), stored_b64_hash.size()) == 0;
 }
 
 // Verify PHP-scrypt style hash: N$r$p$salt$hash
@@ -478,16 +525,16 @@ bool verify_scrypt_hash_base64(const std::string& password, const std::string& s
 bool verify_scrypt_hash(const std::string& password, std::string& stored_salt_hex, const std::string& hash) {
     if (hash.empty()) return false;
 
-    if (hash.rfind("$s0$", 0) == 0) {
+    if (is_base64_scrypt_hash(hash)) {
         // Libsodium modular crypt format
-        return verify_libsodium_hash(password, hash);
+        return verify_libsodium_hash(password, hash, stored_salt_hex) || verify_scrypt_hash_base64(password, stored_salt_hex, hash);
     }
     else if (std::count(hash.begin(), hash.end(), '$') == 4) {
         // PHP style: N$r$p$salt$hash
         return verify_php_scrypt_hash(password, hash);
     }
     else {
-        return verify_scrypt_hash_base64(password, stored_salt_hex, hash);
+        return false;
     }
 }
 
