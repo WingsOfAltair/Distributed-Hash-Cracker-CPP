@@ -5282,7 +5282,7 @@ C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(363,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(33,13):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(34,13):
           see reference to class template instantiation 'boost::asio::basic_stream_socket<boost::asio::ip::tcp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\basic_stream_socket.hpp(62,12):
           see reference to class template instantiation 'boost::asio::basic_socket<Protocol,Executor>' being compiled
@@ -5382,18 +5382,19 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(128,19): warning C4820:  
 C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(128,19): warning C4820:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,31): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(155,31): warning C4996: 'std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\codecvt(34,39):
       see declaration of 'std::codecvt_utf8'
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,10): warning C4996: 'std::wstring_convert<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(155,10): warning C4996: 'std::wstring_convert<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\xlocbuf(303,39):
       see declaration of 'std::wstring_convert'
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(154,54): warning C4996: 'std::wstring_convert<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(155,17): warning C4996: 'std::wstring_convert<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(217,12): warning C4244: 'return': conversion from 'uintmax_t' to 'int', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(217,12): warning C4365: 'return': conversion from 'uintmax_t' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(155,54): warning C4996: 'std::wstring_convert<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(156,17): warning C4996: 'std::wstring_convert<std::codecvt_utf8<wchar_t,1114111,(std::codecvt_mode)0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes': warning STL4017: std::wbuffer_convert, std::wstring_convert, and the <codecvt> header (containing std::codecvt_mode, std::codecvt_utf8, std::codecvt_utf16, and std::codecvt_utf8_utf16) are deprecated in C++17. (The std::codecvt class template is NOT deprecated.) The C++ Standard doesn't provide equivalent non-deprecated functionality; consider using MultiByteToWideChar() and WideCharToMultiByte() from <Windows.h> instead. You can define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to suppress this warning.
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(218,12): warning C4244: 'return': conversion from 'uintmax_t' to 'int', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(218,12): warning C4365: 'return': conversion from 'uintmax_t' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(370,20): warning C4365: 'argument': conversion from 'int' to 'const unsigned __int64', signed/unsigned mismatch
 C:\boost\boost\asio\detail\is_buffer_sequence.hpp(49,8): warning C4623: 'boost::asio::detail::buffer_sequence_memfns_derived<T>': default constructor was implicitly defined as deleted
 C:\boost\boost\asio\detail\is_buffer_sequence.hpp(49,8): warning C4623:         with
 C:\boost\boost\asio\detail\is_buffer_sequence.hpp(49,8): warning C4623:         [
@@ -5402,9 +5403,9 @@ C:\boost\boost\asio\detail\is_buffer_sequence.hpp(49,8): warning C4623:         
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\is_buffer_sequence.hpp(49,8):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(373,22):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(492,22):
           see reference to function template instantiation 'size_t boost::asio::write(SyncWriteStream &,DynamicBuffer_v2,constraint<boost::asio::is_dynamic_buffer_v2<DynamicBuffer_v2>::value,int>::type)' being compiled
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(373,22):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(492,22):
           see reference to class template instantiation 'boost::asio::is_dynamic_buffer_v2<boost::asio::const_buffers_1>' being compiled
           C:\boost\boost\asio\buffer.hpp(2569,26):
           see reference to class template instantiation 'boost::asio::detail::is_dynamic_buffer_v2<T>' being compiled
@@ -5433,7 +5434,7 @@ C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(363,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(699,21):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(860,21):
           see reference to class template instantiation 'boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\basic_datagram_socket.hpp(59,12):
           see reference to class template instantiation 'boost::asio::basic_socket<Protocol,Executor>' being compiled
@@ -5533,8 +5534,8 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(128,19): warning C4820:  
 C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(128,19): warning C4820:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(705,69): warning C4242: 'argument': conversion from 'int' to 'boost::asio::ip::port_type', possible loss of data
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(705,69): warning C4365: 'argument': conversion from 'int' to 'boost::asio::ip::port_type', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(866,69): warning C4242: 'argument': conversion from 'int' to 'boost::asio::ip::port_type', possible loss of data
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(866,69): warning C4365: 'argument': conversion from 'int' to 'boost::asio::ip::port_type', signed/unsigned mismatch
 C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625: 'boost::asio::detail::execution_context_service_base<boost::asio::detail::resolver_service<InternetProtocol>>': copy constructor was implicitly defined as deleted
 C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625:         with
 C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625:         [
@@ -5543,7 +5544,7 @@ C:\boost\boost\asio\execution_context.hpp(363,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(363,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(776,19):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(941,19):
           see reference to class template instantiation 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\ip\basic_resolver.hpp(1104,15):
           see reference to class template instantiation 'boost::asio::detail::io_object_impl<boost::asio::detail::resolver_service<InternetProtocol>,Executor>' being compiled
@@ -5622,7 +5623,7 @@ C:\boost\boost\asio\ip\basic_resolver_query.hpp(39,7): warning C4626:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\ip\basic_resolver_query.hpp(39,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(777,39):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(942,39):
           see reference to class template instantiation 'boost::asio::ip::basic_resolver_query<InternetProtocol>' being compiled
           with
           [
@@ -5633,9 +5634,9 @@ C:\boost\boost\type_traits\is_complete.hpp(45,38): warning C4820: 'boost::detail
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\type_traits\is_complete.hpp(45,38):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(823,69):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(988,69):
           while compiling class template member function 'boost::chrono::duration<int_least64_t,std::ratio<1,1>>::duration(const Rep2 &,boost::enable_if<boost::mpl::and_<boost::is_convertible<Rep2,__int64>,boost::mpl::or_<boost::chrono::treat_as_floating_point<__int64>,boost::mpl::and_<boost::mpl::not_<boost::chrono::treat_as_floating_point<__int64>>,boost::mpl::not_<boost::chrono::treat_as_floating_point<Rep2>>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,boost::mpl::false_,boost::mpl::false_,boost::mpl::false_>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,void>::type *)'
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(823,69):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(988,69):
           see reference to class template instantiation 'boost::enable_if<boost::mpl::and_<boost::is_convertible<int,__int64>,boost::mpl::or_<boost::chrono::treat_as_floating_point<__int64>,boost::mpl::and_<boost::mpl::not_<boost::chrono::treat_as_floating_point<__int64>>,boost::mpl::not_<boost::chrono::treat_as_floating_point<int>>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,boost::mpl::false_,boost::mpl::false_,boost::mpl::false_>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,void>' being compiled
           C:\boost\boost\core\enable_if.hpp(41,47):
           see reference to class template instantiation 'boost::mpl::and_<boost::is_convertible<int,__int64>,boost::mpl::or_<boost::chrono::treat_as_floating_point<__int64>,boost::mpl::and_<boost::mpl::not_<boost::chrono::treat_as_floating_point<__int64>>,boost::mpl::not_<boost::chrono::treat_as_floating_point<int>>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>,boost::mpl::false_,boost::mpl::false_,boost::mpl::false_>,boost::mpl::true_,boost::mpl::true_,boost::mpl::true_>' being compiled
@@ -5650,9 +5651,9 @@ C:\boost\boost\type_traits\is_complete.hpp(45,38): warning C4820: 'boost::detail
           C:\boost\boost\type_traits\is_complete.hpp(54,137):
           see reference to class template instantiation 'boost::detail::ok_tag<4>' being compiled
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(894,33): warning C4365: 'initializing': conversion from 'unsigned int' to 'int', signed/unsigned mismatch
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(926,45): warning C4456: declaration of 'lock' hides previous local declaration
-      D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(849,42):
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(1059,33): warning C4365: 'initializing': conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(1091,45): warning C4456: declaration of 'lock' hides previous local declaration
+      D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(1014,42):
       see declaration of 'lock'
   
 C:\boost\boost\asio\detail\thread_info_base.hpp(168,39): warning C4365: '=': conversion from 'int' to 'unsigned char', signed/unsigned mismatch
@@ -5791,7 +5792,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.352
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\algorithm(3799,25):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(148,10):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(149,10):
           see reference to function template instantiation '_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,to_lowercase::<lambda_1>>(const _InIt,const _InIt,_OutIt,_Fn)' being compiled
           with
           [
@@ -5808,7 +5809,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.352
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\algorithm(524,20):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(160,23):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(161,23):
           see reference to function template instantiation '_InIt std::find_if_not<std::_String_const_iterator<std::_String_val<std::_Simple_types<_Elem>>>,trim::<lambda_1>>(_InIt,const _InIt,_Pr)' being compiled
           with
           [
@@ -6091,7 +6092,7 @@ C:\boost\boost\lexical_cast\detail\converter_lexical_streams.hpp(111,15): warnin
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\lexical_cast\detail\converter_lexical_streams.hpp(111,15):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(408,34):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(527,34):
           see reference to function template instantiation 'Target boost::lexical_cast<int,std::basic_string<char,std::char_traits<char>,std::allocator<char>>>(const Source &)' being compiled
           with
           [
@@ -6158,7 +6159,7 @@ C:\boost\boost\algorithm\string\detail\classification.hpp(87,37): warning C4365:
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\algorithm\string\detail\classification.hpp(87,37):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(489,65):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(608,65):
           see reference to function template instantiation 'boost::algorithm::detail::is_any_ofF<char> boost::algorithm::is_any_of<char[3]>(const RangeT (&))' being compiled
           with
           [
@@ -6175,13 +6176,13 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(329,5): warning C4365: 'a
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(329,5):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(710,12):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(871,12):
           see reference to function template instantiation 'size_t boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>::send_to<boost::asio::mutable_buffers_1>(const ConstBufferSequence &,const boost::asio::ip::basic_endpoint<boost::asio::ip::udp> &,boost::asio::socket_base::message_flags,boost::system::error_code &)' being compiled
           with
           [
               ConstBufferSequence=boost::asio::mutable_buffers_1
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(710,19):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(871,19):
               see the first reference to 'boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>::send_to' in 'udp_ping'
           C:\boost\boost\asio\basic_datagram_socket.hpp(640,38):
           see reference to function template instantiation 'size_t boost::asio::detail::win_iocp_socket_service<Protocol>::send_to<ConstBufferSequence>(boost::asio::detail::win_iocp_socket_service<Protocol>::implementation_type &,const ConstBufferSequence &,const boost::asio::ip::basic_endpoint<boost::asio::ip::udp> &,boost::asio::socket_base::message_flags,boost::system::error_code &)' being compiled
@@ -6195,13 +6196,13 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(417,5): warning C4365: 'a
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(417,5):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(721,22):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(882,22):
           see reference to function template instantiation 'size_t boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>::receive_from<boost::asio::mutable_buffers_1>(const MutableBufferSequence &,boost::asio::ip::basic_endpoint<boost::asio::ip::udp> &,boost::asio::socket_base::message_flags,boost::system::error_code &)' being compiled
           with
           [
               MutableBufferSequence=boost::asio::mutable_buffers_1
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(721,13):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(882,13):
               see the first reference to 'boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>::receive_from' in 'udp_ping'
           C:\boost\boost\asio\basic_datagram_socket.hpp(1079,38):
           see reference to function template instantiation 'size_t boost::asio::detail::win_iocp_socket_service<Protocol>::receive_from<MutableBufferSequence>(boost::asio::detail::win_iocp_socket_service<Protocol>::implementation_type &,const MutableBufferSequence &,boost::asio::ip::basic_endpoint<boost::asio::ip::udp> &,boost::asio::socket_base::message_flags,boost::system::error_code &)' being compiled
@@ -6265,7 +6266,7 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(209,5): warning C4365: 'a
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(209,5):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(699,21):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(860,21):
           see reference to class template instantiation 'boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\basic_datagram_socket.hpp(59,12):
           see reference to class template instantiation 'boost::asio::basic_socket<Protocol,Executor>' being compiled
@@ -6292,7 +6293,7 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(209,5): warning C4365: 'a
           [
               Protocol=boost::asio::ip::udp
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(702,16):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(863,16):
               see the first reference to 'boost::asio::basic_socket<Protocol,Executor>::open' in 'udp_ping'
           with
           [
@@ -6712,13 +6713,13 @@ C:\boost\boost\asio\execution_context.hpp(356,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(356,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(776,27):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(941,27):
           see reference to function template instantiation 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::basic_resolver<boost::asio::io_context>(ExecutionContext &,int)' being compiled
           with
           [
               ExecutionContext=boost::asio::io_context
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(776,27):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(941,27):
               see the first reference to 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::basic_resolver' in 'main'
           C:\boost\boost\asio\ip\basic_resolver.hpp(126,12):
           see reference to function template instantiation 'boost::asio::detail::io_object_impl<boost::asio::detail::resolver_service<InternetProtocol>,Executor>::io_object_impl<ExecutionContext>(int,int,ExecutionContext &)' being compiled
@@ -6771,7 +6772,7 @@ C:\boost\boost\asio\ip\basic_resolver_entry.hpp(104,17): warning C4820:         
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\ip\basic_resolver_entry.hpp(104,17):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(815,23):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(980,23):
           see reference to function template instantiation 'boost::asio::ip::tcp::endpoint boost::asio::connect<Protocol,Executor,boost::asio::ip::basic_resolver_results<InternetProtocol>>(boost::asio::basic_socket<Protocol,Executor> &,const EndpointSequence &,int)' being compiled
           with
           [
@@ -6809,7 +6810,7 @@ C:\boost\boost\asio\detail\resolver_service.hpp(84,5): warning C4365: 'argument'
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\resolver_service.hpp(84,5):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(776,19):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(941,19):
           see reference to class template instantiation 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\ip\basic_resolver.hpp(1104,15):
           see reference to class template instantiation 'boost::asio::detail::io_object_impl<boost::asio::detail::resolver_service<InternetProtocol>,Executor>' being compiled
@@ -6838,7 +6839,7 @@ C:\boost\boost\asio\detail\resolver_service.hpp(84,5): warning C4365: 'argument'
           ]
               C:\boost\boost\asio\ip\basic_resolver.hpp(314,5):
               see the first reference to 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::resolve' in 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::resolve'
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(777,20):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(942,20):
               see the first reference to 'boost::asio::ip::basic_resolver<boost::asio::ip::tcp,boost::asio::any_io_executor>::resolve' in 'main'
   
 C:\boost\boost\asio\detail\keyword_tss_ptr.hpp(31,7): warning C4625: 'boost::asio::detail::keyword_tss_ptr<T>': copy constructor was implicitly defined as deleted
@@ -7005,13 +7006,13 @@ C:\boost\boost\asio\execution_context.hpp(356,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(356,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(33,26):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(34,26):
           see reference to function template instantiation 'boost::asio::basic_stream_socket<boost::asio::ip::tcp,boost::asio::any_io_executor>::basic_stream_socket<boost::asio::io_context>(ExecutionContext &,int)' being compiled
           with
           [
               ExecutionContext=boost::asio::io_context
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(33,26):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(34,26):
               see the first reference to 'boost::asio::basic_stream_socket<boost::asio::ip::tcp,boost::asio::any_io_executor>::basic_stream_socket' in 'void __cdecl `dynamic initializer for 'client_socket''(void)'
           C:\boost\boost\asio\basic_stream_socket.hpp(123,39):
           see reference to function template instantiation 'boost::asio::basic_socket<Protocol,Executor>::basic_socket<ExecutionContext>(ExecutionContext &,int)' being compiled
@@ -7078,7 +7079,7 @@ C:\boost\boost\asio\buffer.hpp(647,4): warning C5267:         ]
           ]
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\functional(855,1):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(373,49):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(492,49):
           see reference to function template instantiation 'boost::asio::const_buffers_1 boost::asio::buffer<char,std::char_traits<char>,std::allocator<char>>(const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &) noexcept' being compiled
           C:\boost\boost\asio\buffer.hpp(1352,10):
           see reference to function template instantiation 'std::function<void (void)>::function<boost::asio::detail::buffer_debug_check<std::_String_const_iterator<std::_String_val<std::_Simple_types<_Elem>>>>,0>(_Fx &&)' being compiled
@@ -7119,7 +7120,7 @@ C:\boost\boost\asio\buffer.hpp(647,4): warning C5267:         ]
           ]
       C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\functional(855,1):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(710,20):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(871,20):
           see reference to function template instantiation 'boost::asio::mutable_buffers_1 boost::asio::buffer<char,std::char_traits<char>,std::allocator<char>>(std::basic_string<char,std::char_traits<char>,std::allocator<char>> &) noexcept' being compiled
           C:\boost\boost\asio\buffer.hpp(1306,10):
           see reference to function template instantiation 'std::function<void (void)>::function<boost::asio::detail::buffer_debug_check<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>>,0>(_Fx &&)' being compiled
@@ -7154,13 +7155,13 @@ C:\boost\boost\asio\execution_context.hpp(356,7): warning C4625:         ]
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\execution_context.hpp(356,7):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(699,27):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(860,27):
           see reference to function template instantiation 'boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>::basic_datagram_socket<boost::asio::io_service>(ExecutionContext &,int)' being compiled
           with
           [
               ExecutionContext=boost::asio::io_service
           ]
-              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(699,27):
+              D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(860,27):
               see the first reference to 'boost::asio::basic_datagram_socket<boost::asio::ip::udp,boost::asio::any_io_executor>::basic_datagram_socket' in 'udp_ping'
           C:\boost\boost\asio\basic_datagram_socket.hpp(120,39):
           see reference to function template instantiation 'boost::asio::basic_socket<Protocol,Executor>::basic_socket<ExecutionContext>(ExecutionContext &,int)' being compiled
@@ -7272,7 +7273,7 @@ C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(629,5): warning C4365: 'a
   (compiling source file 'Distributed-Hash-Cracker-CPP-Client.cpp')
       C:\boost\boost\asio\detail\win_iocp_socket_service.hpp(629,5):
       the template instantiation context (the oldest one first) is
-          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(33,13):
+          D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(34,13):
           see reference to class template instantiation 'boost::asio::basic_stream_socket<boost::asio::ip::tcp,boost::asio::any_io_executor>' being compiled
           C:\boost\boost\asio\basic_stream_socket.hpp(62,12):
           see reference to class template instantiation 'boost::asio::basic_socket<Protocol,Executor>' being compiled
@@ -7493,21 +7494,24 @@ C:\boost\boost\asio\execution\any_executor.hpp(1087,15): warning C4710:         
       C:\boost\boost\asio\execution\any_executor.hpp(1087,15):
       see declaration of 'boost::asio::execution::detail::any_executor_base::require_fn_impl'
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(140) : note: index 'i' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(339,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(339,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(338) : note: index '' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(339,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(339) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(724,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(724,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(723) : note: index 'len' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(724,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(724) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(229,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(229,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(228) : note: index 'i' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(229,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(322) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(269,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(269,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(266) : note: index '' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(269,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(269) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(142,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(142,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(141) : note: index 'i' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(142,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(142) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(367,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(367,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(366) : note: index 'len' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(367,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(367) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(885,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(885,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(884) : note: index 'len' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(885,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(885) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(458,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(458,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(457) : note: index '' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(458,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(458) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(230,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(230,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(229) : note: index 'i' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(230,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(323) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(270,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(270,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(267) : note: index '' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(270,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(270) : note: feeds call on this line
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251,1): warning C5045: C:\boost\boost\thread\win32\basic_timed_mutex.hpp(247) : note: index 'old_count' range checked by comparison on this line
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251,1): warning C5045: C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251) : note: feeds call on this line
@@ -7517,9 +7521,6 @@ C:\boost\boost\thread\win32\basic_timed_mutex.hpp(249,1): warning C5045: C:\boos
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1749) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750) : note: feeds call on this line
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1175) : note: index 'bytes' range checked by comparison on this line
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173) : note: feeds call on this line
@@ -7535,6 +7536,9 @@ C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151,1): warning C5045: C
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145) : note: feeds call on this line
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1175) : note: index 'bytes' range checked by comparison on this line
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(905) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(906) : note: feeds call on this line
@@ -7547,12 +7551,12 @@ C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(382) : note: index 'i' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(383) : note: feeds call on this line
-C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: index '' range checked by comparison on this line
-C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: feeds call on this line
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: feeds call on this line
+C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: index '' range checked by comparison on this line
+C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1514) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515) : note: feeds call on this line

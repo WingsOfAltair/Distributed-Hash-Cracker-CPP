@@ -67,6 +67,7 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::Crypto
     "${BCRYPT_LIB_PATH}"
     "${ARGON2_LIB_PATH}"
+    sodium::sodium
 )
 else()
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
@@ -133,6 +134,11 @@ if (WIN32)
     add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/argon2/argon2.dll"
+            "$<TARGET_FILE_DIR:DistributedHashCrackerClient>"
+    )             
+    add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libsodium.dll"
             "$<TARGET_FILE_DIR:DistributedHashCrackerClient>"
     )
 endif()

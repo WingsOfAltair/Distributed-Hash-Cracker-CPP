@@ -63,7 +63,7 @@ std::string to_lowercase(const std::string& str) {
 
 bool is_valid_hashtype(const std::string& hash_type) {
     static const std::vector<std::string> valid_types = {
-        "bcrypt", "argon2",
+        "bcrypt", "scrypt", "argon2",
         "md5", "sha1", "sha256", "sha384", "sha512",
         "sha3-224", "sha3-256", "sha3-384", "sha3-512"
     };
@@ -71,6 +71,11 @@ bool is_valid_hashtype(const std::string& hash_type) {
     std::string lower_hash_type = to_lowercase(hash_type);
 
     return std::find(valid_types.begin(), valid_types.end(), lower_hash_type) != valid_types.end();
+}
+
+bool isPhpScryptHash(const std::string& hash) {
+    boost::regex scryptPattern(R"(^\d+\$\d+\$\d+\$[A-Za-z0-9./]+\$[A-Za-z0-9./+=]+$)");
+    return boost::regex_match(hash, scryptPattern);
 }
 
 // Check bcrypt hash format
@@ -305,7 +310,7 @@ int main() {
     // Main loop for hash input
     while (true) {
         while (clients_ready.size() > 0 && std::all_of(clients_ready.begin(), clients_ready.end(), [](auto& entry) { return entry.second; }) && clients_ready.size() > 0) {
-            std::cout << "Hash type (BCRYPT, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
+            std::cout << "Hash type (BCRYPT, Scrypt, argon2, MD5, SHA1, SHA512, sha384, SHA256, sha224, sha3-512, sha3-384, sha3-256, sha3-224, ripemd160): " << std::endl;
             std::cout << "To check hash type, enter 'type' as the hash type." << std::endl;
             std::cout << "To check connected clients, enter 'connections'." << std::endl;
             std::cout << "To reload connected clients' settings (wordlist/mutation options), enter 'reload'." << std::endl;
@@ -319,8 +324,13 @@ int main() {
                 std::string hashType = getHashType(hash);
                 if (hashType == "Unknown hash type") {
                     bool isBcrypt = isBcryptHash(hash);
+                    bool isScrypt = isPhpScryptHash(hash);
                     if (isBcrypt) {
                         std::cout << "Hash Type: BCrypt" << std::endl;
+                        continue;
+                    }
+                    else if (isScrypt) {
+                        std::cout << "Hash Type: Scrypt" << std::endl;
                         continue;
                     }
                     else {
@@ -364,7 +374,7 @@ int main() {
             std::cout << "Enter the hash: ";
             std::getline(std::cin, hash);
 
-            std::cout << "Enter the salt (leave empty if none, or BCRYPT or argon2): ";
+            std::cout << "Enter the salt (leave empty if none, or BCRYPT, Scrypt or argon2): ";
             std::getline(std::cin, salt);
 
             if (clients_ready.size() == 0)
