@@ -374,7 +374,7 @@ int main() {
             std::cout << "Enter the hash: ";
             std::getline(std::cin, hash);
 
-            std::cout << "Enter the salt (leave empty if none, or BCRYPT, Scrypt or argon2): ";
+            std::cout << "Enter the salt (leave empty if none, or BCRYPT or argon2): ";
             std::getline(std::cin, salt);
 
             if (clients_ready.size() == 0)
