@@ -1,4 +1,4 @@
-#include <boost/asio.hpp>
+﻿#include <boost/asio.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 #include <boost/algorithm/string.hpp>    
@@ -23,6 +23,7 @@
 #include <codecvt>
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
+#include <sodium.h>
 
 namespace asio = boost::asio;
 
@@ -332,6 +333,124 @@ std::string applyRule(const std::wstring& password, const std::string& rule) {
     return wstring_to_utf8(wresult);
 }
 
+// Split string by delimiter
+std::vector<std::string> split(const std::string& s, char delimiter) {
+    std::vector<std::string> tokens;
+    std::istringstream tokenStream(s);
+    std::string token;
+    while (std::getline(tokenStream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
+// Base64 decode with PHP tweaks (replace '.' with '+', strip '$')
+std::vector<unsigned char> base64_decode_php(const std::string& input) {
+    std::string modified = input;
+    std::replace(modified.begin(), modified.end(), '.', '+');
+    // Strip any '$' characters (shouldn't be there normally, but just in case)
+    modified.erase(std::remove(modified.begin(), modified.end(), '$'), modified.end());
+
+    // Pad base64 string to multiple of 4
+    while (modified.size() % 4 != 0) {
+        modified.push_back('=');
+    }
+
+    BIO* bio = BIO_new_mem_buf(modified.data(), (int)modified.size());
+    BIO* b64 = BIO_new(BIO_f_base64());
+    bio = BIO_push(b64, bio);
+    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
+
+    std::vector<unsigned char> decoded(modified.size());
+    int len = BIO_read(bio, decoded.data(), (int)decoded.size());
+    if (len < 0) {
+        BIO_free_all(bio);
+        throw std::runtime_error("Base64 decode failed");
+    }
+    decoded.resize(len);
+    BIO_free_all(bio);
+    return decoded;
+} 
+
+// Constant-time memory comparison
+bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
+    if (a.size() != b.size()) return false;
+    return sodium_memcmp(a.data(), b.data(), a.size()) == 0;
+} 
+
+// Verify libsodium modular crypt hash: $s0$... format
+bool verify_libsodium_hash(const std::string& password, const std::string& hash) {
+    // Use libsodium's function to verify modular crypt hashes:
+    // Available in libsodium >= 1.0.12
+    return crypto_pwhash_str_verify(hash.c_str(), password.c_str(), password.size()) == 0;
+}
+
+// Verify PHP-scrypt style hash: N$r$p$salt$hash
+bool verify_php_scrypt_hash(const std::string& password, const std::string& fullHash) {
+    auto parts = split(fullHash, '$');
+    if (parts.size() != 5) {
+        std::cerr << "Invalid hash format, expected 5 parts\n";
+        return false;
+    }
+
+    uint64_t N = 0;
+    uint32_t r = 0, p = 0;
+
+    try {
+        N = std::stoull(parts[0]);
+        r = static_cast<uint32_t>(std::stoul(parts[1]));
+        p = static_cast<uint32_t>(std::stoul(parts[2]));
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Failed to parse numeric parameters: " << e.what() << "\n";
+        return false;
+    }
+
+    const std::string& salt_b64 = parts[3];
+    const std::string& hash_b64 = parts[4];
+
+    std::vector<unsigned char> salt, targetHash;
+    try {
+        salt = base64_decode_php(salt_b64);
+        targetHash = base64_decode_php(hash_b64);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Base64 decode failed: " << e.what() << "\n";
+        return false;
+    }
+
+    std::vector<unsigned char> computedHash(targetHash.size());
+
+    if (crypto_pwhash_scryptsalsa208sha256_ll(
+        reinterpret_cast<const uint8_t*>(password.data()), password.size(),
+        salt.data(), salt.size(),
+        N, r, p,
+        computedHash.data(), computedHash.size()) != 0) {
+        std::cerr << "crypto_pwhash_scryptsalsa208sha256_ll failed\n";
+        return false;
+    }
+
+    return secure_compare(computedHash, targetHash);
+}
+
+// Main verify dispatcher
+bool verify_scrypt_hash(const std::string& password, const std::string& hash) {
+    if (hash.empty()) return false;
+
+    if (hash.rfind("$s0$", 0) == 0) {
+        // Libsodium modular crypt format
+        return verify_libsodium_hash(password, hash);
+    }
+    else if (std::count(hash.begin(), hash.end(), '$') == 4) {
+        // PHP style: N$r$p$salt$hash
+        return verify_php_scrypt_hash(password, hash);
+    }
+    else {
+        std::cerr << "Unknown or unsupported scrypt hash format\n";
+        return false;
+    }
+}
+
 // Convert hex string to binary
 std::vector<uint8_t> from_hex(const std::string& hex) {
     std::vector<uint8_t> result;
@@ -510,6 +629,18 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                             }
                         }
                     }
+                    else if (to_lowercase(hash_type) == "scrypt") {
+                        if (sodium_init() < 0) {
+                            std::cerr << "Failed to initialize libsodium\n";
+                            break;
+                        }
+                        std::cout << "Validating the hash against the word: " << mutated << std::endl;
+                        if (BCrypt::validatePassword(mutated, hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
                     else if (to_lowercase(hash_type) == "argon2") {
                         if (to_lowercase(SHOW_PROGRESS) == "true")
                             std::cout << "Validating the hash against the word: " << mutated << std::endl;
@@ -536,6 +667,18 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                 if (to_lowercase(hash_type) == "bcrypt") {
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                        if (!match_found) {
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                }
+                else if (to_lowercase(hash_type) == "scrypt") {
+                    if (sodium_init() < 0) {
+                        std::cerr << "Failed to initialize libsodium\n";
+                        break;
+                    }
+                    std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
                     if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
                         if (!match_found) {
                             report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
@@ -625,6 +768,15 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
                             }
                         }
                     }
+                    else if (to_lowercase(hash_type) == "scrypt") {
+                        if (to_lowercase(SHOW_PROGRESS) == "true")
+                            std::cout << "Validating the hash against the word: " << mutated << std::endl;
+                        if (verify_scrypt_hash(mutated, hash_value)) {
+                            if (!match_found) {
+                                report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
+                            }
+                        }
+                    }
                     else if (to_lowercase(hash_type) == "argon2") {
                         if (to_lowercase(SHOW_PROGRESS) == "true")
                             std::cout << "Validating the hash against the word: " << mutated << std::endl;
@@ -657,6 +809,15 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
                         }
                     }
                 }
+                else if (to_lowercase(hash_type) == "scrypt") {
+                    if (to_lowercase(SHOW_PROGRESS) == "true")
+                        std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
+                    if (verify_scrypt_hash(utf8_word_str, hash_value)) {
+                        if (!match_found) {
+                            report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
+                        }
+                    }
+                } 
                 else if (to_lowercase(hash_type) == "argon2") {
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
@@ -735,6 +896,10 @@ bool udp_ping(const std::string& ip, int port, int timeout_ms = 1000) {
 }
 
 int main() {
+    if (sodium_init() < 0) {
+        std::cerr << "Libsodium init failed\n";
+        return 1;
+    }
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif
