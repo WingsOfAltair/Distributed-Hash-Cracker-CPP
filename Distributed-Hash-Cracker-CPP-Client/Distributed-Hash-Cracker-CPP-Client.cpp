@@ -433,8 +433,49 @@ bool verify_php_scrypt_hash(const std::string& password, const std::string& full
     return secure_compare(computedHash, targetHash);
 }
 
+bool verify_scrypt_hash_base64(const std::string& password, const std::string& salt_raw, const std::string& base64_hash) {
+    const std::size_t HASH_LEN = 32;
+    const std::uint64_t N = 2048;
+    const std::uint32_t r = 8;
+    const std::uint32_t p = 1;
+
+    unsigned char computed_hash[HASH_LEN];
+    unsigned char stored_hash[HASH_LEN];
+    unsigned char salt[64]; // Use correct length if salt is binary
+
+    // Use raw salt data directly
+    std::memcpy(salt, salt_raw.data(), salt_raw.size());
+
+    // Decode base64 hash into binary
+    size_t decoded_len = 0;
+    if (sodium_base642bin(stored_hash, HASH_LEN,
+        base64_hash.c_str(), base64_hash.length(),
+        nullptr, &decoded_len, nullptr,
+        sodium_base64_VARIANT_ORIGINAL) != 0) {
+        std::cerr << "Failed to decode base64 hash" << std::endl;
+        return false;
+    }
+
+    if (decoded_len != HASH_LEN) {
+        std::cerr << "Hash length mismatch" << std::endl;
+        return false;
+    }
+
+    // Compute hash
+    if (crypto_pwhash_scryptsalsa208sha256_ll(
+        reinterpret_cast<const uint8_t*>(password.c_str()), password.size(),
+        salt, salt_raw.size(),  // match real salt size
+        N, r, p,
+        computed_hash, HASH_LEN) != 0) {
+        std::cerr << "Out of memory while computing scrypt.\n";
+        return false;
+    }
+
+    return sodium_memcmp(computed_hash, stored_hash, HASH_LEN) == 0;
+}
+
 // Main verify dispatcher
-bool verify_scrypt_hash(const std::string& password, const std::string& hash) {
+bool verify_scrypt_hash(const std::string& password, std::string& stored_salt_hex, const std::string& hash) {
     if (hash.empty()) return false;
 
     if (hash.rfind("$s0$", 0) == 0) {
@@ -446,8 +487,7 @@ bool verify_scrypt_hash(const std::string& password, const std::string& hash) {
         return verify_php_scrypt_hash(password, hash);
     }
     else {
-        std::cerr << "Unknown or unsupported scrypt hash format\n";
-        return false;
+        return verify_scrypt_hash_base64(password, stored_salt_hex, hash);
     }
 }
 
@@ -575,7 +615,7 @@ void socket_reader() {
 }
 
 // Process chunk - NO socket reading here!
-void process_chunk(int start_line, int end_line, const std::string& hash_type, const std::string& hash_value, const std::string& salt) {
+void process_chunk(int start_line, int end_line, const std::string& hash_type, const std::string& hash_value, std::string& salt) {
     std::ifstream wordlist(WORDLIST_FILE, std::ios::binary);
     if (!wordlist.is_open()) {
         std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
@@ -630,12 +670,8 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                         }
                     }
                     else if (to_lowercase(hash_type) == "scrypt") {
-                        if (sodium_init() < 0) {
-                            std::cerr << "Failed to initialize libsodium\n";
-                            break;
-                        }
                         std::cout << "Validating the hash against the word: " << mutated << std::endl;
-                        if (BCrypt::validatePassword(mutated, hash_value)) {
+                        if (verify_scrypt_hash(mutated, salt, hash_value)) {
                             if (!match_found) {
                                 report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
                             }
@@ -674,12 +710,8 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
                     }
                 }
                 else if (to_lowercase(hash_type) == "scrypt") {
-                    if (sodium_init() < 0) {
-                        std::cerr << "Failed to initialize libsodium\n";
-                        break;
-                    }
                     std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                    if (BCrypt::validatePassword(utf8_word_str, hash_value)) {
+                    if (verify_scrypt_hash(utf8_word_str, salt, hash_value)) {
                         if (!match_found) {
                             report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
@@ -722,7 +754,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
 }
 
 // Process chunk - NO socket reading here!
-void process_chunk_single_threaded(const std::string& hash_type, const std::string& hash_value, const std::string& salt) {
+void process_chunk_single_threaded(const std::string& hash_type, const std::string& hash_value, std::string& salt) {
     std::ifstream wordlist(WORDLIST_FILE, std::ios::binary);
     if (!wordlist.is_open()) {
         std::cerr << "Failed to open wordlist file: " << WORDLIST_FILE << std::endl;
@@ -771,7 +803,7 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
                     else if (to_lowercase(hash_type) == "scrypt") {
                         if (to_lowercase(SHOW_PROGRESS) == "true")
                             std::cout << "Validating the hash against the word: " << mutated << std::endl;
-                        if (verify_scrypt_hash(mutated, hash_value)) {
+                        if (verify_scrypt_hash(mutated, salt, hash_value)) {
                             if (!match_found) {
                                 report_match(mutated, current_line, *global_socket_ptr, WORDLIST_FILE);
                             }
@@ -812,7 +844,7 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
                 else if (to_lowercase(hash_type) == "scrypt") {
                     if (to_lowercase(SHOW_PROGRESS) == "true")
                         std::cout << "Validating the hash against the word: " << utf8_word_str << std::endl;
-                    if (verify_scrypt_hash(utf8_word_str, hash_value)) {
+                    if (verify_scrypt_hash(utf8_word_str, salt, hash_value)) {
                         if (!match_found) {
                             report_match(utf8_word_str, current_line, *global_socket_ptr, WORDLIST_FILE);
                         }
