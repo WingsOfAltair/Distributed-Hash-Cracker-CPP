@@ -2,6 +2,11 @@
 MAKE SURE YOU SETUP ALL DEPENDENCIES BEFORE YOU ATTEMPT TO COMPILE
 ==================================================================
 
+(in case pkgconfig is not present on system.)
+
+sudo apt install pkg-config
+==================================================================
+
 (in case boost is not present on system.)
 
 sudo apt install libboost-all-dev
