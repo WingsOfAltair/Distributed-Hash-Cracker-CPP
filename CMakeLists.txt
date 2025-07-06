@@ -9,6 +9,12 @@ project(DistributedHashCracker VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Find libsodium using pkg-config
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(SODIUM REQUIRED libsodium)
+include_directories(${SODIUM_INCLUDE_DIRS})
+link_directories(${SODIUM_LIBRARY_DIRS})
+
 # ------------------------------
 # Include internal headers
 # ------------------------------
@@ -66,8 +72,8 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::SSL
     OpenSSL::Crypto
     "${BCRYPT_LIB_PATH}"
-    "${ARGON2_LIB_PATH}"
-    sodium::sodium
+    "${ARGON2_LIB_PATH}"       
+    ${SODIUM_LIBRARIES}
 )
 else()
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
