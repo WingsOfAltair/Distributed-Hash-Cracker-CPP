@@ -72,8 +72,8 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::SSL
     OpenSSL::Crypto
     "${BCRYPT_LIB_PATH}"
-    "${ARGON2_LIB_PATH}"       
-    ${SODIUM_LIBRARIES}
+    "${ARGON2_LIB_PATH}"  
+    ${SODIUM_LIBRARIES}  
 )
 else()
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
@@ -82,7 +82,8 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::Crypto
     bcrypt
     argon2
-    crypt
+    crypt      
+    ${SODIUM_LIBRARIES}
 )
 endif()
 
