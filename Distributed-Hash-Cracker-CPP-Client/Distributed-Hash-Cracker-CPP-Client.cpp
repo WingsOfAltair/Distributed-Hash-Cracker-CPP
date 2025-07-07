@@ -332,6 +332,30 @@ std::string applyRule(const std::wstring& password, const std::string& rule) {
 
     // Convert back to UTF-8 before returning
     return wstring_to_utf8(wresult);
+}  
+
+std::vector<unsigned char> base64_decode(const std::string& input) {
+    std::string padded = input;
+    while (padded.size() % 4 != 0) {
+        padded.push_back('=');
+    }
+
+    BIO* bio = BIO_new_mem_buf(padded.data(), static_cast<int>(padded.size()));
+    BIO* b64 = BIO_new(BIO_f_base64());
+    BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);  // Disable line breaks
+    bio = BIO_push(b64, bio);
+
+    std::vector<unsigned char> decoded(padded.size());
+    int decodedLen = BIO_read(bio, decoded.data(), static_cast<int>(decoded.size()));
+
+    BIO_free_all(bio);
+
+    if (decodedLen <= 0) {
+        throw std::runtime_error("Base64 decode failed");
+    }
+
+    decoded.resize(decodedLen);
+    return decoded;
 }
 
 // Split string by delimiter
@@ -390,34 +414,6 @@ bool validate_scrypt(const std::string& password, const std::string& salt,
     return result_hex == expected_hex;
 }
 
-// Base64 decode with PHP tweaks (replace '.' with '+', strip '$')
-std::vector<unsigned char> base64_decode_php(const std::string& input) {
-    std::string modified = input;
-    std::replace(modified.begin(), modified.end(), '.', '+');
-    // Strip any '$' characters (shouldn't be there normally, but just in case)
-    modified.erase(std::remove(modified.begin(), modified.end(), '$'), modified.end());
-
-    // Pad base64 string to multiple of 4
-    while (modified.size() % 4 != 0) {
-        modified.push_back('=');
-    }
-
-    BIO* bio = BIO_new_mem_buf(modified.data(), (int)modified.size());
-    BIO* b64 = BIO_new(BIO_f_base64());
-    bio = BIO_push(b64, bio);
-    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
-
-    std::vector<unsigned char> decoded(modified.size());
-    int len = BIO_read(bio, decoded.data(), (int)decoded.size());
-    if (len < 0) {
-        BIO_free_all(bio);
-        throw std::runtime_error("Base64 decode failed");
-    }
-    decoded.resize(len);
-    BIO_free_all(bio);
-    return decoded;
-} 
-
 // Constant-time memory comparison
 bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
     if (a.size() != b.size()) return false;
@@ -471,8 +467,8 @@ bool verify_php_scrypt_hash(const std::string& password, const std::string& full
     uint32_t r = std::stoul(parts[1]);
     uint32_t p = std::stoul(parts[2]);
 
-    std::vector<unsigned char> salt = base64_decode_php(parts[3]);
-    std::vector<unsigned char> targetHash = base64_decode_php(parts[4]);
+    std::vector<unsigned char> salt = base64_decode(parts[3]);
+    std::vector<unsigned char> targetHash = base64_decode(parts[4]);
 
     std::vector<unsigned char> computedHash(targetHash.size());
 
@@ -486,6 +482,17 @@ bool verify_php_scrypt_hash(const std::string& password, const std::string& full
         std::cerr << "crypto_scrypt failed\n";
         return false;
     }
+
+    auto print_hex = [](const std::string& label, const std::vector<unsigned char>& data) {
+        std::cout << label << ": ";
+        for (unsigned char c : data)
+            printf("%02x", c);
+        std::cout << "\n";
+        };
+
+    print_hex("Computed", computedHash);
+    print_hex("Target  ", targetHash);   
+    print_hex("Salt", salt);
 
     return computedHash == targetHash;
 }
@@ -991,6 +998,19 @@ int main() {
     if (sodium_init() < 0) {
         std::cerr << "Libsodium init failed\n";
         return 1;
+    }
+    // Example password and PHP scrypt hash
+    std::string password = "jesperhp10";
+
+    // PHP output format: N$r$p$base64(salt)$base64(hash)
+    std::string php_scrypt_hash = "16384$8$1$W9SFsyla8VPUno8hlvnhpw==$nCpAXXueTlOEPFh/KJv00bIqqHWijnNHtggYXizuDYU=";
+
+    // Validate
+    if (verify_php_scrypt_hash(password, php_scrypt_hash)) {
+        std::cout << "✅ Password verified!\n";
+    }
+    else {
+        std::cout << "❌ Invalid password.\n";
     }
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
