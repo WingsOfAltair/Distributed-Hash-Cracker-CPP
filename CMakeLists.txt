@@ -66,22 +66,21 @@ file(GLOB SCRYPT_SRC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/*.c
 )  
 
-add_library(scrypt STATIC ${SCRYPT_SRC})
-
-target_include_directories(scrypt PUBLIC
-    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt
-)
-
-
-target_include_directories(DistributedHashCrackerClient PRIVATE
-    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include
-)
+add_library(scrypt STATIC ${SCRYPT_SRC})  
 
 # ------------------------------
 # Client executable
 # ------------------------------
 add_executable(DistributedHashCrackerClient 
     Distributed-Hash-Cracker-CPP-Client/Distributed-Hash-Cracker-CPP-Client.cpp
+)
+
+target_include_directories(scrypt PUBLIC
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt
+)
+
+target_include_directories(DistributedHashCrackerClient PRIVATE
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include
 )
 
 if (WIN32)
