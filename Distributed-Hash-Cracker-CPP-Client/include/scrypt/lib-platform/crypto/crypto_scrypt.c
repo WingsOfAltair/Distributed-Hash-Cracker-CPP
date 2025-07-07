@@ -226,7 +226,6 @@ selectsmix(void)
 			smix_func = crypto_scrypt_smix_sse2;
 			return;
 		}
-		warn0("Disabling broken SSE2 scrypt support - please report bug!");
 	}
 #endif
 
@@ -235,7 +234,6 @@ selectsmix(void)
 		smix_func = crypto_scrypt_smix;
 		return;
 	}
-	warn0("Generic scrypt code is broken - please report bug!");
 
 	/* If we get here, something really bad happened. */
 	abort();
