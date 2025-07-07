@@ -45,6 +45,9 @@ else()
     message(FATAL_ERROR "OpenSSL not found")
 endif()
 
+# ------------------------------
+# Windows-specific argon2 and bcrypt libs
+# ------------------------------
 if(WIN32)
     # Full path to argon2.lib
     set(ARGON2_LIB_PATH "${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/argon2/argon2.lib")      
@@ -61,22 +64,25 @@ if(WIN32)
     endif()
 endif()
 
-# ---- Scrypt Static Library ----
+# ------------------------------
+# Build scrypt static library from source files
+# ------------------------------
 file(GLOB SCRYPT_SRC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/*.c
-)  
+)
 
-add_library(scrypt STATIC ${SCRYPT_SRC})  
+add_library(scrypt STATIC ${SCRYPT_SRC})
+
+target_include_directories(scrypt PUBLIC
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt
+)
+
 
 # ------------------------------
 # Client executable
 # ------------------------------
 add_executable(DistributedHashCrackerClient 
     Distributed-Hash-Cracker-CPP-Client/Distributed-Hash-Cracker-CPP-Client.cpp
-)
-
-target_include_directories(scrypt PUBLIC
-    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt
 )
 
 target_include_directories(DistributedHashCrackerClient PRIVATE
@@ -90,8 +96,8 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::Crypto
     "${BCRYPT_LIB_PATH}"
     "${ARGON2_LIB_PATH}"  
-    ${SODIUM_LIBRARIES}    
-    scrypt
+    ${SODIUM_LIBRARIES}   
+    scrypt 
 )
 else()
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
@@ -101,8 +107,8 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     bcrypt
     argon2
     crypt      
-    ${SODIUM_LIBRARIES}
-    scrypt
+    ${SODIUM_LIBRARIES}   
+    scrypt 
 )
 endif()
 
