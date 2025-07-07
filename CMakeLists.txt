@@ -15,6 +15,8 @@ pkg_check_modules(SODIUM REQUIRED libsodium)
 include_directories(${SODIUM_INCLUDE_DIRS})
 link_directories(${SODIUM_LIBRARY_DIRS})
 
+link_directories(${CMAKE_SOURCE_DIR}/lib)
+
 # ------------------------------
 # Include internal headers
 # ------------------------------
@@ -73,7 +75,8 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     OpenSSL::Crypto
     "${BCRYPT_LIB_PATH}"
     "${ARGON2_LIB_PATH}"  
-    ${SODIUM_LIBRARIES}  
+    ${SODIUM_LIBRARIES}    
+    scrypt
 )
 else()
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
@@ -84,6 +87,7 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     argon2
     crypt      
     ${SODIUM_LIBRARIES}
+    scrypt
 )
 endif()
 
