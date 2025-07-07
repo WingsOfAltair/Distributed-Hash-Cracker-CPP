@@ -417,8 +417,12 @@ bool validate_scrypt(const std::string& password, const std::string& salt,
 // Constant-time memory comparison
 bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
     if (a.size() != b.size()) return false;
-    return sodium_memcmp(a.data(), b.data(), a.size()) == 0;
-} 
+    uint8_t result = 0;
+    for (size_t i = 0; i < a.size(); ++i) {
+        result |= a[i] ^ b[i];
+    }
+    return result == 0;
+}
 
 // Hash a password using libsodium's low-level Scrypt and a custom salt.
 // Returns the hash as a base64 string.
@@ -492,9 +496,11 @@ bool verify_php_scrypt_hash(const std::string& password, const std::string& full
 
     print_hex("Computed", computedHash);
     print_hex("Target  ", targetHash);   
-    print_hex("Salt", salt);
+    print_hex("Salt", salt);          
+    std::cout << "Salt size: " << salt.size() << std::endl;          // Should be 16
+    std::cout << "Target hash size: " << targetHash.size() << std::endl; // Should be 32
 
-    return computedHash == targetHash;
+    return secure_compare(computedHash, targetHash);
 }
 
 bool verify_scrypt_hash_base64(const std::string& password, const std::string& salt_raw, const std::string& base64_hash) {
@@ -998,19 +1004,6 @@ int main() {
     if (sodium_init() < 0) {
         std::cerr << "Libsodium init failed\n";
         return 1;
-    }
-    // Example password and PHP scrypt hash
-    std::string password = "jesperhp10";
-
-    // PHP output format: N$r$p$base64(salt)$base64(hash)
-    std::string php_scrypt_hash = "16384$8$1$W9SFsyla8VPUno8hlvnhpw==$nCpAXXueTlOEPFh/KJv00bIqqHWijnNHtggYXizuDYU=";
-
-    // Validate
-    if (verify_php_scrypt_hash(password, php_scrypt_hash)) {
-        std::cout << "✅ Password verified!\n";
-    }
-    else {
-        std::cout << "❌ Invalid password.\n";
     }
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
