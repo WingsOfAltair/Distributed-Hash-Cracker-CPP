@@ -24,7 +24,8 @@
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
 #include <scrypt/sodium.h>
-#include "include/scrypt/crypto_scrypt.h"
+#include "include/scrypt/crypto_scrypt.h"           
+#include <openssl/sha.h>
 
 namespace asio = boost::asio;
 
@@ -1000,11 +1001,61 @@ bool udp_ping(const std::string& ip, int port, int timeout_ms = 1000) {
     }
 }
 
+// Base64 encode a byte vector using libsodium
+std::string base64Encode(const std::vector<uint8_t>& data) {
+    size_t len = sodium_base64_encoded_len(data.size(), sodium_base64_VARIANT_ORIGINAL);
+    std::vector<char> encoded(len);
+    sodium_bin2base64(encoded.data(), len,
+        data.data(), data.size(),
+        sodium_base64_VARIANT_ORIGINAL);
+    return std::string(encoded.data());
+}
+
+// Generate deterministic salt from string like PHP
+std::vector<uint8_t> generate_salt_from_string(const std::string& input, size_t length = 16) {
+    uint8_t hash[SHA256_DIGEST_LENGTH];
+    SHA256(reinterpret_cast<const uint8_t*>(input.data()), input.size(), hash);
+    return std::vector<uint8_t>(hash, hash + length);
+}
+
+void test_php_crypto_scrypt()
+{
+    std::string password = "jesperhp10";
+    std::string salt_str = "123";
+    uint64_t N = 16384; // Must be power of 2
+    uint32_t r = 8;
+    uint32_t p = 1;
+    size_t dkLen = 32; // Length of derived key (same as PHP output)
+
+    // Output buffer                                                 
+    std::vector<uint8_t> salt2 = generate_salt_from_string(salt_str);
+    std::string salt_base64 = base64Encode(salt2);
+    std::vector<uint8_t> derivedKey(dkLen);
+
+    // Call scrypt
+    int rc = crypto_scrypt(
+        reinterpret_cast<const uint8_t*>(password.data()), password.size(),
+        salt2.data(), salt2.size(),
+        N, r, p,
+        derivedKey.data(), dkLen
+    );
+
+    if (rc != 0) {
+        std::cerr << "scrypt failed with error code: " << rc << std::endl;
+        return;// originally return 1;
+    }
+
+    std::cout << N << "$" << r << "$" << p << "$"
+        << base64Encode(salt2) << "$"
+        << base64Encode(derivedKey) << std::endl;
+}
+
 int main() {
     if (sodium_init() < 0) {
         std::cerr << "Libsodium init failed\n";
         return 1;
     }
+    //test_php_crypto_scrypt();
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif
