@@ -113,7 +113,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\boost\lib64-msvc-14.3;C:\Program Files\OpenSSL-Win64\lib\VC\x64\MD</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libssl.lib;libcrypto.lib;boost_system-vc143-mt-gd-x64-1_88.lib;boost_filesystem-vc143-mt-gd-x64-1_88.lib;boost_thread-vc143-mt-gd-x64-1_88.lib;boost_regex-vc143-mt-gd-x64-1_88.lib;boost_locale-vc143-mt-gd-x64-1_88.lib;boost_chrono-vc143-mt-gd-x64-1_88.lib;boost_program_options-vc143-mt-gd-x64-1_88.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;boost_system-vc143-mt-gd-x64-1_85.lib;boost_filesystem-vc143-mt-gd-x64-1_85.lib;boost_thread-vc143-mt-gd-x64-1_85.lib;boost_regex-vc143-mt-gd-x64-1_85.lib;boost_locale-vc143-mt-gd-x64-1_85.lib;boost_chrono-vc143-mt-gd-x64-1_85.lib;boost_program_options-vc143-mt-gd-x64-1_85.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

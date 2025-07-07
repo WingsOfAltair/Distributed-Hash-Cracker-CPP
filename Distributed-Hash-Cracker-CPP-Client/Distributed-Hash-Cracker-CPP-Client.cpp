@@ -24,6 +24,7 @@
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
 #include <scrypt/sodium.h>
+#include "include/scrypt/crypto_scrypt.h"
 
 namespace asio = boost::asio;
 
@@ -331,6 +332,30 @@ std::string applyRule(const std::wstring& password, const std::string& rule) {
 
     // Convert back to UTF-8 before returning
     return wstring_to_utf8(wresult);
+}  
+
+std::vector<unsigned char> base64_decode(const std::string& input) {
+    std::string padded = input;
+    while (padded.size() % 4 != 0) {
+        padded.push_back('=');
+    }
+
+    BIO* bio = BIO_new_mem_buf(padded.data(), static_cast<int>(padded.size()));
+    BIO* b64 = BIO_new(BIO_f_base64());
+    BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);  // Disable line breaks
+    bio = BIO_push(b64, bio);
+
+    std::vector<unsigned char> decoded(padded.size());
+    int decodedLen = BIO_read(bio, decoded.data(), static_cast<int>(decoded.size()));
+
+    BIO_free_all(bio);
+
+    if (decodedLen <= 0) {
+        throw std::runtime_error("Base64 decode failed");
+    }
+
+    decoded.resize(decodedLen);
+    return decoded;
 }
 
 // Split string by delimiter
@@ -389,39 +414,15 @@ bool validate_scrypt(const std::string& password, const std::string& salt,
     return result_hex == expected_hex;
 }
 
-// Base64 decode with PHP tweaks (replace '.' with '+', strip '$')
-std::vector<unsigned char> base64_decode_php(const std::string& input) {
-    std::string modified = input;
-    std::replace(modified.begin(), modified.end(), '.', '+');
-    // Strip any '$' characters (shouldn't be there normally, but just in case)
-    modified.erase(std::remove(modified.begin(), modified.end(), '$'), modified.end());
-
-    // Pad base64 string to multiple of 4
-    while (modified.size() % 4 != 0) {
-        modified.push_back('=');
-    }
-
-    BIO* bio = BIO_new_mem_buf(modified.data(), (int)modified.size());
-    BIO* b64 = BIO_new(BIO_f_base64());
-    bio = BIO_push(b64, bio);
-    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
-
-    std::vector<unsigned char> decoded(modified.size());
-    int len = BIO_read(bio, decoded.data(), (int)decoded.size());
-    if (len < 0) {
-        BIO_free_all(bio);
-        throw std::runtime_error("Base64 decode failed");
-    }
-    decoded.resize(len);
-    BIO_free_all(bio);
-    return decoded;
-} 
-
 // Constant-time memory comparison
 bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
     if (a.size() != b.size()) return false;
-    return sodium_memcmp(a.data(), b.data(), a.size()) == 0;
-} 
+    uint8_t result = 0;
+    for (size_t i = 0; i < a.size(); ++i) {
+        result |= a[i] ^ b[i];
+    }
+    return result == 0;
+}
 
 // Hash a password using libsodium's low-level Scrypt and a custom salt.
 // Returns the hash as a base64 string.
@@ -464,47 +465,40 @@ bool verify_libsodium_hash(const std::string& password, const std::string& store
 // Verify PHP-scrypt style hash: N$r$p$salt$hash
 bool verify_php_scrypt_hash(const std::string& password, const std::string& fullHash) {
     auto parts = split(fullHash, '$');
-    if (parts.size() != 5) {
-        std::cerr << "Invalid hash format, expected 5 parts\n";
-        return false;
-    }
+    if (parts.size() != 5) return false;
 
-    uint64_t N = 0;
-    uint32_t r = 0, p = 0;
+    uint64_t N = std::stoull(parts[0]);
+    uint32_t r = std::stoul(parts[1]);
+    uint32_t p = std::stoul(parts[2]);
 
-    try {
-        N = std::stoull(parts[0]);
-        r = static_cast<uint32_t>(std::stoul(parts[1]));
-        p = static_cast<uint32_t>(std::stoul(parts[2]));
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Failed to parse numeric parameters: " << e.what() << "\n";
-        return false;
-    }
-
-    const std::string& salt_b64 = parts[3];
-    const std::string& hash_b64 = parts[4];
-
-    std::vector<unsigned char> salt, targetHash;
-    try {
-        salt = base64_decode_php(salt_b64);
-        targetHash = base64_decode_php(hash_b64);
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Base64 decode failed: " << e.what() << "\n";
-        return false;
-    }
+    std::vector<unsigned char> salt = base64_decode(parts[3]);
+    std::vector<unsigned char> targetHash = base64_decode(parts[4]);
 
     std::vector<unsigned char> computedHash(targetHash.size());
 
-    if (crypto_pwhash_scryptsalsa208sha256_ll(
+    int rc = crypto_scrypt(
         reinterpret_cast<const uint8_t*>(password.data()), password.size(),
         salt.data(), salt.size(),
         N, r, p,
-        computedHash.data(), computedHash.size()) != 0) {
-        std::cerr << "crypto_pwhash_scryptsalsa208sha256_ll failed\n";
+        computedHash.data(), computedHash.size());
+
+    if (rc != 0) {
+        std::cerr << "crypto_scrypt failed\n";
         return false;
     }
+
+    auto print_hex = [](const std::string& label, const std::vector<unsigned char>& data) {
+        std::cout << label << ": ";
+        for (unsigned char c : data)
+            printf("%02x", c);
+        std::cout << "\n";
+        };
+
+    print_hex("Computed", computedHash);
+    print_hex("Target  ", targetHash);   
+    print_hex("Salt", salt);          
+    std::cout << "Salt size: " << salt.size() << std::endl;          // Should be 16
+    std::cout << "Target hash size: " << targetHash.size() << std::endl; // Should be 32
 
     return secure_compare(computedHash, targetHash);
 }
