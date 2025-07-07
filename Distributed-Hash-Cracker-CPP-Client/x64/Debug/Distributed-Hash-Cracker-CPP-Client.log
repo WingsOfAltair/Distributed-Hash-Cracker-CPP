@@ -7509,30 +7509,24 @@ D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distr
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(424,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(424,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(423) : note: index 'i' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(424,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(424) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(569) : note: index '' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(991) : note: index 'len' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992) : note: feeds call on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(233,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(233,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(232) : note: index 'i' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(233,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(326) : note: feeds call on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(273,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(273,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(270) : note: index '' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(273,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(273) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(569) : note: index '' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(991) : note: index 'len' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(992) : note: feeds call on this line
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251,1): warning C5045: C:\boost\boost\thread\win32\basic_timed_mutex.hpp(247) : note: index 'old_count' range checked by comparison on this line
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251,1): warning C5045: C:\boost\boost\thread\win32\basic_timed_mutex.hpp(251) : note: feeds call on this line
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(249,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(249,1): warning C5045: C:\boost\boost\thread\win32\basic_timed_mutex.hpp(247) : note: index 'old_count' range checked by comparison on this line
 C:\boost\boost\thread\win32\basic_timed_mutex.hpp(249,1): warning C5045: C:\boost\boost\thread\win32\basic_timed_mutex.hpp(249) : note: feeds call on this line
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1749) : note: index 'bytes' range checked by comparison on this line
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750) : note: feeds call on this line
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1175) : note: index 'bytes' range checked by comparison on this line
-C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(173) : note: feeds call on this line
@@ -7548,6 +7542,12 @@ C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(151,1): warning C5045: C
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(141) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145,1): warning C5045: C:\boost\boost\asio\detail\impl\win_iocp_io_context.ipp(145) : note: feeds call on this line
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1749) : note: index 'bytes' range checked by comparison on this line
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1750) : note: feeds call on this line
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1175) : note: index 'bytes' range checked by comparison on this line
+C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1176) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(905) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(906,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(906) : note: feeds call on this line
@@ -7560,12 +7560,12 @@ C:\boost\boost\system\detail\system_category_message_win32.hpp(190,1): warning C
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(382) : note: index 'i' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\select_reactor.ipp(383,1): warning C5045: C:\boost\boost\asio\detail\impl\select_reactor.ipp(383) : note: feeds call on this line
-C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: index '' range checked by comparison on this line
-C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: feeds call on this line
 C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: index '' range checked by comparison on this line
 C:\boost\boost\asio\buffer.hpp(615,1): warning C5045: C:\boost\boost\asio\buffer.hpp(615) : note: feeds call on this line
+C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: index '' range checked by comparison on this line
+C:\boost\boost\asio\buffer.hpp(911,1): warning C5045: C:\boost\boost\asio\buffer.hpp(911) : note: feeds call on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1514) : note: index 'bytes' range checked by comparison on this line
 C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515,1): warning C5045: C:\boost\boost\asio\detail\impl\socket_ops.ipp(1515) : note: feeds call on this line
