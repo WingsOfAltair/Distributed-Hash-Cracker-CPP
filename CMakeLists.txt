@@ -99,6 +99,11 @@ target_include_directories(scrypt PUBLIC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/lib
 )
 
+# Ensure warnp.c is included
+list(APPEND SCRYPT_SRC
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/util/warnp.c
+)
+
 # ------------------------------
 # Client executable
 # ------------------------------
