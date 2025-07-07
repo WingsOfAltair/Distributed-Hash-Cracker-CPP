@@ -236,7 +236,7 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
 }
 
 void run_udp_echo_server(unsigned short port) {
-    boost::asio::io_service io_service;
+    boost::asio::io_context io_service;
 
     // Create UDP socket bound to given port
     boost::asio::ip::udp::socket socket(
