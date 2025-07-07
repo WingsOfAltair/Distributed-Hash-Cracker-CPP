@@ -1014,12 +1014,25 @@ std::string base64Encode(const std::vector<uint8_t>& data) {
 
 // Generate deterministic salt from string like PHP
 std::vector<uint8_t> generate_salt_from_string(const std::string& input) {
-    uint8_t hash[32];
-    SHA256_CTX sha256;
-    SHA256_Init(&sha256);
-    SHA256_Update(&sha256, input.data(), input.size());
-    SHA256_Final(hash, &sha256);
-    return std::vector<uint8_t>(hash, hash + 16); // first 16 bytes only
+    std::vector<uint8_t> hash(EVP_MD_size(EVP_sha256())); // 32 bytes for SHA256
+    unsigned int hash_len = 0;
+
+    EVP_MD_CTX* mdctx = EVP_MD_CTX_new();
+    if (!mdctx) {
+        throw std::runtime_error("Failed to create EVP_MD_CTX");
+    }
+
+    if (EVP_DigestInit_ex(mdctx, EVP_sha256(), nullptr) != 1 ||
+        EVP_DigestUpdate(mdctx, input.data(), input.size()) != 1 ||
+        EVP_DigestFinal_ex(mdctx, hash.data(), &hash_len) != 1) {
+        EVP_MD_CTX_free(mdctx);
+        throw std::runtime_error("EVP SHA256 digest failed");
+    }
+
+    EVP_MD_CTX_free(mdctx);
+
+    // Return first 16 bytes as salt
+    return std::vector<uint8_t>(hash.begin(), hash.begin() + 16);
 }
 
 void test_php_crypto_scrypt()
