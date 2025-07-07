@@ -23,7 +23,7 @@
 #include <codecvt>
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
-#include <sodium.h>
+#include <scrypt/sodium.h>
 
 namespace asio = boost::asio;
 
