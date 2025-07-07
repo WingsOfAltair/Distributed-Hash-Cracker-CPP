@@ -1059,7 +1059,7 @@ int main() {
         std::cerr << "Libsodium init failed\n";
         return 1;
     }
-    test_php_crypto_scrypt();
+    //test_php_crypto_scrypt();
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif

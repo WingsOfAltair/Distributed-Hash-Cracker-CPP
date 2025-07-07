@@ -8,3 +8,5 @@
 .vs/Distributed-Hash-Cracker-CPP/v17/ipch/AutoPCH/ea8bd99b914810c3/ASYNCLOGGER.ipch
 .vs/Distributed-Hash-Cracker-CPP/v17/Browse.VC.db
 vcpkg/
+x64/Debug/Distributed-Hash-Cracker-CPP-Client.pdb
+x64/Debug/Distributed-Hash-Cracker-CPP-Client.pdb
