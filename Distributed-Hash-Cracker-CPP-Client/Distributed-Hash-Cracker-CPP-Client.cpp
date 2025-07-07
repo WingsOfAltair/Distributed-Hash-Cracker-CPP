@@ -26,6 +26,7 @@
 #include <scrypt/sodium.h>
 #include "include/scrypt/crypto_scrypt.h"           
 #include <openssl/sha.h>
+#include <scrypt/libscrypt.h>
 
 namespace asio = boost::asio;
 
@@ -1012,10 +1013,13 @@ std::string base64Encode(const std::vector<uint8_t>& data) {
 }
 
 // Generate deterministic salt from string like PHP
-std::vector<uint8_t> generate_salt_from_string(const std::string& input, size_t length = 16) {
-    uint8_t hash[SHA256_DIGEST_LENGTH];
-    SHA256(reinterpret_cast<const uint8_t*>(input.data()), input.size(), hash);
-    return std::vector<uint8_t>(hash, hash + length);
+std::vector<uint8_t> generate_salt_from_string(const std::string& input) {
+    uint8_t hash[32];
+    SHA256_CTX sha256;
+    SHA256_Init(&sha256);
+    SHA256_Update(&sha256, input.data(), input.size());
+    SHA256_Final(hash, &sha256);
+    return std::vector<uint8_t>(hash, hash + 16); // first 16 bytes only
 }
 
 void test_php_crypto_scrypt()
@@ -1033,7 +1037,7 @@ void test_php_crypto_scrypt()
     std::vector<uint8_t> derivedKey(dkLen);
 
     // Call scrypt
-    int rc = crypto_scrypt(
+    int rc = libscrypt_scrypt(
         reinterpret_cast<const uint8_t*>(password.data()), password.size(),
         salt2.data(), salt2.size(),
         N, r, p,
@@ -1055,7 +1059,7 @@ int main() {
         std::cerr << "Libsodium init failed\n";
         return 1;
     }
-    //test_php_crypto_scrypt();
+    test_php_crypto_scrypt();
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif

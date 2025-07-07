@@ -9,6 +9,13 @@ project(DistributedHashCracker VERSION 1.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Find libscrypt library manually if no Findlibscrypt.cmake exists
+find_library(LIBSCRYPT_LIBRARY NAMES scrypt libscrypt)
+
+if(NOT LIBSCRYPT_LIBRARY)
+    message(FATAL_ERROR "libscrypt not found")
+endif()
+
 # Find libsodium using pkg-config
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SODIUM REQUIRED libsodium)
@@ -124,6 +131,7 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     "${ARGON2_LIB_PATH}"  
     ${SODIUM_LIBRARIES}   
     scrypt 
+    ${LIBSCRYPT_LIBRARY}
 )
 else()
 target_link_libraries(DistributedHashCrackerClient PRIVATE 
@@ -135,6 +143,7 @@ target_link_libraries(DistributedHashCrackerClient PRIVATE
     crypt      
     ${SODIUM_LIBRARIES}   
     scrypt 
+    ${LIBSCRYPT_LIBRARY}
 )
 endif()
 
