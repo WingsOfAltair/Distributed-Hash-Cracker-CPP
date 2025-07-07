@@ -1037,7 +1037,7 @@ void test_php_crypto_scrypt()
     std::vector<uint8_t> derivedKey(dkLen);
 
     // Call scrypt
-    int rc = libscrypt_scrypt(
+    int rc = crypto_scrypt(
         reinterpret_cast<const uint8_t*>(password.data()), password.size(),
         salt2.data(), salt2.size(),
         N, r, p,
