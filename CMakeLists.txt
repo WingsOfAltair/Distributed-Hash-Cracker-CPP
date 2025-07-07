@@ -72,6 +72,13 @@ file(GLOB_RECURSE SCRYPT_SRC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/*.c
 )
 
+# Remove ARM-specific file on non-ARM platforms
+if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
+    list(REMOVE_ITEM SCRYPT_SRC
+        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-ARM-AES.c
+    )
+endif()
+
 add_library(scrypt STATIC ${SCRYPT_SRC})
 
 target_compile_definitions(scrypt PUBLIC HAVE_CONFIG_H)
