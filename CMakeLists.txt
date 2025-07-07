@@ -4,7 +4,7 @@ if(POLICY CMP0167)
     cmake_policy(SET CMP0167 OLD)
 endif()
 
-project(DistributedHashCracker VERSION 1.0 LANGUAGES CXX)
+project(DistributedHashCracker VERSION 1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -67,11 +67,14 @@ endif()
 # ------------------------------
 # Build scrypt static library from source files
 # ------------------------------
-file(GLOB SCRYPT_SRC
+
+file(GLOB_RECURSE SCRYPT_SRC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/*.c
 )
 
 add_library(scrypt STATIC ${SCRYPT_SRC})
+
+target_compile_definitions(scrypt PUBLIC HAVE_CONFIG_H)
 
 target_include_directories(scrypt PUBLIC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt
