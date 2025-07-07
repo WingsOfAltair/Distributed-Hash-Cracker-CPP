@@ -1,5 +1,5 @@
-﻿bcrypt.lib(bcrypt.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(bcrypt.obj)' or at ''; linking object as if no debug info
-bcrypt.lib(wrapper.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(wrapper.obj)' or at ''; linking object as if no debug info
-bcrypt.lib(crypt_blowfish.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(crypt_blowfish.obj)' or at ''; linking object as if no debug info
-bcrypt.lib(crypt_gensalt.obj) : warning LNK4099: PDB '' was not found with 'bcrypt.lib(crypt_gensalt.obj)' or at ''; linking object as if no debug info
-  Distributed-Hash-Cracker-CPP-Client.vcxproj -> C:\Users\ASUS\Desktop\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe
+﻿bcrypt.lib(bcrypt.obj) : warning LNK4099: PDB 'bcrypt.pdb' was not found with 'bcrypt.lib(bcrypt.obj)' or at 'D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\bcrypt.pdb'; linking object as if no debug info
+bcrypt.lib(wrapper.obj) : warning LNK4099: PDB 'bcrypt.pdb' was not found with 'bcrypt.lib(wrapper.obj)' or at 'D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\bcrypt.pdb'; linking object as if no debug info
+bcrypt.lib(crypt_blowfish.obj) : warning LNK4099: PDB 'bcrypt.pdb' was not found with 'bcrypt.lib(crypt_blowfish.obj)' or at 'D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\bcrypt.pdb'; linking object as if no debug info
+bcrypt.lib(crypt_gensalt.obj) : warning LNK4099: PDB 'bcrypt.pdb' was not found with 'bcrypt.lib(crypt_gensalt.obj)' or at 'D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\bcrypt.pdb'; linking object as if no debug info
+  Distributed-Hash-Cracker-CPP-Client.vcxproj -> D:\GitHub\Distributed-Hash-Cracker-CPP\x64\Debug\Distributed-Hash-Cracker-CPP-Client.exe
