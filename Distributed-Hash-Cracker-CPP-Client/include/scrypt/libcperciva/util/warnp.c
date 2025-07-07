@@ -4,8 +4,17 @@
 #ifdef _WIN32
 #include <stdarg.h>
 
+#define warnx libcperciva_warnx
+
 void libcperciva_warnx(const char* fmt, ...) {
 	// Stub: do nothing
+}
+
+void warnx(const char* fmt, ...) {
+	va_list ap;
+	va_start(ap, fmt);
+	vfprintf(stderr, fmt, ap);
+	va_end(ap);
 }
 
 void syslog(int priority, const char* format, ...) {
