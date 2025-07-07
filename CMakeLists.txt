@@ -72,11 +72,16 @@ file(GLOB_RECURSE SCRYPT_SRC
     ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/*.c
 )
 
-# Remove ARM-specific file on non-ARM platforms
+# Exclude ARM-only test files that break build on non-ARM systems
 if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
+
     list(REMOVE_ITEM SCRYPT_SRC
         ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-ARM-AES.c
+        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-ARM-SHA256.c
+        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/apisupport/Build/apisupport-LIBCRYPTO-LOW_LEVEL_AES.c
+        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/apisupport/Build/apisupport-NONPOSIX-MEMLIMIT.c
     )
+
 endif()
 
 add_library(scrypt STATIC ${SCRYPT_SRC})
