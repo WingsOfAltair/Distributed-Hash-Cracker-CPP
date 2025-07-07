@@ -73,17 +73,13 @@ file(GLOB_RECURSE SCRYPT_SRC
 )
 
 # Exclude ARM-only test files that break build on non-ARM systems
-if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
-
-    list(REMOVE_ITEM SCRYPT_SRC
-        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-ARM-AES.c
-        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-ARM-SHA256.c
-        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/apisupport/Build/apisupport-LIBCRYPTO-LOW_LEVEL_AES.c
-        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/apisupport/Build/apisupport-NONPOSIX-MEMLIMIT.c
-        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-X86-AESNI.c
-    )
-
-endif()
+# Remove ARM and X86-specific files
+foreach(cpu_file ${SCRYPT_SRC})
+    if(cpu_file MATCHES ".*(ARM|X86|RDRAND).*\\.c$")
+        message(STATUS "Excluding CPU-specific file: ${cpu_file}")
+        list(REMOVE_ITEM SCRYPT_SRC ${cpu_file})
+    endif()
+endforeach()
 
 add_library(scrypt STATIC ${SCRYPT_SRC})
 
