@@ -77,9 +77,11 @@ add_library(scrypt STATIC ${SCRYPT_SRC})
 target_compile_definitions(scrypt PUBLIC HAVE_CONFIG_H)
 
 target_include_directories(scrypt PUBLIC
-    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt   
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/lib-platform     
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva
+    ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/lib
 )
-
 
 # ------------------------------
 # Client executable
