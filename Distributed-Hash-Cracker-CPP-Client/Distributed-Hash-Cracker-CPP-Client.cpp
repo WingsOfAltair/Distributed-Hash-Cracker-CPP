@@ -23,7 +23,7 @@
 #include <codecvt>
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
-#include <sodium.h>
+#include <scrypt/sodium.h>
 
 namespace asio = boost::asio;
 
@@ -360,6 +360,35 @@ bool is_base64_scrypt_hash(const std::string& hash) {
     return true;
 }
 
+std::string to_hex(const unsigned char* data, size_t len) {
+    std::ostringstream oss;
+    for (size_t i = 0; i < len; ++i)
+        oss << std::hex << std::setw(2) << std::setfill('0') << (int)data[i];
+    return oss.str();
+}
+
+// validate Nodejs's scrypt hash format crypto.scrypt backed by OpenSSL
+bool validate_scrypt(const std::string& password, const std::string& salt, 
+    const std::string& expected_hex) {
+    uint64_t N = 16384;
+    uint32_t r = 8;
+    uint32_t p = 1;
+    size_t key_len = 64;
+
+    std::vector<unsigned char> out(key_len);
+
+    if (crypto_pwhash_scryptsalsa208sha256_ll(
+        (const uint8_t*)password.data(), password.size(),
+        (const uint8_t*)salt.data(), salt.size(),
+        N, r, p, out.data(), key_len) != 0) {
+        std::cerr << "scrypt failed (out-of-memory?)\n";
+        return false;
+    }
+
+    std::string result_hex = to_hex(out.data(), key_len);
+    return result_hex == expected_hex;
+}
+
 // Base64 decode with PHP tweaks (replace '.' with '+', strip '$')
 std::vector<unsigned char> base64_decode_php(const std::string& input) {
     std::string modified = input;
@@ -534,7 +563,7 @@ bool verify_scrypt_hash(const std::string& password, std::string& stored_salt_he
         return verify_php_scrypt_hash(password, hash);
     }
     else {
-        return false;
+        return validate_scrypt(password, stored_salt_hex, hash);
     }
 }
 
@@ -935,14 +964,17 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
 
 bool udp_ping(const std::string& ip, int port, int timeout_ms = 1000) {
     using namespace boost::asio;
-    io_service io;
+    boost::asio::io_context io;
+
+    // Replace the problematic line with the following:  
+    boost::asio::ip::address server_address = boost::asio::ip::make_address(ip);  
     ip::udp::socket socket(io);
     boost::system::error_code ec;
 
     socket.open(ip::udp::v4(), ec);
     if (ec) return false;
 
-    ip::udp::endpoint server_endpoint(ip::address::from_string(ip), port);
+    boost::asio::ip::udp::endpoint server_endpoint(server_address, port);
     ip::udp::endpoint sender_endpoint;
 
     // Send "ping"
