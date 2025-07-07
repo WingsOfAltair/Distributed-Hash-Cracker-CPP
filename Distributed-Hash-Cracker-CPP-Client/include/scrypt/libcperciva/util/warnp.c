@@ -24,6 +24,8 @@ void syslog(int priority, const char* format, ...) {
 #define LOG_NOTICE  5       /* normal but significant condition */
 #define LOG_INFO    6       /* informational */
 #define LOG_DEBUG   7       /* debug-level messages */
+#elif
+#include <syslog.h>    // for LOG_WARNING, syslog(), closelog()
 #endif
 
 #include "warnp.h"
