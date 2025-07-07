@@ -1,3 +1,7 @@
+#include <stdint.h>
+#include <stddef.h>
+#include <assert.h>
+
 /*
  * This code is shared between crypto_aesctr*.c files, and should not be
  * compiled as a separate translation unit.  For details, see the comments in
