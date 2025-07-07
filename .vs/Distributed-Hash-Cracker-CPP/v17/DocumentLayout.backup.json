@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\platform.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\platform.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\config.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\config.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHub\\Distributed-Hash-Cracker-CPP\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -27,19 +35,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "platform.h",
+              "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\platform.h",
+              "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\platform.h",
+              "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\platform.h",
+              "RelativeToolTip": "Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\platform.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-07T14:39:44.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "config.h",
+              "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\config.h",
+              "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\config.h",
+              "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\config.h",
+              "RelativeToolTip": "Distributed-Hash-Cracker-CPP-Client\\include\\scrypt\\lib-platform\\config.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-07T14:39:28.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CMakeLists.txt",
               "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\CMakeLists.txt",
               "RelativeDocumentMoniker": "CMakeLists.txt",
               "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\CMakeLists.txt",
               "RelativeToolTip": "CMakeLists.txt",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAAAIwAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAEUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-06-26T16:20:14.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Distributed-Hash-Cracker-CPP-Client.cpp",
               "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
               "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
@@ -51,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Distributed-Hash-Cracker-CPP-Server.cpp",
               "DocumentMoniker": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
               "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
