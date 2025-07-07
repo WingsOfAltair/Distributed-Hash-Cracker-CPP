@@ -80,6 +80,7 @@ if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64)")
         ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-ARM-SHA256.c
         ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/apisupport/Build/apisupport-LIBCRYPTO-LOW_LEVEL_AES.c
         ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/apisupport/Build/apisupport-NONPOSIX-MEMLIMIT.c
+        ${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/cpusupport/Build/cpusupport-X86-AESNI.c
     )
 
 endif()
