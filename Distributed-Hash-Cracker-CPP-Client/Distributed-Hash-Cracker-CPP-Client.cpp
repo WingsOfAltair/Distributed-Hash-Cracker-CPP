@@ -24,6 +24,7 @@
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
 #include <scrypt/sodium.h>
+#include "include/scrypt/crypto_scrypt.h"
 
 namespace asio = boost::asio;
 
@@ -464,49 +465,29 @@ bool verify_libsodium_hash(const std::string& password, const std::string& store
 // Verify PHP-scrypt style hash: N$r$p$salt$hash
 bool verify_php_scrypt_hash(const std::string& password, const std::string& fullHash) {
     auto parts = split(fullHash, '$');
-    if (parts.size() != 5) {
-        std::cerr << "Invalid hash format, expected 5 parts\n";
-        return false;
-    }
+    if (parts.size() != 5) return false;
 
-    uint64_t N = 0;
-    uint32_t r = 0, p = 0;
+    uint64_t N = std::stoull(parts[0]);
+    uint32_t r = std::stoul(parts[1]);
+    uint32_t p = std::stoul(parts[2]);
 
-    try {
-        N = std::stoull(parts[0]);
-        r = static_cast<uint32_t>(std::stoul(parts[1]));
-        p = static_cast<uint32_t>(std::stoul(parts[2]));
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Failed to parse numeric parameters: " << e.what() << "\n";
-        return false;
-    }
-
-    const std::string& salt_b64 = parts[3];
-    const std::string& hash_b64 = parts[4];
-
-    std::vector<unsigned char> salt, targetHash;
-    try {
-        salt = base64_decode_php(salt_b64);
-        targetHash = base64_decode_php(hash_b64);
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Base64 decode failed: " << e.what() << "\n";
-        return false;
-    }
+    std::vector<unsigned char> salt = base64_decode_php(parts[3]);
+    std::vector<unsigned char> targetHash = base64_decode_php(parts[4]);
 
     std::vector<unsigned char> computedHash(targetHash.size());
 
-    if (crypto_pwhash_scryptsalsa208sha256_ll(
+    int rc = crypto_scrypt(
         reinterpret_cast<const uint8_t*>(password.data()), password.size(),
         salt.data(), salt.size(),
         N, r, p,
-        computedHash.data(), computedHash.size()) != 0) {
-        std::cerr << "crypto_pwhash_scryptsalsa208sha256_ll failed\n";
+        computedHash.data(), computedHash.size());
+
+    if (rc != 0) {
+        std::cerr << "crypto_scrypt failed\n";
         return false;
     }
 
-    return secure_compare(computedHash, targetHash);
+    return computedHash == targetHash;
 }
 
 bool verify_scrypt_hash_base64(const std::string& password, const std::string& salt_raw, const std::string& base64_hash) {
