@@ -478,7 +478,7 @@ bool verify_php_scrypt_hash(const std::string& password, const std::string& full
 
     std::vector<unsigned char> computedHash(targetHash.size());
 
-    int rc = crypto_scrypt(
+    int rc = libscrypt_scrypt(
         reinterpret_cast<const uint8_t*>(password.data()), password.size(),
         salt.data(), salt.size(),
         N, r, p,
@@ -1050,7 +1050,7 @@ void test_php_crypto_scrypt()
     std::vector<uint8_t> derivedKey(dkLen);
 
     // Call scrypt
-    int rc = crypto_scrypt(
+    int rc = libscrypt_scrypt(
         reinterpret_cast<const uint8_t*>(password.data()), password.size(),
         salt2.data(), salt2.size(),
         N, r, p,
