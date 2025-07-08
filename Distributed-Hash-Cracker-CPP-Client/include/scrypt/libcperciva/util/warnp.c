@@ -1,10 +1,21 @@
+#include <stdio.h>
+#include <stdarg.h>
 #define _CRT_NONSTDC_NO_DEPRECATE
 #define _CRT_SECURE_NO_WARNINGS
 #include <errno.h>
 #ifdef _WIN32
-#include <stdarg.h>
+#define warnx libcperciva_warnx	
+void syslog(int priority, const char* format, ...) {
+	// Stub: do nothing
+}
+#endif
 
-#define warnx libcperciva_warnx
+void libcperciva_warnx(const char* fmt, ...) {
+	va_list ap;
+	va_start(ap, fmt);
+	vfprintf(stderr, fmt, ap);
+	va_end(ap);
+}
 
 void warnx(const char* fmt, ...) {
 	va_list ap;
@@ -13,11 +24,6 @@ void warnx(const char* fmt, ...) {
 	va_end(ap);
 }
 
-void syslog(int priority, const char* format, ...) {
-	// Stub: do nothing
-}
-#endif
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #ifdef _WIN32
