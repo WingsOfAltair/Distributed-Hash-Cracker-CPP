@@ -41,10 +41,9 @@ ONCE YOU FINISH SETTING UP ALL DEPENDENCIES
 ==================================================================
 then you do below commands to COMPILE:
 
-mkdir -p build
-cd build
-cmake ..
-make -j$(nproc)
+1- mkdir -p build && build
+2- cmake ..
+3- make -j$(nproc)
 
 ==================================================================
 IMPORTANT, DO NOT IGNORE OR YOUR CLIENT WILL PROBABLY CRASH
@@ -60,11 +59,11 @@ of the server and port match properly.
 MANUAL COMPILATION WITHOUT CMAKE (IGNORE BELOW UNLESS IF EXPERT.)
 ==================================================================
 
-Navigate to Distributed-Hash-Cracker-CPP-Client/include/scrypt folder in terminal, run:
+Navigate to Distributed-Hash-Cracker-CPP/Distributed-Hash-Cracker-CPP-Client/include/scrypt folder in terminal, run:
 
-mkdir -p obj
+1- mkdir -p obj
 
-find . -name "*.c" ! -name "*ARM*" ! -name "*X86*" ! -name "*RDRAND*" | while read f; do
+2- find . -name "*.c" ! -name "*ARM*" ! -name "*X86*" ! -name "*RDRAND*" | while read f; do
     gcc -c "$f" \
         -I. \
         -I./libcperciva/cpusupport \
@@ -81,7 +80,7 @@ done
 
 Then run:
 
-ar rcs libscrypt.a obj/*.o
+3- ar rcs libscrypt.a obj/*.o
 
 Then finally go back to Distributed-Hash-Cracker-CPP-Client (client source) folder and run:
 
@@ -91,6 +90,6 @@ g++ -o DistributedHashCracker Distributed-Hash-Cracker-CPP-Client.cpp \
     -lboost_system -lssl -lcrypto -lboost_thread -lboost_chrono -lboost_locale \
     -lpthread -lbcrypt -lcrypt -largon2 -lsodium
 
-Then go to Distributed-Hash-Cracker-CPP (server source) folder and run:
+Then go to Distributed-Hash-Cracker-CPP/Distributed-Hash-Cracker-CPP (server source) folder and run:
 
 g++ Distributed-Hash-Cracker-CPP-Server.cpp -o Server -lboost_system -lboost_filesystem -lssl -lboost_thread -lboost_chrono -lboost_locale -lpthread
