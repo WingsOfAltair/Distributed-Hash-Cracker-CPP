@@ -57,10 +57,10 @@ of the server and port match properly.
 
 
 ==================================================================
-IGNORE BELOW UNLESS IF EXPERT.
+MANUAL COMPILATION WITHOUT CMAKE (IGNORE BELOW UNLESS IF EXPERT.)
 ==================================================================
 
-From include/scrypt, run:
+Navigate to Distributed-Hash-Cracker-CPP-Client/include/scrypt folder in terminal, run:
 
 mkdir -p obj
 
@@ -83,7 +83,7 @@ Then run:
 
 ar rcs libscrypt.a obj/*.o
 
-Then finally go to Distributed-Hash-Cracker-CPP-Client (client source) folder and run:
+Then finally go back to Distributed-Hash-Cracker-CPP-Client (client source) folder and run:
 
 g++ -o DistributedHashCracker Distributed-Hash-Cracker-CPP-Client.cpp \
     -Iinclude -Iinclude/scrypt \
