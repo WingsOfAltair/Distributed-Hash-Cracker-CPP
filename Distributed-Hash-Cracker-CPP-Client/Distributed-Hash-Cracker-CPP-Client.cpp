@@ -13,7 +13,8 @@
 #include <mutex>
 #include <atomic>
 #include "bcrypt/BCrypt.hpp"
-#include <openssl/evp.h>
+#include <openssl/evp.h>    
+#include <openssl/hmac.h>
 #include <openssl/err.h>
 #include <filesystem>
 #include "argon2/argon2.h"
@@ -24,9 +25,10 @@
 #include <algorithm>
 #include "../shared/AsyncLogger.h"
 #include <scrypt/sodium.h>
-#include "include/scrypt/crypto_scrypt.h"           
+#include "include/scrypt/crypto_scrypt.h"       
 #include <openssl/sha.h>
-#include <scrypt/libscrypt.h>
+#include <scrypt/libscrypt.h>     
+#include "../Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/util/sysendian.h"
 
 namespace asio = boost::asio;
 
@@ -416,16 +418,6 @@ bool validate_scrypt(const std::string& password, const std::string& salt,
     return result_hex == expected_hex;
 }
 
-// Constant-time memory comparison
-bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
-    if (a.size() != b.size()) return false;
-    uint8_t result = 0;
-    for (size_t i = 0; i < a.size(); ++i) {
-        result |= a[i] ^ b[i];
-    }
-    return result == 0;
-}
-
 // Hash a password using libsodium's low-level Scrypt and a custom salt.
 // Returns the hash as a base64 string.
 std::string scrypt_hash_password_libsodium(const std::string& password, const std::string& salt_str) {
@@ -464,6 +456,16 @@ bool verify_libsodium_hash(const std::string& password, const std::string& store
     return sodium_memcmp(computed_b64_hash.data(), stored_b64_hash.data(), stored_b64_hash.size()) == 0;
 }
 
+// Constant-time memory comparison
+bool secure_compare(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
+    if (a.size() != b.size()) return false;
+    uint8_t result = 0;
+    for (size_t i = 0; i < a.size(); ++i) {
+        result |= a[i] ^ b[i];
+    }
+    return result == 0;
+}
+
 // Verify PHP-scrypt style hash: N$r$p$salt$hash
 bool verify_php_scrypt_hash(const std::string& password, const std::string& fullHash) {
     auto parts = split(fullHash, '$');
@@ -497,8 +499,8 @@ bool verify_php_scrypt_hash(const std::string& password, const std::string& full
         };
 
     print_hex("Computed", computedHash);
-    print_hex("Target  ", targetHash);   
-    print_hex("Salt", salt);          
+    print_hex("Target  ", targetHash);
+    print_hex("Salt", salt);
     std::cout << "Salt size: " << salt.size() << std::endl;          // Should be 16
     std::cout << "Target hash size: " << targetHash.size() << std::endl; // Should be 32
 
@@ -556,7 +558,7 @@ bool verify_scrypt_hash(const std::string& password, std::string& stored_salt_he
     }
     else if (std::count(hash.begin(), hash.end(), '$') == 4) {
         // PHP style: N$r$p$salt$hash
-        return verify_php_scrypt_hash(password, hash);
+        return (verify_php_scrypt_hash(password, hash));
     }
     else {
         return validate_scrypt(password, stored_salt_hex, hash);
@@ -1035,44 +1037,11 @@ std::vector<uint8_t> generate_salt_from_string(const std::string& input) {
     return std::vector<uint8_t>(hash.begin(), hash.begin() + 16);
 }
 
-void test_php_crypto_scrypt()
-{
-    std::string password = "jesperhp10";
-    std::string salt_str = "123";
-    uint64_t N = 16384; // Must be power of 2
-    uint32_t r = 8;
-    uint32_t p = 1;
-    size_t dkLen = 32; // Length of derived key (same as PHP output)
-
-    // Output buffer                                                 
-    std::vector<uint8_t> salt2 = generate_salt_from_string(salt_str);
-    std::string salt_base64 = base64Encode(salt2);
-    std::vector<uint8_t> derivedKey(dkLen);
-
-    // Call scrypt
-    int rc = crypto_scrypt(
-        reinterpret_cast<const uint8_t*>(password.data()), password.size(),
-        salt2.data(), salt2.size(),
-        N, r, p,
-        derivedKey.data(), dkLen
-    );
-
-    if (rc != 0) {
-        std::cerr << "scrypt failed with error code: " << rc << std::endl;
-        return;// originally return 1;
-    }
-
-    std::cout << N << "$" << r << "$" << p << "$"
-        << base64Encode(salt2) << "$"
-        << base64Encode(derivedKey) << std::endl;
-}
-
 int main() {
     if (sodium_init() < 0) {
         std::cerr << "Libsodium init failed\n";
         return 1;
     }
-    //test_php_crypto_scrypt();
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif
