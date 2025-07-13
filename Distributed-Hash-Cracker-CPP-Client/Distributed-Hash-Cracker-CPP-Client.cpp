@@ -14,7 +14,6 @@
 #include <atomic>
 #include "bcrypt/BCrypt.hpp"
 #include <openssl/evp.h>    
-#include <openssl/hmac.h>
 #include <openssl/err.h>
 #include <filesystem>
 #include "argon2/argon2.h"
@@ -28,7 +27,6 @@
 #include "include/scrypt/crypto_scrypt.h"       
 #include <openssl/sha.h>
 #include <scrypt/libscrypt.h>     
-#include "../Distributed-Hash-Cracker-CPP-Client/include/scrypt/libcperciva/util/sysendian.h"
 
 namespace asio = boost::asio;
 
