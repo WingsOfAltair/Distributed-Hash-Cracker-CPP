@@ -5,6 +5,7 @@
 #include <boost/locale.hpp>
 #include <boost/process.hpp>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
 #include <map>
@@ -12,8 +13,10 @@
 #include <sstream>
 #include <boost/algorithm/string/trim.hpp>        
 #include "../shared/AsyncLogger.h" 
+#include "../shared/AsyncStorageLogger.h" 
 
 AsyncLogger logger("server.log");
+AsyncStorageLogger cracked("cracked.txt");
 
 using boost::asio::ip::tcp;
 
@@ -25,8 +28,41 @@ std::atomic<bool> match_found(false);
 std::atomic<int> clients_responses(0);
 int total_clients = 0;
 
+std::string hash_type;
+std::string hash;
+std::string salt;
+std::string password;
+
+std::vector<std::tuple<std::string, std::string, std::string>> cracked_hashes_storage;
+
 auto start = std::chrono::high_resolution_clock::now();
 auto end = std::chrono::high_resolution_clock::now();
+
+// Read pre-cracked hash storage
+void readHashStorage(const std::string& filename) {
+    boost::filesystem::path fullPath = boost::filesystem::absolute(filename);
+    std::ifstream configFile(fullPath.string());
+
+    if (boost::filesystem::exists(fullPath)) {
+        std::string line;
+        while (std::getline(configFile, line)) {
+            std::istringstream iss(line);
+
+            if (std::getline(iss, hash, ':') &&
+                std::getline(iss, salt, ':') &&
+                std::getline(iss, password)) {
+                cracked_hashes_storage.emplace_back(hash, salt, password);
+            }
+            else {
+                std::cerr << "Invalid line format in cracked.txt: " << line << std::endl;
+            }
+        }
+        configFile.close();
+    }
+    else {
+        std::cerr << "Pre-cracked Hash storage does not exist.\n";
+    }
+}
 
 // Read config file
 std::map<std::string, std::string> readConfig(const std::string& filename) {
@@ -51,6 +87,19 @@ std::map<std::string, std::string> readConfig(const std::string& filename) {
     }
 
     return configMap;
+}
+
+std::string extract_password_from_match_response(const std::string& match_info) {
+    std::istringstream iss(match_info);
+    std::string word;
+    int count = 0;
+
+    while (iss >> word) {
+        count++;
+        if (count == 1) {
+            return word;
+        }
+    }
 }
 
 // Convert to lowercase
@@ -196,6 +245,18 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
                 std::cout << "Client " << client_key << " Match found: " << match_info << std::endl
                     << "Elapsed time: " << duration_ms.count() << " ms" << std::endl;
                 match_found = true;
+                password = extract_password_from_match_response(match_info);
+                bool found = false;
+                for (const auto& pair : cracked_hashes_storage) {
+                    if (std::get<0>(pair) == hash && std::get<1>(pair) == salt) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    cracked_hashes_storage.emplace_back(hash, salt, password);
+                    cracked.log(hash + ":" + salt + ":" + password);
+                }
                 logger.log(match_info + " by Client " + client_key + ".");
                 {
                     std::lock_guard<std::mutex> lock(clients_mutex);
@@ -286,12 +347,11 @@ int main() {
     auto config = readConfig("server.ini");
     SERVER_PORT = std::stoi(config["SERVER_PORT"]);
 
+    std::cout << "Reading pre-cracked hashes storage...\n";
+    readHashStorage("cracked.txt");
+
     std::vector<boost::thread> threads;
     threads.emplace_back(run_udp_echo_server, SERVER_PORT);
-
-    std::string hash_type;
-    std::string hash;
-    std::string salt;
 
     boost::asio::io_context io_context;
     tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), SERVER_PORT));
@@ -377,45 +437,56 @@ int main() {
             std::cout << "Enter the salt (leave empty if none, or BCRYPT or argon2): ";
             std::getline(std::cin, salt);
 
-            if (clients_ready.size() == 0)
-            {
-                std::cout << "There are no ready clients. Forfieting request." << std::endl;
-                match_found = false;
-                clients_responses = 0;
-                continue;
+            bool found = false;
+            for (const auto& pair : cracked_hashes_storage) {
+                if (std::get<0>(pair) == hash && std::get<1>(pair) == salt) {
+                    std::cout << "Found pre-cracked Hash: " << std::get<0>(pair) << " Salt: " << std::get<1>(pair) << " Decoded: " << std::get<2>(pair) << std::endl;
+                    logger.log("Found pre-cracked Hash: " + std::get<0>(pair) + " Salt: " + std::get<1>(pair) + " Decoded: " + std::get<2>(pair));
+                    found = true;
+                    break;
+                }
             }
-
-            if (!hash_type.empty() && !hash.empty()) {
-                start = std::chrono::high_resolution_clock::now();
-                notify_clients(hash_type, hash, salt);
-                match_found = false;
-                clients_responses = 0;
-
-                for (auto& pair : clients_ready) {
-                    pair.second = false;
+            if (!found) {
+                if (clients_ready.size() == 0)
+                {
+                    std::cout << "There are no ready clients. Forfieting request." << std::endl;
+                    match_found = false;
+                    clients_responses = 0;
+                    continue;
                 }
 
-                std::cout << "Processing entered hash, please wait...\n";
-                while (clients_responses < clients_ready.size()) {
-                    boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
-                    if (match_found) {
-                        break;
+                if (!hash_type.empty() && !hash.empty()) {
+                    start = std::chrono::high_resolution_clock::now();
+                    notify_clients(hash_type, hash, salt);
+                    match_found = false;
+                    clients_responses = 0;
+
+                    for (auto& pair : clients_ready) {
+                        pair.second = false;
+                    }
+
+                    std::cout << "Processing entered hash, please wait...\n";
+                    while (clients_responses < clients_ready.size()) {
+                        boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
+                        if (match_found) {
+                            break;
+                        }
+                    }
+
+                    if (!match_found && clients_responses == clients_ready.size()) {
+                        auto end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> duration_ms = end - start;
+                        std::cout << "No matches found, please wait until you can enter a new hash...\n";
+                        std::cout << "Elapsed time: " << duration_ms.count() << " ms\n";
+
+                    }
+                    else if (match_found) {
+                        std::cout << "Match found, please wait until you can enter a new hash...\nThis may take a while depending on your clients' hardware/os.\n";
                     }
                 }
-
-                if (!match_found && clients_responses == clients_ready.size()) {
-                    auto end = std::chrono::high_resolution_clock::now();
-                    std::chrono::duration<double, std::milli> duration_ms = end - start;
-                    std::cout << "No matches found, please wait until you can enter a new hash...\n";
-                    std::cout << "Elapsed time: " << duration_ms.count() << " ms\n";
-
+                else {
+                    std::cout << "No hash entered. Try again.\n";
                 }
-                else if (match_found) {
-                    std::cout << "Match found, please wait until you can enter a new hash...\nThis may take a while depending on your clients' hardware/os.\n";
-                }
-            }
-            else {
-                std::cout << "No hash entered. Try again.\n";
             }
         }
     }

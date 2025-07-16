@@ -1,4 +1,29 @@
-﻿  Distributed-Hash-Cracker-CPP-Client.cpp
+﻿  AsyncLogger.cpp
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(42,23): warning C4820: 'AsyncLogger': '7' bytes padding added after data member 'AsyncLogger::running'
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(13,7): warning C4625: 'AsyncLogger': copy constructor was implicitly defined as deleted
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(13,7): warning C4626: 'AsyncLogger': assignment operator was implicitly defined as deleted
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(16,114): warning C4355: 'this': used in base member initializer list
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(16,61): warning C5038: data member 'AsyncLogger::running' will be initialized after data member 'AsyncLogger::logThread'
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(15,5): warning C4514: 'AsyncLogger::AsyncLogger': unreferenced inline function has been removed
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(19,6): warning C4514: 'AsyncLogger::~AsyncLogger': unreferenced inline function has been removed
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+D:\GitHub\Distributed-Hash-Cracker-CPP\shared\AsyncLogger.h(23,10): warning C4514: 'AsyncLogger::log': unreferenced inline function has been removed
+  (compiling source file '../shared/AsyncLogger.cpp')
+  
+  Distributed-Hash-Cracker-CPP-Client.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
@@ -7495,18 +7520,19 @@ C:\boost\boost\asio\execution\any_executor.hpp(1087,15): warning C4710:         
       C:\boost\boost\asio\execution\any_executor.hpp(1087,15):
       see declaration of 'boost::asio::execution::detail::any_executor_base::require_fn_impl'
   
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(144) : note: index 'i' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145) : note: feeds call on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380) : note: index '' range checked by comparison on this line
-D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380) : note: feeds call on this line
+  Generating Code...
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(393,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(393,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(392) : note: index 'i' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(393,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(393) : note: feeds call on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(462,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(462,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(461) : note: index 'i' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(462,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(462) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380) : note: index '' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(380) : note: feeds call on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(144) : note: index 'i' range checked by comparison on this line
+D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(145) : note: feeds call on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(569) : note: index '' range checked by comparison on this line
 D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570,1): warning C5045: D:\GitHub\Distributed-Hash-Cracker-CPP\Distributed-Hash-Cracker-CPP-Client\Distributed-Hash-Cracker-CPP-Client.cpp(570) : note: feeds call on this line
