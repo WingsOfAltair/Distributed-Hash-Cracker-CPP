@@ -106,8 +106,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\boost;C:\Program Files\OpenSSL-Win64\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,10 +134,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\shared\AsyncLogger.cpp" />
+    <ClCompile Include="..\shared\AsyncStorageLogger.cpp" />
     <ClCompile Include="Distributed-Hash-Cracker-CPP-Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\AsyncLogger.h" />
+    <ClInclude Include="..\shared\AsyncStorageLogger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

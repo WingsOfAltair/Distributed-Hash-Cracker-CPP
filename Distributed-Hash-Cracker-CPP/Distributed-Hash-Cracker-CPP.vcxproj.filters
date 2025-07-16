@@ -21,9 +21,15 @@
     <ClCompile Include="..\shared\AsyncLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\shared\AsyncStorageLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\AsyncLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\AsyncStorageLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
