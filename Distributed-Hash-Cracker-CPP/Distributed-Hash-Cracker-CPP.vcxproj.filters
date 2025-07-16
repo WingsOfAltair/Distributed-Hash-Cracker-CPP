@@ -32,5 +32,8 @@
     <ClInclude Include="..\shared\AsyncStorageLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\shared\BaseAsyncLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
