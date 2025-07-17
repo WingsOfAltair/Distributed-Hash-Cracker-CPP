@@ -1141,7 +1141,7 @@ int main() {
 
         global_socket_ptr = &client_socket;
 
-        while (!server_disconnected && stop_processing && ((to_lowercase(MULTI_THREADED) == "true" && total_lines >= 0) || (to_lowercase(MULTI_THREADED) == "false" && total_lines == -1))) {
+        while (!server_disconnected && ((to_lowercase(MULTI_THREADED) == "true" && total_lines >= 0) || (to_lowercase(MULTI_THREADED) == "false" && total_lines == -1))) {
             match_found = false;
             stop_processing.store(false);
             boost::thread reader_thread(socket_reader);
