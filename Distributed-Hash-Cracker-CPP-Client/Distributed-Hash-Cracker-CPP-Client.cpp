@@ -617,9 +617,10 @@ void socket_reader() {
         size_t bytes_received = global_socket_ptr->read_some(boost::asio::buffer(temp), ec);
         if (ec) {
             std::cerr << "Disconnected from server or error occurred: " << ec.message() << std::endl;
-            stop_processing = true;
+            stop_processing = true;     
             server_disconnected.store(true);
-            queue_cv.notify_all();  // Wake up main thread if it's waiting
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            queue_cv.notify_one();  // Wake up main thread if it's waiting
             return;
         }
 
@@ -710,7 +711,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
 
     // Skip lines before the chunk
     while (current_line < start_line && std::getline(wordlist, utf8_word)) {
-        if (stop_processing.load(std::memory_order_acquire)) {
+        if (server_disconnected || stop_processing.load(std::memory_order_acquire)) {
             break;
         }
         ++current_line;
@@ -718,7 +719,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
 
     // Process assigned chunk
     while (current_line < end_line && std::getline(wordlist, utf8_word)) { 
-        if (stop_processing.load(std::memory_order_acquire)) {
+        if (server_disconnected || stop_processing.load(std::memory_order_acquire)) {
             break;
         }
         std::wstring utf8_word_str_w = boost::locale::conv::to_utf<wchar_t>(utf8_word, "UTF-8");
@@ -730,7 +731,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
             if (MUTATION_RULES.size() > 0)
             {
                 for (const std::string& rule : MUTATION_RULES) {
-                    if (stop_processing.load(std::memory_order_acquire)) {
+                    if (server_disconnected || stop_processing.load(std::memory_order_acquire)) {
                         break;
                     }
                     std::string mutated = applyRule(utf8_word_str_w, rule);
@@ -829,7 +830,7 @@ void process_chunk(int start_line, int end_line, const std::string& hash_type, c
         }
     }
 
-    if (!match_found)
+    if (!match_found && !server_disconnected)
     {
         std::lock_guard<std::mutex> lock(send_mutex);
         boost::asio::write(client_socket, boost::asio::buffer("NO_MATCH\n"));
@@ -855,7 +856,7 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
 
     // Process assigned chunk
     while (std::getline(wordlist, utf8_word)) {
-        if (stop_processing.load(std::memory_order_acquire)) {
+        if (server_disconnected || stop_processing.load(std::memory_order_acquire)) {
             break;
         }
         std::wstring utf8_word_str_w = boost::locale::conv::to_utf<wchar_t>(utf8_word, "UTF-8");
@@ -867,7 +868,7 @@ void process_chunk_single_threaded(const std::string& hash_type, const std::stri
             if (MUTATION_RULES.size() > 0)
             {
                 for (const std::string& rule : MUTATION_RULES) {
-                    if (stop_processing.load(std::memory_order_acquire)) {
+                    if (server_disconnected || stop_processing.load(std::memory_order_acquire)) {
                         break;
                     }
                     std::string mutated = applyRule(utf8_word_str_w, rule);
