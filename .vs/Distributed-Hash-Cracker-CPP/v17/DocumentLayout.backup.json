@@ -35,8 +35,7 @@
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.44.35207\\include\\system_error",
               "ViewState": "AgIAAOkBAAAAAAAAAAAUwPQBAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-18T08:15:56.078Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-18T08:15:56.078Z"
             },
             {
               "$type": "Document",
@@ -48,8 +47,7 @@
               "RelativeToolTip": "CMakeLists.txt",
               "ViewState": "AgIAADYAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-06-26T16:20:14.277Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-26T16:20:14.277Z"
             },
             {
               "$type": "Document",
@@ -59,7 +57,7 @@
               "RelativeDocumentMoniker": "Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
               "ToolTip": "D:\\GitHub\\Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
               "RelativeToolTip": "Distributed-Hash-Cracker-CPP-Client\\Distributed-Hash-Cracker-CPP-Client.cpp",
-              "ViewState": "AgIAAFcCAAAAAAAAAAAAAGsCAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAB0DAAAAAAAAAAASwEADAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-01T07:57:41.42Z",
               "EditorCaption": ""
@@ -74,8 +72,7 @@
               "RelativeToolTip": "Distributed-Hash-Cracker-CPP\\Distributed-Hash-Cracker-CPP-Server.cpp",
               "ViewState": "AgIAAPoAAAAAAAAAAAAMwBABAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-07T07:53:19.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-07T07:53:19.938Z"
             }
           ]
         }
