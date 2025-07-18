@@ -274,6 +274,8 @@ void handle_client(std::shared_ptr<tcp::socket> client_socket) {
             }
             else if (message.find("NO_MATCH") == 0) {
                 std::cout << "Match not found in client: " << client_socket << std::endl;
+                std::lock_guard<std::mutex> lock(clients_mutex);
+                clients_ready[client_key] = true;
             }
             else if (message.find("Ready") == 0) {
                 std::lock_guard<std::mutex> lock(clients_mutex);
