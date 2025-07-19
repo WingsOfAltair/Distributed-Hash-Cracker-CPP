@@ -170,27 +170,7 @@ if(WIN32)
             )
         endforeach()
     endforeach()
-endif()
-
-# ------------------------------
-# Copy configuration files
-# ------------------------------
-set(CONFIG_SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")
-set(CONFIG_FILES config.ini server.ini wordlist.txt mutation_list.txt mutation_list_generator_upto_n_times.py)
-
-foreach(FILE ${CONFIG_FILES})
-    foreach(target DistributedHashCrackerClient DistributedHashCrackerServer)
-        add_custom_command(TARGET ${target} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                "${CONFIG_SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:${target}>
-        )
-    endforeach()
-endforeach()
-       
-# ------------------------------
-# Copy DLL files
-# ------------------------------
-if (WIN32)              
+            
     add_custom_command(TARGET DistributedHashCrackerClient POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_SOURCE_DIR}/Distributed-Hash-Cracker-CPP-Client/include/argon2/argon2.dll"
@@ -202,3 +182,15 @@ if (WIN32)
             "$<TARGET_FILE_DIR:DistributedHashCrackerClient>"
     )
 endif()
+
+set(CONFIG_SRC_DIR "${CMAKE_SOURCE_DIR}/x64/Debug")
+set(CONFIG_FILES config.ini server.ini wordlist.txt mutation_list.txt mutation_list_generator_upto_n_times.py)
+
+foreach(FILE ${CONFIG_FILES})
+    foreach(target DistributedHashCrackerClient DistributedHashCrackerServer)
+        add_custom_command(TARGET ${target} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${CONFIG_SRC_DIR}/${FILE}" $<TARGET_FILE_DIR:${target}>
+        )
+    endforeach()
+endforeach()

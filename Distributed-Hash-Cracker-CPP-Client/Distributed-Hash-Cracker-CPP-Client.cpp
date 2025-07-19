@@ -628,6 +628,7 @@ void socket_reader() {
 
         if (message.find("STOP") == 0) {
             std::cout << "Received STOP command. Stopping processing.\n";
+            logger.log("Received STOP command. Stopping processing.");
             stop_processing.store(true, std::memory_order_release);
             prepared.store(true);
             std::lock_guard<std::mutex> lock(queue_mutex);
@@ -635,8 +636,21 @@ void socket_reader() {
             continue;  // Exit the reader thread or continue to clean shutdown
         }
 
+        if (message.find("SHUTDOWN") == 0) {
+            std::cout << "Received SHUTDOWN command. Stopping processing & shutting down.\n";
+            logger.log("Received SHUTDOWN command. Stopping processing & shutting down.");
+            stop_processing.store(true, std::memory_order_release);
+            prepared.store(false);
+            AUTO_RECONNECT = "FALSE";
+            server_disconnected = true;
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            queue_cv.notify_one();  // Wake up main thread if it's waiting
+            continue;  // Exit the reader thread or continue to clean shutdown
+        }
+
         if (message.find("reload") == 0) {
             std::cout << "Received Reload command. Disconnecting & reloading wordlist & mutations' options list.\n";
+            logger.log("Received Reload command. Disconnecting & reloading wordlist & mutations' options list.");
 
             config = readFile("config.ini");
             mutation_list = readFile("mutation_list.txt");
