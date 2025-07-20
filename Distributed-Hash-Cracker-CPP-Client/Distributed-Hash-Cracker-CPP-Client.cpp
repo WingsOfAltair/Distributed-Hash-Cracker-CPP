@@ -1283,7 +1283,7 @@ int main() {
                 match_found = false;
                 boost::thread reader_thread(socket_reader);
                 std::string readyStr = "Ready to accept new requests.:" + NICKNAME;
-                std::cout << readyStr << std::endl;
+                std::cout << "Ready to accept new requests." << std::endl;
 
                 stop_receiving = false;
                 // Send ready message to server
