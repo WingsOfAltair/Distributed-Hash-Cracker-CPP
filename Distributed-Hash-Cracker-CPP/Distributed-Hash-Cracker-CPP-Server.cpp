@@ -457,6 +457,17 @@ int main() {
                     continue;
                 }
 
+                bool allReady = std::all_of(clients_ready.begin(), clients_ready.end(),
+                    [](const auto& pair) {
+                        return pair.second; // second = is_ready
+                    });
+
+                if (!allReady)
+                {
+                    std::cout << "All connected clients must be ready." << std::endl;
+                    continue;
+                }
+
                 if (!hash_type.empty() && !hash.empty()) {
                     start = std::chrono::high_resolution_clock::now();
                     notify_clients(hash_type, hash, salt);
