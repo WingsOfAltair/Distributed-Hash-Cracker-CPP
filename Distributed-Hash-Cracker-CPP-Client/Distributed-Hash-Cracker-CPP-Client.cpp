@@ -648,6 +648,18 @@ void socket_reader() {
             continue;  // Exit the reader thread or continue to clean shutdown
         }
 
+        if (message.find("RESTART") == 0) {
+            std::cout << "Received RESTART command. Stopping processing & restarting.\n";
+            logger.log("Received RESTART command. Stopping processing & restarting.");
+            stop_processing.store(true, std::memory_order_release);
+            prepared.store(false);
+            client_socket.close();
+            AUTO_RECONNECT = "TRUE";
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            queue_cv.notify_one();  // Wake up main thread if it's waiting
+            continue;  // Exit the reader thread or continue to clean shutdown
+        }
+
         if (message.find("reload") == 0) {
             std::cout << "Received Reload command. Disconnecting & reloading wordlist & mutations' options list.\n";
             logger.log("Received Reload command. Disconnecting & reloading wordlist & mutations' options list.");
