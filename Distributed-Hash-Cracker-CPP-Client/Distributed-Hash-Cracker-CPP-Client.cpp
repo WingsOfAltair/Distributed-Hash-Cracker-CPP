@@ -713,17 +713,17 @@ void socket_reader() {
 
             if (pos != std::string::npos && pos + 1 < message.length()) {
                 std::string nickname = message.substr(pos + 1);
-                std::cout << "Received SET_NICKNAME command. Changing nickname to: " + nickname + ".\n";
-                logger.log("Received SET_NICKNAME command. Changing nickname to: " + nickname + ".");
+                std::cout << "Received SET_NICKNAME command. Changing nickname to: " + nickname;
+                logger.log("Received SET_NICKNAME command. Changing nickname to: " + nickname);
                 if (replaceNickname("config.ini", nickname))
                 {
                     NICKNAME = nickname;
-                    std::cout << "Set nickname to: " + NICKNAME + ".\n";
-                    logger.log("Set nickname to: " + NICKNAME + ".");
+                    std::cout << "Set nickname to: " + NICKNAME;
+                    logger.log("Set nickname to: " + NICKNAME);
                 }
                 else {
-                    std::cout << "Unable to set nickname to: " + NICKNAME + ".\n";
-                    logger.log("Unable to set nickname to: " + NICKNAME + ".");
+                    std::cout << "Unable to set nickname to: " + NICKNAME;
+                    logger.log("Unable to set nickname to: " + NICKNAME);
                 }
             }
             else {
