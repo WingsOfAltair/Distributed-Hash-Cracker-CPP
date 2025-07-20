@@ -46,6 +46,7 @@ int SERVER_PORT = 0;
 std::string SHOW_PROGRESS = "";
 std::string AUTO_RECONNECT = "";
 std::string MULTI_THREADED = "";
+std::string NICKNAME = "";
 std::vector<std::string> MUTATION_RULES;
 AsyncLogger logger("client.log");
 
@@ -89,7 +90,54 @@ std::map<std::string, std::string> readFile(const std::string& filename) {
         std::cerr << "Unable to open config file: " << filename << std::endl;
     }
     return configMap;
-}  
+}
+
+bool replaceNickname(const std::string& filename, const std::string& newNickname) {
+    std::ifstream infile(filename);
+    if (!infile) {
+        std::cerr << "Failed to open file for reading.\n";
+        return false;
+    }
+
+    std::ostringstream buffer;
+    std::string line;
+    bool replaced = false;
+
+    while (std::getline(infile, line)) {
+        if (line.rfind("NICKNAME=", 0) == 0) { // line starts with "NICKNAME="
+            std::string cleanNickname = newNickname;
+            cleanNickname.erase(std::remove(cleanNickname.begin(), cleanNickname.end(), '\n'), cleanNickname.end());
+            cleanNickname.erase(std::remove(cleanNickname.begin(), cleanNickname.end(), '\r'), cleanNickname.end());
+            line = "NICKNAME=" + cleanNickname;
+            replaced = true;
+        }
+        buffer << line << '\n';
+    }
+
+    infile.close();
+
+    if (!replaced) {
+        std::cerr << "NICKNAME entry not found.\n";
+        return false;
+    }
+
+    std::ofstream outfile(filename);
+    if (!outfile) {
+        std::cerr << "Failed to open file for writing.\n";
+        return false;
+    }
+
+    std::string content = buffer.str();
+    if (!content.empty() && content.back() == '\n') {
+        content.pop_back(); // prevent extra newline
+    }
+
+    outfile << content;
+    outfile.close();
+
+    std::cout << "Nickname updated successfully.\n";
+    return true;
+}
 
 // Function to calculate hash using EVP
 std::string calculate_hash(const std::string& hash_type, const std::string& input) {
@@ -660,6 +708,49 @@ void socket_reader() {
             continue;  // Exit the reader thread or continue to clean shutdown
         }
 
+        if (message.find("SET_NICKNAME") == 0) {
+            size_t pos = message.find(':');
+
+            if (pos != std::string::npos && pos + 1 < message.length()) {
+                std::string nickname = message.substr(pos + 1);
+                std::cout << "Received SET_NICKNAME command. Changing nickname to: " + nickname + ".\n";
+                logger.log("Received SET_NICKNAME command. Changing nickname to: " + nickname + ".");
+                if (replaceNickname("config.ini", nickname))
+                {
+                    NICKNAME = nickname;
+                    std::cout << "Set nickname to: " + NICKNAME + ".\n";
+                    logger.log("Set nickname to: " + NICKNAME + ".");
+                }
+                else {
+                    std::cout << "Unable to set nickname to: " + NICKNAME + ".\n";
+                    logger.log("Unable to set nickname to: " + NICKNAME + ".");
+                }
+            }
+            else {
+                std::cout << "Colon not found or no content after colon." << std::endl;
+                logger.log("Colon not found or no content after colon.");
+            }
+            queue_cv.notify_one();  // Wake up main thread if it's waiting
+            continue;
+        }
+
+        if (message.find("REMOVE_NICKNAME") == 0) {
+            std::cout << "Received REMOVE_NICKNAME command.\n";
+            logger.log("Received REMOVE_NICKNAME command.");
+            if (replaceNickname("config.ini", ""))
+            {
+                NICKNAME = "";
+                std::cout << "Removed client nickname.\n";
+                logger.log("Removed client nickname.");
+            }
+            else {
+                std::cout << "Unable to remove nickname.\n";
+                logger.log("Unable to remove nickname.");
+            }
+            queue_cv.notify_one();  // Wake up main thread if it's waiting
+            continue;
+        }
+
         if (message.find("reload") == 0) {
             std::cout << "Received Reload command. Disconnecting & reloading wordlist & mutations' options list.\n";
             logger.log("Received Reload command. Disconnecting & reloading wordlist & mutations' options list.");
@@ -1101,6 +1192,7 @@ int main() {
     LINE_COUNT = config["LINE_COUNT"];
     SHOW_PROGRESS = config["SHOW_PROGRESS"];
     MULTI_THREADED = config["MULTI_THREADED"];
+    NICKNAME = config["NICKNAME"];
 
     if (to_lowercase(MULTI_THREADED) == "true")
     {
@@ -1190,7 +1282,7 @@ int main() {
             if (prepared) {
                 match_found = false;
                 boost::thread reader_thread(socket_reader);
-                std::string readyStr = "Ready to accept new requests.";
+                std::string readyStr = "Ready to accept new requests.:" + NICKNAME;
                 std::cout << readyStr << std::endl;
 
                 stop_receiving = false;
